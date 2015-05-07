@@ -1,4 +1,6 @@
 //import java.io.File;
+import java.awt.Component;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -9,12 +11,13 @@ import javax.swing.ImageIcon;
  * @author carducjd.
  *         Created May 5, 2015.
  */
-public class Dirt extends ImageIcon{
+public class Dirt extends ImageIcon implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
 	private int[][] position;
 	private Icon dirticon;
 //	private File iconFile;
 	private boolean state;
+	private static final int points = 0;
 	
 	public Dirt(){
 		this.position = new int[][] {{0},{0}};
@@ -44,7 +47,7 @@ public class Dirt extends ImageIcon{
 		}
 	}
 	
-	public void transform(){
+	public int transform(){
 		this.state=!this.state;
 		if (this.state){
 			this.dirticon = new ImageIcon("desktop/Dirt");
@@ -54,5 +57,6 @@ public class Dirt extends ImageIcon{
 			this.dirticon = new ImageIcon("desktop/Air");
 //			this.iconFile = new File("dirtSpriteOff.gif");
 		}
+		return points;
 	}
 }

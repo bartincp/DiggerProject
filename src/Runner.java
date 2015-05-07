@@ -24,5 +24,4 @@ public class Runner extends JFrame{
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	player.getInputMap().put(KeyStoke.getKeyStoke("I"),player.moveUp());
 }

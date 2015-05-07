@@ -1,12 +1,15 @@
+import java.awt.Component;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 
-public class Emerald extends ImageIcon{
+public class Emerald extends ImageIcon implements Interactable{
 	
 	private Icon emeraldicon;
 	private boolean emeraldstate;
 	private int xposition, yposition;
+	private static final int points = 10;
 	
 	// Added zero-parameter block since Level had trouble constructing Emerald without it (JDC)
 	public Emerald(){
@@ -23,10 +26,11 @@ public class Emerald extends ImageIcon{
 		this.yposition = yaxis;
 	}
 
-	public void collect(){
+	public int transform(){
 		emeraldstate = false;
 		emeraldicon = null;
 		xposition = -1;
 		yposition = -1;
+		return points;
 	}
 }
