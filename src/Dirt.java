@@ -1,4 +1,6 @@
-import java.io.File;
+//import java.io.File;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -7,25 +9,37 @@ import java.io.File;
  * @author carducjd.
  *         Created May 5, 2015.
  */
-public class Dirt {
+public class Dirt extends ImageIcon{
+	// Maybe use xpos and ypos instead for consistency?
 	private int[][] position;
-	private File iconFile;
+	private Icon dirticon;
+//	private File iconFile;
 	private boolean state;
 	
 	public Dirt(){
-		this.position = new int[][] {{1},{1}};
-		this.iconFile = new File("dirtSpriteOn.gif");
+		this.position = new int[][] {{0},{0}};
+		this.dirticon = new ImageIcon("desktop/Dirt");
+//		this.iconFile = new File("dirtSpriteOn.gif");
+		this.state = true;
+	}
+	
+	public Dirt(int xPos, int yPos, boolean state){
+		this.position = new int[][] {{xPos},{yPos}};
+		this.dirticon = new ImageIcon("desktop/Dirt");
+//		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 	}
 	
 	public Dirt(int[][] position, boolean state){
 		this.position = position;
 		if (state){
-			this.iconFile = new File("dirtSpriteOn.gif");
+			this.dirticon = new ImageIcon("desktop/Dirt");
+//			this.iconFile = new File("dirtSpriteOn.gif");
 			this.state = true;
 		}
 		if (!state){
-			this.iconFile = new File("dirtSpriteOff.gif");
+			this.dirticon = new ImageIcon("desktop/Air");
+//			this.iconFile = new File("dirtSpriteOff.gif");
 			this.state = false;
 		}
 	}
@@ -33,10 +47,12 @@ public class Dirt {
 	public void transform(){
 		this.state=!this.state;
 		if (this.state){
-			this.iconFile = new File("dirtSpriteOn.gif");
+			this.dirticon = new ImageIcon("desktop/Dirt");
+//			this.iconFile = new File("dirtSpriteOn.gif");
 		}
 		if (!this.state){
-			this.iconFile = new File("dirtSpriteOff.gif");
+			this.dirticon = new ImageIcon("desktop/Air");
+//			this.iconFile = new File("dirtSpriteOff.gif");
 		}
 	}
 }
