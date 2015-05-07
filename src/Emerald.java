@@ -8,12 +8,11 @@ public class Emerald extends ImageIcon{
 	private boolean emeraldstate;
 	
 	public Emerald(){
-		emeraldicon = new ImageIcon(Image );
+		emeraldicon = new ImageIcon("desktop/Emerald");
 		emeraldstate = true;
 	}
 
-	public void collect()
-	{
+	public void collect(){
 		emeraldstate = false;
 		emeraldicon = null;
 	}
