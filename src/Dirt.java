@@ -18,13 +18,13 @@ public class Dirt {
 		this.state = true;
 	}
 	
-	public Dirt(int[][] placement, boolean presence){
-		this.position = placement;
-		if (presence){
+	public Dirt(int[][] position, boolean state){
+		this.position = position;
+		if (state){
 			this.iconFile = new File("dirtSpriteOn.gif");
 			this.state = true;
 		}
-		if (!presence){
+		if (!state){
 			this.iconFile = new File("dirtSpriteOff.gif");
 			this.state = false;
 		}

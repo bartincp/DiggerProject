@@ -27,9 +27,9 @@ public class Level {
 		try {
 			Scanner sc = new Scanner(this.lvlFile);
 			// Temporary code to verify that file is being read
-			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-				System.out.println(line);
+			while (sc.hasNext()) {
+				String symbol = sc.next();
+				System.out.println(symbol);
 			}
 			
 		} catch (FileNotFoundException exception) {
@@ -49,10 +49,14 @@ public class Level {
 		
 	}
 	
-	public void advance(){
-		destroy();
+	public void init(){
 		this.lvlNum = this.lvlNum + 1;
 		readFile();
-		create();
+//		create();
+	}
+	
+	public void advance(){
+//		destroy();
+		init();
 	}
 }
