@@ -8,5 +8,7 @@ public class HelloWorld {
 		System.out.println("sup");
 		
 		System.out.println("Testing Commit Number Four.");
+		Level lvl = new Level();
+		lvl.initLvl();
 	}
 }
