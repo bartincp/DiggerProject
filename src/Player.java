@@ -1,19 +1,24 @@
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
 
-public class Player implements ActionListener{
+public class Player extends Component{
 	
 	private Icon playericon;
 	private boolean playerstate;
 	private int xposition, yposition;
-	private static final int xrespawn, yrespawn, gridwidth, gridheight;
+	private int xrespawn, yrespawn, gridwidth, gridheight;
 	
-	public Player(){
-		
+	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
+		xrespawn = xaxis;
+		yrespawn = yaxis;
+		gridwidth = widthofgrid;
+		gridheight = heightofgrid;
 	}
 	
 	public void death(){
@@ -45,7 +50,19 @@ public class Player implements ActionListener{
 			yposition--;
 	}
 
-	public void actionPerformed(ActionEvent event) {
-		//add actionlistener for keystroke matching the event to keystroke
+	public void actionPerformed(KeyEvent event) {
+		int keyCode = event.getKeyCode();
+		if(keyCode==KeyEvent.VK_UP){
+			moveUp();
+		}
+		if(keyCode==KeyEvent.VK_DOWN){
+			moveDown();
+		}
+		if(keyCode==KeyEvent.VK_LEFT){
+			moveLeft();
+		}
+		if(keyCode==KeyEvent.VK_RIGHT){
+			moveRight();
+		}
 	}
 }
