@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.awt.event.*;
 
 
 /**
@@ -73,25 +72,24 @@ public class Level {
 		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
-	
-	// Will need use of JSwing
-	public void create(){
-		
-	}
-	
-	// Will need use of JSwing
-	public void destroy(){
-		
-	}
-	
-	public void initLvl(){
+
+	public void advance(){
 		this.lvlNum = this.lvlNum + 1;
 		readFile();
-//		create();
 	}
 	
-	public void advance(){
-//		destroy();
-		initLvl();
+	public void retreat(){
+		this.lvlNum = this.lvlNum - 1;
+		readFile();
+	}
+	
+	public void actionPerformed(KeyEvent event) {
+		int keyCode = event.getKeyCode();
+		if(keyCode==KeyEvent.VK_U){
+			retreat();
+		}
+		if(keyCode==KeyEvent.VK_P){
+			advance();
+		}
 	}
 }

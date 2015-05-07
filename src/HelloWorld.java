@@ -9,6 +9,6 @@ public class HelloWorld {
 		
 		System.out.println("Testing Commit Number Four.");
 		Level lvl = new Level();
-		lvl.initLvl();
+		lvl.advance();
 	}
 }
