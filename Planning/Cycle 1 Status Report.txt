@@ -1,0 +1,19 @@
+Created playing space
+Est. time: 2 hours
+Actual time:
+Comment:
+
+Loading levels from text file:
+Est. time: 1.5 hours
+Actual time: 2.5 hours
+Comment: Implementing the related classes required a bit more research and creative thinking than expected, but it is currently functional.
+
+Hero spawning and moving:
+Est. time: 2 hours
+Actual time:
+Comment:
+
+Emeralds and dirt spawning:
+Est. time: 2 hours
+Actual time:
+Comment: The classes involving dirt and emeralds is implemented for the most part.

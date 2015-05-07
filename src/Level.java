@@ -27,6 +27,9 @@ public class Level {
 	}
 	
 	public void readFile(){
+		// Clears current level
+		this.objectList.clear();
+		// Reads text file with level information
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level" + this.lvlNum + ".txt");
 		try {
 			Scanner sc = new Scanner(this.lvlFile);
