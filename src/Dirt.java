@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
  * @author carducjd.
  *         Created May 5, 2015.
  */
-public class Dirt extends ImageIcon implements Interactable{
+public class Dirt extends Component implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
 	private int[][] position;
 	private Icon dirticon;

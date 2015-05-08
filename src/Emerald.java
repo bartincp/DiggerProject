@@ -4,7 +4,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 
-public class Emerald extends ImageIcon implements Interactable{
+public class Emerald extends Component implements Interactable{
 	
 	private Icon emeraldicon;
 	private boolean emeraldstate;
@@ -13,14 +13,14 @@ public class Emerald extends ImageIcon implements Interactable{
 	
 	// Added zero-parameter block since Level had trouble constructing Emerald without it (JDC)
 	public Emerald(){
-		this.emeraldicon = new ImageIcon("desktop/Emerald");
+		this.emeraldicon = new ImageIcon("Emerald.png");
 		this.emeraldstate = true;
 		this.xposition = 0;
 		this.yposition = 0;
 	}
 	
 	public Emerald(int xaxis, int yaxis){
-		this.emeraldicon = new ImageIcon("desktop/Emerald");
+		this.emeraldicon = new ImageIcon("Emerald.png");
 		this.emeraldstate = true;
 		this.xposition = xaxis;
 		this.yposition = yaxis;

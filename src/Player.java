@@ -2,6 +2,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -9,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
 
-public class Player extends ImageIcon implements Interactable{
+public class Player extends Component implements Interactable{
 	
 	private Icon playericon;
 	private boolean playerstate;
@@ -18,11 +19,23 @@ public class Player extends ImageIcon implements Interactable{
 	private ArrayList<Interactable> list;
 	private int score = 0;
 	
-	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
+	public Player(int yaxis, int xaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
 		yrespawn = yaxis;
 		gridwidth = widthofgrid;
 		gridheight = heightofgrid;
+		playerstate = true;
+		playericon = new ImageIcon("Dig_Dug.png");
+		xposition = xaxis;
+		yposition = yaxis;
+	}
+	
+	public int getXPosition(){
+		return xposition;
+	}
+	
+	public int getYPosition(){
+		return yposition;
 	}
 	
 	public void death(){
@@ -40,49 +53,53 @@ public class Player extends ImageIcon implements Interactable{
 	
 	public void moveUp(){
 		if(yposition>=0 && yposition<gridheight){
-			list.set(xposition*yposition, new Dirt());
-			list.get(xposition*yposition).transform();
+			list.set(gridwidth*yposition+xposition, new Dirt());
+			list.get(gridwidth*yposition+xposition).transform();
 			yposition--;
-			Interactable icon = list.get(xposition*yposition);
-			list.set(xposition*yposition, this);
-			score += list.get(xposition*yposition).transform();
+			Interactable icon = list.get(gridwidth*yposition+xposition);
+			list.set(gridwidth*yposition+xposition, this);
+			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveDown(){
 		if(yposition>=0 && yposition<gridheight){
-			list.set(xposition*yposition, new Dirt());
-			list.get(xposition*yposition).transform();
+			list.set(gridwidth*yposition+xposition, new Dirt());
+			list.get(gridwidth*yposition+xposition).transform();
 			yposition++;
-			Interactable icon = list.get(xposition*yposition);
-			list.set(xposition*yposition, this);
-			score += list.get(xposition*yposition).transform();
+			Interactable icon = list.get(gridwidth*yposition+xposition);
+			list.set(gridwidth*yposition+xposition, this);
+			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveLeft(){
 		if(xposition>=0 && xposition<gridwidth){
-			list.set(xposition*yposition, new Dirt());
-			list.get(xposition*yposition).transform();
+			list.set(gridwidth*yposition+xposition, new Dirt());
+			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
-			Interactable icon = list.get(xposition*yposition);
-			list.set(xposition*yposition, this);
-			score += list.get(xposition*yposition).transform();
+			Interactable icon = list.get(gridwidth*yposition+xposition);
+			list.set(gridwidth*yposition+xposition, this);
+			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveRight(){
 		if(xposition>=0 && xposition<gridwidth){
-			list.set(xposition*yposition, new Dirt());
-			list.get(xposition*yposition).transform();
+			list.set(gridwidth*yposition+xposition, new Dirt());
+			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
-			Interactable icon = list.get(xposition*yposition);
-			list.set(xposition*yposition, this);
-			score += list.get(xposition*yposition).transform();
+			Interactable icon = list.get(gridwidth*yposition+xposition);
+			list.set(gridwidth*yposition+xposition, this);
+			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
-	
-	public void actionPerformed(KeyEvent event) {
+
+	public int transform() {
+		return 0;
+	}
+
+	public void keyPressed(KeyEvent event) {
 		int keyCode = event.getKeyCode();
 		if(keyCode==KeyEvent.VK_UP){
 			moveUp();
@@ -96,9 +113,5 @@ public class Player extends ImageIcon implements Interactable{
 		if(keyCode==KeyEvent.VK_RIGHT){
 			moveRight();
 		}
-	}
-
-	public int transform() {
-		return 0;
 	}
 }

@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -12,17 +13,19 @@ import java.util.Scanner;
  */
 public class Level {
 	private int lvlNum;
-	private ArrayList objectList;
+	private ArrayList<Component> objectList;
 //	private int[][] positionList;
 //	private int[][] spawnList;
 //	private int xIndex;
 //	private int yIndex;
 	private File lvlFile;
+	private int playerxposition, playeryposition;
+	private int xMax, yMax;
 	
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
 		this.lvlNum = 0;
-		this.objectList= new ArrayList();
+		this.objectList= new ArrayList<Component>();
 //		this.positionList = new int[1][1];
 //		this.spawnList = new int[1][1];
 	}
@@ -52,7 +55,7 @@ public class Level {
 	}	
 		
 	private void readFileColIter(String row, int xIndex, int yIndex){
-		int xMax = row.length();
+		xMax = row.length();
 		if (xIndex == xMax){
 			System.out.println("End of row, moving to row " + (yIndex+1));
 			return;
@@ -70,6 +73,8 @@ public class Level {
 			System.out.println("Player created at row " + yIndex + ", column " + xIndex + ".");
 			// Used xMax for grid dimensions for now, should definitely change
 			this.objectList.add(new Player(xIndex,yIndex,xMax,xMax));
+			playerxposition = xIndex;
+			playeryposition = yIndex;
 		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
@@ -93,5 +98,17 @@ public class Level {
 	public void advance(){
 //		destroy();
 		initLvl();
+	}
+	
+	public int getPlayerXPosition(){
+		return playerxposition;
+	}
+	
+	public int getPlayerYPosition(){
+		return playeryposition;
+	}
+	
+	public ArrayList<Component> getList(){
+		return objectList;
 	}
 }
