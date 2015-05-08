@@ -1,0 +1,8 @@
+The user will intially see nobbins spawning near the other end of the playing space.
+The nobbins will attempt to navigate through preexisting tunnels towards the player.
+The nobbins will also attempt not to cross with other nobbins.
+Over time, the nobblins will eventually transform into hobbins.
+All hobbins will be able to dig their own tunnels and attempt to destroy collectables and the player.
+If the player enters the same space or comes in contact with an enemy, he will die and respawn with one less life.
+If the player presses space, a projectile will radiate from the player's facing direction in a straight line.
+If the projectile hits an enemy, the enemy will die and disapper.

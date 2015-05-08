@@ -1,0 +1,11 @@
+U/D will increase/decrease level number
+Arrow keys will control movement
+
+The user is intially presented with the playing space, loaded from a premade text file.
+The playing space will be filled with dirt and emeralds.
+
+The user controls the digger with the corresponding arrow keys.
+As the user moves over empty space, it remains as empty space.
+As the user moves over dirt, it is transformed into empty space.
+The user can control the digger to a emerald, where contact results in the emerald's disappearence and a point increase.
+The user can press P to advance to the next level or U to go back a previous level.
