@@ -2,9 +2,10 @@ import java.awt.Component;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 
-public class Emerald extends Component implements Interactable{
+public class Emerald extends JComponent implements Interactable{
 	
 	private Icon emeraldicon;
 	private boolean emeraldstate;

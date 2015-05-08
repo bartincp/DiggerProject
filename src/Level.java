@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import java.io.*;
 import java.util.*;
 import java.awt.event.*;
+
+import javax.swing.JComponent;
 
 
 /**
@@ -18,7 +19,7 @@ import java.awt.event.*;
  */
 public class Level {
 	private int lvlNum;
-	private ArrayList<Component> objectList;
+	private ArrayList<JComponent> objectList;
 //	private int[][] positionList;
 //	private int[][] spawnList;
 //	private int xIndex;
@@ -30,7 +31,7 @@ public class Level {
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
 		this.lvlNum = 0;
-		this.objectList= new ArrayList<Component>();
+		this.objectList= new ArrayList<JComponent>();
 //		this.positionList = new int[1][1];
 //		this.spawnList = new int[1][1];
 	}
@@ -115,7 +116,7 @@ public class Level {
 		return playeryposition;
 	}
 	
-	public ArrayList<Component> getList(){
+	public ArrayList<JComponent> getList(){
 		return objectList;
 	}
 }

@@ -11,7 +11,8 @@ Comment: Implementing the related classes required a bit more research and creat
 Hero spawning and moving:
 Est. time: 2 hours
 Actual time:
-Comment:
+Comment: Implementing the creation of a new JComponent is difficult due to the lack of a painted object and the lack of transparency
+when comparing the component to the creation of a JButton
 
 Emeralds and dirt spawning:
 Est. time: 2 hours

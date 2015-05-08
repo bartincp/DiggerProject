@@ -1,16 +1,20 @@
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 
-public class Player extends Component implements Interactable{
+public class Player extends JComponent implements Interactable{
 	
 	private Icon playericon;
 	private boolean playerstate;
@@ -25,9 +29,13 @@ public class Player extends Component implements Interactable{
 		gridwidth = widthofgrid;
 		gridheight = heightofgrid;
 		playerstate = true;
-		playericon = new ImageIcon("Dig_Dug.png");
+		playericon = new ImageIcon("Digdug.png");
 		xposition = xaxis;
 		yposition = yaxis;
+	}
+	
+	public Icon getIcon(){
+		return playericon;
 	}
 	
 	public int getXPosition(){
@@ -56,7 +64,7 @@ public class Player extends Component implements Interactable{
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition--;
-			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			score += list.get(gridwidth*yposition+xposition).transform();
 		}
@@ -67,7 +75,7 @@ public class Player extends Component implements Interactable{
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition++;
-			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			score += list.get(gridwidth*yposition+xposition).transform();
 		}
@@ -78,7 +86,7 @@ public class Player extends Component implements Interactable{
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
-			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			score += list.get(gridwidth*yposition+xposition).transform();
 		}
@@ -89,7 +97,7 @@ public class Player extends Component implements Interactable{
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
-			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			score += list.get(gridwidth*yposition+xposition).transform();
 		}

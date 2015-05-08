@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 
 public class GameGrid extends JPanel{
-	private ArrayList<Component> grid;
-	private int gridwidth, gridheight;
+	private ArrayList<JComponent> grid;
 	
 	public GameGrid() {
 		setBackground(Color.gray);
@@ -34,6 +34,25 @@ public class GameGrid extends JPanel{
 			}
 
 			public void keyTyped(KeyEvent e) {
+			}
+		});
+		addKeyListener(new KeyListener(){
+
+			
+			public void keyPressed(KeyEvent event){
+				int keyCode = event.getKeyCode();
+				if(keyCode==KeyEvent.VK_U){
+					lvl.advance();
+				}
+				if(keyCode==KeyEvent.VK_D){
+					lvl.retreat();
+				}
+			}
+
+			public void keyReleased(KeyEvent event){
+			}
+
+			public void keyTyped(KeyEvent event){
 			}
 		});
 	}

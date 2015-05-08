@@ -3,6 +3,7 @@ import java.awt.Component;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 
 /**
@@ -11,7 +12,7 @@ import javax.swing.ImageIcon;
  * @author carducjd.
  *         Created May 5, 2015.
  */
-public class Dirt extends Component implements Interactable{
+public class Dirt extends JComponent implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
 	private int[][] position;
 	private Icon dirticon;
