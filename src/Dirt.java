@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class Dirt extends JComponent implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
 	private int[][] position;
-	private Icon dirticon;
+	private Icon dirticon, airicon;
 //	private File iconFile;
 	private boolean state;
 	private static final int points = 0;
@@ -25,6 +25,7 @@ public class Dirt extends JComponent implements Interactable{
 	public Dirt(){
 		this.position = new int[][] {{0},{0}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
+		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 		label = new JLabel();
@@ -34,6 +35,7 @@ public class Dirt extends JComponent implements Interactable{
 	public Dirt(int xPos, int yPos, boolean state){
 		this.position = new int[][] {{xPos},{yPos}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
+		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 		label = new JLabel();
@@ -55,7 +57,7 @@ public class Dirt extends JComponent implements Interactable{
 	}
 	
 	public int transform(){
-		label = null;
+		label.setIcon(airicon);
 //		this.state=!this.state;
 //		if (this.state){
 //			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.jpg");

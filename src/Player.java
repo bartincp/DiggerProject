@@ -25,7 +25,7 @@ public class Player extends JComponent implements Interactable{
 	private int score = 0;
 	JLabel label;
 	
-	public Player(int yaxis, int xaxis, int widthofgrid, int heightofgrid){
+	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
 		yrespawn = yaxis;
 		gridwidth = widthofgrid;
@@ -64,46 +64,54 @@ public class Player extends JComponent implements Interactable{
 	}
 	
 	public void moveUp(){
-		if(yposition>=0 && yposition<gridheight){
+		if(yposition-1>=0 && yposition-1<gridheight){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition--;
+			Interactable temp = list.get(gridwidth*yposition+xposition);
+			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
-			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveDown(){
-		if(yposition>=0 && yposition<gridheight){
+		if(yposition+1>=0 && yposition+1<gridheight){
+//			System.out.println(gridwidth);
+//			System.out.println(yposition);
+//			System.out.println(xposition);
+//			System.out.println(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition++;
+			Interactable temp = list.get(gridwidth*yposition+xposition);
+			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
-			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveLeft(){
-		if(xposition>=0 && xposition<gridwidth){
+		if(xposition-1>=0 && xposition-1<gridwidth){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
+			Interactable temp = list.get(gridwidth*yposition+xposition);
+			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
-			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 	
 	public void moveRight(){
-		if(xposition>=0 && xposition<gridwidth){
+		if(xposition+1>=0 && xposition+1<gridwidth){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
+			Interactable temp = list.get(gridwidth*yposition+xposition);
+			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
-			score += list.get(gridwidth*yposition+xposition).transform();
 		}
 	}
 
@@ -165,5 +173,9 @@ public class Player extends JComponent implements Interactable{
 	
 	public JLabel returnLabel(){
 		return label;
+	}
+	
+	public int returnScore(){
+		return score;
 	}
 }

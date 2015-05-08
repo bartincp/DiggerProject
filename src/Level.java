@@ -19,7 +19,7 @@ import javax.swing.JComponent;
  */
 public class Level {
 	private int lvlNum;
-	private ArrayList<JComponent> objectList;
+	private ArrayList<Interactable> objectList;
 //	private int[][] positionList;
 //	private int[][] spawnList;
 //	private int xIndex;
@@ -31,7 +31,7 @@ public class Level {
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
 		this.lvlNum = 0;
-		this.objectList= new ArrayList<JComponent>();
+		this.objectList= new ArrayList<Interactable>();
 //		this.positionList = new int[1][1];
 //		this.spawnList = new int[1][1];
 	}
@@ -51,6 +51,7 @@ public class Level {
 			exception.printStackTrace();
 		}
 		System.out.println("The raw resulting array list is " + this.objectList);
+		((Player) objectList.get(xMax*playeryposition+playerxposition)).linkGrid(objectList);
 	}
 	
 	private void readFileRowIter(Scanner sc, int yIndex){
@@ -116,7 +117,7 @@ public class Level {
 		return playeryposition;
 	}
 	
-	public ArrayList<JComponent> getList(){
+	public ArrayList<Interactable> getList(){
 		return objectList;
 	}
 }
