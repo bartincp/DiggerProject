@@ -1,14 +1,13 @@
-<<<<<<< HEAD
+
 import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-=======
+
 import java.io.*;
 import java.util.*;
 import java.awt.event.*;
->>>>>>> origin/master
 
 
 /**

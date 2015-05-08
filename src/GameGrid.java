@@ -17,11 +17,11 @@ public class GameGrid extends JPanel{
 	public GameGrid() {
 		setBackground(Color.gray);
 		Level lvl = new Level();
-		lvl.initLvl();
+		lvl.advance();
 		grid = lvl.getList();
 		setLayout(new GridLayout(5, 5, 1, 1));
 		for (int i = 0; i < grid.size(); i++) {
-			add(new JButton());
+			add(grid.get(i));
 		}
 		int playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 		Player userPlayer = (Player) grid.get(playerposition);
