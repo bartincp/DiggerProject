@@ -1,12 +1,9 @@
 
-import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.*;
-import java.util.*;
-import java.awt.event.*;
 
 import javax.swing.JComponent;
 
@@ -84,6 +81,10 @@ public class Level {
 			this.objectList.add(new Player(xIndex,yIndex,xMax,xMax));
 			playerxposition = xIndex;
 			playeryposition = yIndex;
+		}
+		if (symbol == 'n'){
+			System.out.println("Nobbin created at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new Nobbin(xIndex, yIndex));
 		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
