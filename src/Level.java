@@ -90,14 +90,16 @@ public class Level {
 		readFileColIter(row, xIndex+1, yIndex);
 	}
 
-	public void advance(){
+	public Level advance(){
 		this.lvlNum = this.lvlNum + 1;
 		readFile();
+		return this;
 	}
 	
-	public void retreat(){
+	public Level retreat(){
 		this.lvlNum = this.lvlNum - 1;
 		readFile();
+		return this;
 	}
 	
 	public void actionPerformed(KeyEvent event) {
