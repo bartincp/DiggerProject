@@ -29,7 +29,7 @@ public class Player extends JComponent implements Interactable{
 		gridwidth = widthofgrid;
 		gridheight = heightofgrid;
 		playerstate = true;
-		playericon = new ImageIcon("Digdug.png");
+		playericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Digdug.png");
 		xposition = xaxis;
 		yposition = yaxis;
 	}
@@ -121,5 +121,10 @@ public class Player extends JComponent implements Interactable{
 		if(keyCode==KeyEvent.VK_RIGHT){
 			moveRight();
 		}
+	}
+
+	@Override
+	public Icon returnIcon() {
+		return playericon;
 	}
 }

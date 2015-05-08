@@ -22,14 +22,14 @@ public class Dirt extends JComponent implements Interactable{
 	
 	public Dirt(){
 		this.position = new int[][] {{0},{0}};
-		this.dirticon = new ImageIcon("desktop/Dirt");
+		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 	}
 	
 	public Dirt(int xPos, int yPos, boolean state){
 		this.position = new int[][] {{xPos},{yPos}};
-		this.dirticon = new ImageIcon("desktop/Dirt");
+		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 	}
@@ -37,12 +37,12 @@ public class Dirt extends JComponent implements Interactable{
 	public Dirt(int[][] position, boolean state){
 		this.position = position;
 		if (state){
-			this.dirticon = new ImageIcon("desktop/Dirt");
+			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //			this.iconFile = new File("dirtSpriteOn.gif");
 			this.state = true;
 		}
 		if (!state){
-			this.dirticon = new ImageIcon("desktop/Air");
+			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //			this.iconFile = new File("dirtSpriteOff.gif");
 			this.state = false;
 		}
@@ -51,13 +51,18 @@ public class Dirt extends JComponent implements Interactable{
 	public int transform(){
 		this.state=!this.state;
 		if (this.state){
-			this.dirticon = new ImageIcon("desktop/Dirt");
+			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.jpg");
 //			this.iconFile = new File("dirtSpriteOn.gif");
 		}
 		if (!this.state){
-			this.dirticon = new ImageIcon("desktop/Air");
+			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //			this.iconFile = new File("dirtSpriteOff.gif");
 		}
 		return points;
+	}
+
+	@Override
+	public Icon returnIcon() {
+		return dirticon;
 	}
 }

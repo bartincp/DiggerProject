@@ -1,14 +1,7 @@
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class GameGrid extends JPanel{
@@ -19,11 +12,20 @@ public class GameGrid extends JPanel{
 		Level lvl = new Level();
 		lvl.advance();
 		grid = lvl.getList();
+		
 		setLayout(new GridLayout(5, 5, 1, 1));
 		for (int i = 0; i < grid.size(); i++) {
-			add(grid.get(i));
+			Interactable gameObject = (Interactable) grid.get(i);
+			Icon currIcon=gameObject.returnIcon();
+			JLabel currLabel = new JLabel();
+			currLabel.setIcon(currIcon);
+//			add(grid.get(i));
+			add(currLabel);
 		}
+		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
+		
 		int playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+		
 		Player userPlayer = (Player) grid.get(playerposition);
 		userPlayer.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent event){
