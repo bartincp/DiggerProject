@@ -1,7 +1,8 @@
 Created playing space
 Est. time: 2 hours
-Actual time:
-Comment:
+Actual time: 4 hours
+Comment: Without the immediate knowledge that ImageIcons can be set in JLabels that can be added to panels, it was extremely difficult and more time consuming to get game objects to appear on the space than expected.
+Otherwise, getting a JSwing window up and running to contain the panel was moderately easy.
 
 Loading levels from text file:
 Est. time: 1.5 hours
@@ -10,11 +11,11 @@ Comment: Implementing the related classes required a bit more research and creat
 
 Hero spawning and moving:
 Est. time: 2 hours
-Actual time:
+Actual time: 4 hours
 Comment: Implementing the creation of a new JComponent is difficult due to the lack of a painted object and the lack of transparency
-when comparing the component to the creation of a JButton
+when comparing the component to the creation of a JButton. The hero is now spawned, but lacks movement.
 
 Emeralds and dirt spawning:
 Est. time: 2 hours
-Actual time:
-Comment: The classes involving dirt and emeralds is implemented for the most part.
+Actual time: 2 hours
+Comment: The classes involving dirt and emeralds is implemented for the most part. They are visible on the playing field, but it is unknown if they can disappear since the player cannot move.
