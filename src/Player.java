@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 
@@ -22,6 +23,7 @@ public class Player extends JComponent implements Interactable{
 	private int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;
 	private int score = 0;
+	JLabel label;
 	
 	public Player(int yaxis, int xaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
@@ -32,6 +34,8 @@ public class Player extends JComponent implements Interactable{
 		playericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Digdug.png");
 		xposition = xaxis;
 		yposition = yaxis;
+		label = new JLabel();
+		label.setIcon(playericon);
 	}
 	
 	public Icon getIcon(){
@@ -111,20 +115,55 @@ public class Player extends JComponent implements Interactable{
 		int keyCode = event.getKeyCode();
 		if(keyCode==KeyEvent.VK_UP){
 			moveUp();
+//			if(yposition>=0 && yposition<gridheight){
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
+//				yposition--;
+//				Interactable icon = list.get(gridwidth*yposition+xposition);
+//				list.set(gridwidth*yposition+xposition, this);
+//				score += list.get(gridwidth*yposition+xposition).transform();
+//			}
 		}
 		if(keyCode==KeyEvent.VK_DOWN){
 			moveDown();
+//			if(yposition>=0 && yposition<gridheight){
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
+//				yposition++;
+//				Interactable icon = list.get(gridwidth*yposition+xposition);
+//				list.set(gridwidth*yposition+xposition, this);
+//				score += list.get(gridwidth*yposition+xposition).transform();
+//			}
 		}
 		if(keyCode==KeyEvent.VK_LEFT){
 			moveLeft();
+//			if(xposition>=0 && xposition<gridwidth){
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
+//				xposition--;
+//				Interactable icon = list.get(gridwidth*yposition+xposition);
+//				list.set(gridwidth*yposition+xposition, this);
+//				score += list.get(gridwidth*yposition+xposition).transform();
+//			}
 		}
 		if(keyCode==KeyEvent.VK_RIGHT){
 			moveRight();
+//			if(xposition>=0 && xposition<gridwidth){
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
+//				xposition++;
+//				Interactable icon = list.get(gridwidth*yposition+xposition);
+//				list.set(gridwidth*yposition+xposition, this);
+//				score += list.get(gridwidth*yposition+xposition).transform();
+//			}
 		}
 	}
 
-	@Override
 	public Icon returnIcon() {
 		return playericon;
+	}
+	
+	public JLabel returnLabel(){
+		return label;
 	}
 }
