@@ -16,7 +16,7 @@ public class Emerald extends JComponent implements Interactable{
 	
 	// Added zero-parameter block since Level had trouble constructing Emerald without it (JDC)
 	public Emerald(){
-		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
+//		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
 		this.emeraldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Emerald.png");
 		this.emeraldstate = true;
 		this.xposition = 0;
@@ -26,7 +26,7 @@ public class Emerald extends JComponent implements Interactable{
 	}
 	
 	public Emerald(int xaxis, int yaxis){
-		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
+//		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 		this.emeraldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Emerald.png");
 		this.emeraldstate = true;
 		this.xposition = xaxis;
@@ -40,7 +40,8 @@ public class Emerald extends JComponent implements Interactable{
 		emeraldicon = null;
 		xposition = -1;
 		yposition = -1;
-		label.setIcon(airicon);
+//		label.setIcon(airicon);
+		label.setIcon(null);
 		return points;
 	}
 

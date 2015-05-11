@@ -25,7 +25,7 @@ public class Dirt extends JComponent implements Interactable{
 	public Dirt(){
 		this.position = new int[][] {{0},{0}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
-		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
+//		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 		label = new JLabel();
@@ -35,7 +35,7 @@ public class Dirt extends JComponent implements Interactable{
 	public Dirt(int xPos, int yPos, boolean state){
 		this.position = new int[][] {{xPos},{yPos}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
-		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
+//		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
 		this.state = true;
 		label = new JLabel();
@@ -50,14 +50,15 @@ public class Dirt extends JComponent implements Interactable{
 			this.state = true;
 		}
 		if (!state){
-			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
+//			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
+			this.dirticon = null;
 //			this.iconFile = new File("dirtSpriteOff.gif");
 			this.state = false;
 		}
 	}
 	
 	public int transform(){
-		label.setIcon(airicon);
+		label.setIcon(null);
 //		this.state=!this.state;
 //		if (this.state){
 //			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.jpg");

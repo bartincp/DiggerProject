@@ -91,14 +91,18 @@ public class Level {
 	}
 
 	public Level advance(){
-		this.lvlNum = this.lvlNum + 1;
-		readFile();
-		return this;
+		if(lvlNum<3){
+			this.lvlNum = this.lvlNum + 1;
+			readFile();
+		}
+			return this;
 	}
 	
 	public Level retreat(){
+		if(lvlNum>1){
 		this.lvlNum = this.lvlNum - 1;
 		readFile();
+		}
 		return this;
 	}
 	
