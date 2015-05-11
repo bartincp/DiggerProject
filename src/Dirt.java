@@ -15,46 +15,50 @@ import javax.swing.JLabel;
  */
 public class Dirt extends JComponent implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
-	private int[][] position;
+//	private int[][] position;
 	private Icon dirticon, airicon;
 //	private File iconFile;
-	private boolean state;
+//	private boolean state;
 	private static final int points = 0;
 	private JLabel label;
+	private boolean enemy;
 	
 	public Dirt(){
-		this.position = new int[][] {{0},{0}};
+//		this.position = new int[][] {{0},{0}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
-		this.state = true;
+//		this.state = true;
 		label = new JLabel();
 		label.setIcon(dirticon);
+		enemy = false;
 	}
 	
 	public Dirt(int xPos, int yPos, boolean state){
-		this.position = new int[][] {{xPos},{yPos}};
+//		this.position = new int[][] {{xPos},{yPos}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
-		this.state = true;
+//		this.state = true;
 		label = new JLabel();
 		label.setIcon(dirticon);
+		enemy = false;
 	}
 	
 	public Dirt(int[][] position, boolean state){
-		this.position = position;
+//		this.position = position;
 		if (state){
 			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //			this.iconFile = new File("dirtSpriteOn.gif");
-			this.state = true;
+//			this.state = true;
 		}
 		if (!state){
 //			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 			this.dirticon = null;
 //			this.iconFile = new File("dirtSpriteOff.gif");
-			this.state = false;
+//			this.state = false;
 		}
+		enemy = false;
 	}
 	
 	public int transform(){
@@ -71,6 +75,10 @@ public class Dirt extends JComponent implements Interactable{
 		return points;
 	}
 
+	public boolean returnEnemy(){
+		return enemy;
+	}
+	
 	public Icon returnIcon() {
 		return dirticon;
 	}

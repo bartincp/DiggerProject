@@ -11,6 +11,7 @@ public class Nobbin extends JComponent implements Interactable {
 	private int xPos, yPos;
 	private int xRespawn, yRespawn;
 	private JLabel label;
+	private boolean enemy;
 	
 	public Nobbin(int xPos, int yPos){
 		this.xRespawn = xPos;
@@ -20,6 +21,7 @@ public class Nobbin extends JComponent implements Interactable {
 		this.icon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/nobbin.png");
 		this.label = new JLabel();
 		this.label.setIcon(this.icon);
+		this.enemy = true;
 	}
 	
 	@Override
@@ -37,4 +39,7 @@ public class Nobbin extends JComponent implements Interactable {
 		return this.label;
 	}
 
+	public boolean returnEnemy(){
+		return enemy;
+	}
 }

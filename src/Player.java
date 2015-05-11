@@ -18,24 +18,26 @@ import javax.swing.KeyStroke;
 public class Player extends JComponent implements Interactable{
 	
 	private Icon playericon;
-	private boolean playerstate;
+//	private boolean playerstate;
 	private int xposition, yposition;
 	private int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;
 	private int score = 0;
-	JLabel label;
+	private JLabel label;
+	private boolean enemy;
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
 		yrespawn = yaxis;
 		gridwidth = widthofgrid;
 		gridheight = heightofgrid;
-		playerstate = true;
+//		playerstate = true;
 		playericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Digdug.png");
 		xposition = xaxis;
 		yposition = yaxis;
 		label = new JLabel();
 		label.setIcon(playericon);
+		enemy = true;
 	}
 	
 	public Icon getIcon(){
@@ -50,9 +52,9 @@ public class Player extends JComponent implements Interactable{
 		return yposition;
 	}
 	
-	public void death(){
-		playerstate = false;
-	}
+//	public void death(){
+//		playerstate = false;
+//	}
 	
 	public void respawn(){
 		xposition = xrespawn;
@@ -69,6 +71,11 @@ public class Player extends JComponent implements Interactable{
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition--;
 			Interactable temp = list.get(gridwidth*yposition+xposition);
+			if(temp.returnEnemy()){
+				this.respawn();
+				list.set(gridwidth*yposition+xposition,this);
+				return;
+			}
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
@@ -85,6 +92,11 @@ public class Player extends JComponent implements Interactable{
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition++;
 			Interactable temp = list.get(gridwidth*yposition+xposition);
+			if(temp.returnEnemy()){
+				this.respawn();
+				list.set(gridwidth*yposition+xposition,this);
+				return;
+			}
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
@@ -97,6 +109,11 @@ public class Player extends JComponent implements Interactable{
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
 			Interactable temp = list.get(gridwidth*yposition+xposition);
+			if(temp.returnEnemy()){
+				this.respawn();
+				list.set(gridwidth*yposition+xposition,this);
+				return;
+			}
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
@@ -109,6 +126,11 @@ public class Player extends JComponent implements Interactable{
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
 			Interactable temp = list.get(gridwidth*yposition+xposition);
+			if(temp.returnEnemy()){
+				this.respawn();
+				list.set(gridwidth*yposition+xposition,this);
+				return;
+			}
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
@@ -145,5 +167,9 @@ public class Player extends JComponent implements Interactable{
 	
 	public int returnScore(){
 		return score;
+	}
+	
+	public boolean returnEnemy(){
+		return enemy;
 	}
 }

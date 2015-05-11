@@ -14,6 +14,7 @@ public class Laser extends JComponent implements Interactable{
 	private int xposition, yposition;
 	private int xdirection, ydirection;
 	private JLabel label;
+	private boolean enemy;
 	
 	public Laser(){
 		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/laser.png");
@@ -22,6 +23,7 @@ public class Laser extends JComponent implements Interactable{
 		this.yposition = 0;
 		label = new JLabel();
 		label.setIcon(lasericon);
+		this.enemy = true;
 	}
 	
 	public Laser(int xaxis, int yaxis){
@@ -31,9 +33,9 @@ public class Laser extends JComponent implements Interactable{
 		this.yposition = yaxis;
 		label = new JLabel();
 		label.setIcon(lasericon);
+		this.enemy = true;
 	}
 
-	@Override
 	public int transform() {
 		// Another suitable method name would be die();
 		laserstate = false;
@@ -44,12 +46,10 @@ public class Laser extends JComponent implements Interactable{
 		return 0;
 	}
 
-	@Override
 	public Icon returnIcon() {
 		return lasericon;
 	}
 
-	@Override
 	public JLabel returnLabel() {
 		return label;
 	}
@@ -67,6 +67,8 @@ public class Laser extends JComponent implements Interactable{
 //		}
 	}
 	
-	
+	public boolean returnEnemy(){
+		return enemy;
+	}
 	//movement method?
 }

@@ -91,30 +91,26 @@ public class Level {
 	}
 
 	public Level advance(){
-		if(lvlNum<3){
 			this.lvlNum = this.lvlNum + 1;
 			readFile();
-		}
 			return this;
 	}
 	
 	public Level retreat(){
-		if(lvlNum>1){
 		this.lvlNum = this.lvlNum - 1;
 		readFile();
-		}
 		return this;
 	}
 	
-	public void actionPerformed(KeyEvent event) {
-		int keyCode = event.getKeyCode();
-		if(keyCode==KeyEvent.VK_U){
-			retreat();
-		}
-		if(keyCode==KeyEvent.VK_P){
-			advance();
-		}
-	}
+//	public void actionPerformed(KeyEvent event) {
+//		int keyCode = event.getKeyCode();
+//		if(keyCode==KeyEvent.VK_U){
+//			retreat();
+//		}
+//		if(keyCode==KeyEvent.VK_P){
+//			advance();
+//		}
+//	}
 	
 	public int getPlayerXPosition(){
 		return playerxposition;
@@ -122,6 +118,10 @@ public class Level {
 	
 	public int getPlayerYPosition(){
 		return playeryposition;
+	}
+	
+	public int getLevelNumber(){
+		return lvlNum;
 	}
 	
 	public ArrayList<Interactable> getList(){

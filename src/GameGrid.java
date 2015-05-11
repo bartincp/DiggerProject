@@ -51,16 +51,20 @@ public class GameGrid extends JPanel{
 //					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_U){
-					lvl = lvl.advance();
-					grid = lvl.getList();
-					playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-					userPlayer = (Player) grid.get(playerposition);
+					if(lvl.getLevelNumber()<3){
+						lvl = lvl.advance();
+						grid = lvl.getList();
+						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+						userPlayer = (Player) grid.get(playerposition);
+					}
 				}
 				if(keyCode==KeyEvent.VK_D){
-					lvl = lvl.retreat();
-					grid = lvl.getList();
-					playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-					userPlayer = (Player) grid.get(playerposition);
+					if(lvl.getLevelNumber()>1){
+						lvl = lvl.retreat();
+						grid = lvl.getList();
+						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+						userPlayer = (Player) grid.get(playerposition);
+					}
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));

@@ -7,4 +7,5 @@ public interface Interactable{
 	public int transform();
 	public Icon returnIcon();
 	public JLabel returnLabel();
+	public boolean returnEnemy();
 }
