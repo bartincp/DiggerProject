@@ -120,11 +120,13 @@ public class GameGrid extends JPanel{
 						userPlayer = (Player) grid.get(playerposition);
 					}
 				}
-				if(runningtimer == false){
-					playertimer = new Timer(600,taskPerformer);
-					playertimer.setInitialDelay(0);
-					playertimer.start();
-					runningtimer = true;
+				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U){
+					if(runningtimer == false){
+						playertimer = new Timer(600,taskPerformer);
+						playertimer.setInitialDelay(0);
+						playertimer.start();
+						runningtimer = true;
+					}
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
@@ -137,8 +139,11 @@ public class GameGrid extends JPanel{
 			}
 
 			public void keyReleased(KeyEvent event){
+				int keyCode = event.getKeyCode();
+				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U){
 				playertimer.stop();
 				runningtimer = false;
+				}
 			}
 
 			public void keyTyped(KeyEvent event){
