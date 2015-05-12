@@ -24,6 +24,24 @@ public class Nobbin extends JComponent implements Interactable {
 		this.enemy = true;
 	}
 	
+	private void moveMe(int playerX, int playerY) {
+		//
+	}
+	
+	private int[] getOptimalMove(int playerX, int playerY) {
+		int dx = playerX - xPos;
+		int dy = playerY - yPos;
+		int[] move = new int[2];
+		if (Math.abs(dx) <= Math.abs(dy)) {
+			move[0] = Math.abs(dx)/dx;
+		} else if (Math.abs(dx) > Math.abs(dy)) {
+			move[1] = Math.abs(dy)/dy;
+		}
+		return move;
+		
+		//implement breadth-first or iterative depth-first search
+	}
+	
 	@Override
 	public int transform() {
 		return 0;
