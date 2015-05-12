@@ -25,6 +25,7 @@ public class Player extends JComponent implements Interactable{
 	private int score = 0;
 	private JLabel label;
 	private boolean enemy;
+	private int northsouth, eastwest;
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
@@ -37,7 +38,9 @@ public class Player extends JComponent implements Interactable{
 		yposition = yaxis;
 		label = new JLabel();
 		label.setIcon(playericon);
-		enemy = true;
+		enemy = false;
+		northsouth = 0;
+		eastwest = 0;
 	}
 	
 	public Icon getIcon(){
@@ -79,6 +82,8 @@ public class Player extends JComponent implements Interactable{
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
+			eastwest = 0;
+			northsouth = -1;
 		}
 	}
 	
@@ -100,6 +105,8 @@ public class Player extends JComponent implements Interactable{
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
+			eastwest = 0;
+			northsouth = 1;
 		}
 	}
 	
@@ -117,6 +124,8 @@ public class Player extends JComponent implements Interactable{
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
+			northsouth = 0;
+			eastwest = -1;
 		}
 	}
 	
@@ -134,6 +143,8 @@ public class Player extends JComponent implements Interactable{
 			score += temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
+			northsouth = 0;
+			eastwest = 1;
 		}
 	}
 
@@ -171,5 +182,13 @@ public class Player extends JComponent implements Interactable{
 	
 	public boolean returnEnemy(){
 		return enemy;
+	}
+	
+	public int returnNorthSouth(){
+		return northsouth;
+	}
+	
+	public int returnEastWest(){
+		return eastwest;
 	}
 }

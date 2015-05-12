@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
+import java.util.Timer;
 import javax.swing.*;
 
 
@@ -32,7 +32,6 @@ public class GameGrid extends JPanel{
 		userPlayer = (Player) grid.get(playerposition);
 		addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent event){
-				removeAll();
 				int keyCode = event.getKeyCode();
 				if(keyCode==KeyEvent.VK_UP){
 					userPlayer.moveUp();
