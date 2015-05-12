@@ -68,6 +68,30 @@ public class Player extends JComponent implements Interactable{
 		list = inputlist;
 	}
 	
+	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
+//	public void move(int dirAxis, int dirAmt){
+//		// Assuming the laser has not reached the border yet:
+//		if (yposition-1>=0 && yposition+1<gridheight && xposition-1>=0 && xposition+1<gridwidth){
+//			list.set(gridwidth*yposition+xposition, new Dirt());
+//			list.get(gridwidth*yposition+xposition).transform();
+//			if (dirAxis == 0) {
+//				yposition=+dirAmt;
+//			}
+//			if (dirAxis == 1) {
+//				xposition=+dirAmt;
+//			}
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			if(temp.returnEnemy()){
+//				this.transform();
+//				return;
+//			}
+//			// This kills the enemy??
+//			score += temp.transform();
+////			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			list.set(gridwidth*yposition+xposition, this);
+//		}
+//	}
+	
 	public void moveUp(){
 		if(yposition-1>=0 && yposition-1<gridheight){
 			list.set(gridwidth*yposition+xposition, new Dirt());

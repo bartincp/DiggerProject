@@ -24,10 +24,12 @@ public class Level {
 	private File lvlFile;
 	private int playerxposition, playeryposition;
 	private int xMax, yMax;
+	private int emeraldCount;
 	
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
 		this.lvlNum = 0;
+		this.emeraldCount=0;
 		this.objectList= new ArrayList<Interactable>();
 //		this.positionList = new int[1][1];
 //		this.spawnList = new int[1][1];
@@ -75,6 +77,7 @@ public class Level {
 		if (symbol == 'v'){
 			System.out.println("Emerald created at row " + yIndex + ", column " + xIndex + ".");
 			this.objectList.add(new Emerald(xIndex, yIndex));
+			emeraldCount++;
 		}
 		if (symbol == 'o'){
 			System.out.println("Player created at row " + yIndex + ", column " + xIndex + ".");
@@ -126,5 +129,9 @@ public class Level {
 	
 	public ArrayList<Interactable> getList(){
 		return objectList;
+	}
+	
+	public int getEmeraldCount(){
+		return emeraldCount;
 	}
 }
