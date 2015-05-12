@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Timer;
+import javax.swing.Timer;
 import javax.swing.*;
 
 
@@ -10,6 +10,9 @@ public class GameGrid extends JPanel{
 	private int playerposition;
 	private Player userPlayer;
 	private Level lvl;
+	private Timer playertimer;
+	private ActionListener taskPerformer;
+	private boolean runningtimer = false;
 	
 	public GameGrid() {
 		setFocusable(true);
@@ -34,19 +37,71 @@ public class GameGrid extends JPanel{
 			public void keyPressed(KeyEvent event){
 				int keyCode = event.getKeyCode();
 				if(keyCode==KeyEvent.VK_UP){
-					userPlayer.moveUp();
+					taskPerformer = new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+							userPlayer.moveUp();
+							removeAll();
+							setLayout(new GridLayout(5, 5, 1, 1));
+							for (int i = 0; i < grid.size(); i++) {
+								JLabel currLabel = (grid.get(i).returnLabel());
+								add(currLabel);
+							}
+							repaint();
+							validate();
+						}
+					};
+//					userPlayer.moveUp();
 //					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_DOWN){
-					userPlayer.moveDown();
+					taskPerformer = new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+							userPlayer.moveDown();
+							removeAll();
+							setLayout(new GridLayout(5, 5, 1, 1));
+							for (int i = 0; i < grid.size(); i++) {
+								JLabel currLabel = (grid.get(i).returnLabel());
+								add(currLabel);
+							}
+							repaint();
+							validate();
+						}
+					};
+//					userPlayer.moveDown();
 //					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_LEFT){
-					userPlayer.moveLeft();
+					taskPerformer = new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+							userPlayer.moveLeft();
+							removeAll();
+							setLayout(new GridLayout(5, 5, 1, 1));
+							for (int i = 0; i < grid.size(); i++) {
+								JLabel currLabel = (grid.get(i).returnLabel());
+								add(currLabel);
+							}
+							repaint();
+							validate();
+						}
+					};
+//					userPlayer.moveLeft();
 //					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_RIGHT){
-					userPlayer.moveRight();
+					taskPerformer = new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+							userPlayer.moveRight();
+							removeAll();
+							setLayout(new GridLayout(5, 5, 1, 1));
+							for (int i = 0; i < grid.size(); i++) {
+								JLabel currLabel = (grid.get(i).returnLabel());
+								add(currLabel);
+							}
+							repaint();
+							validate();
+						}
+					};
+//					userPlayer.moveRight();
 //					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_U){
@@ -65,6 +120,12 @@ public class GameGrid extends JPanel{
 						userPlayer = (Player) grid.get(playerposition);
 					}
 				}
+				if(runningtimer == false){
+					playertimer = new Timer(600,taskPerformer);
+					playertimer.setInitialDelay(0);
+					playertimer.start();
+					runningtimer = true;
+				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
 				for (int i = 0; i < grid.size(); i++) {
@@ -76,6 +137,8 @@ public class GameGrid extends JPanel{
 			}
 
 			public void keyReleased(KeyEvent event){
+				playertimer.stop();
+				runningtimer = false;
 			}
 
 			public void keyTyped(KeyEvent event){

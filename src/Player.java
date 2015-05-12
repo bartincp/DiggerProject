@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
+import java.util.Timer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -174,22 +174,6 @@ public class Player extends JComponent implements Interactable{
 
 	public int transform() {
 		return 0;
-	}
-
-	public void keyPressed(KeyEvent event) {
-		int keyCode = event.getKeyCode();
-		if(keyCode==KeyEvent.VK_UP){
-			moveUp();
-		}
-		if(keyCode==KeyEvent.VK_DOWN){
-			moveDown();
-		}
-		if(keyCode==KeyEvent.VK_LEFT){
-			moveLeft();
-		}
-		if(keyCode==KeyEvent.VK_RIGHT){
-			moveRight();
-		}
 	}
 
 	public Icon returnIcon() {
