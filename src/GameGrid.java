@@ -6,6 +6,9 @@ import javax.swing.*;
 
 
 public class GameGrid extends JPanel{
+	private int lives;
+	private int points;
+	private int emeraldCount;
 	private ArrayList<Interactable> grid;
 	private int playerposition;
 	private Player userPlayer;

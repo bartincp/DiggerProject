@@ -88,7 +88,7 @@ public class Level {
 		}
 		if (symbol == 'n'){
 			System.out.println("Nobbin created at row " + yIndex + ", column " + xIndex + ".");
-			this.objectList.add(new Nobbin(xIndex, yIndex));
+			this.objectList.add(new Nobbin(xIndex, yIndex, 5, 5));
 		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}

@@ -47,14 +47,16 @@ public class Laser extends JComponent implements Interactable{
 		user = player;
 	}
 
-	public int transform() {
+	public int[] transform() {
 		// Another suitable method name would be die();
 		laserstate = false;
 		lasericon = null;
 		xposition = -1;
 		yposition = -1;
 		label.setIcon(null);
-		return score;
+		label = null;
+		int[] tempArray = {0,0};
+		return tempArray;
 	}
 
 	public Icon returnIcon() {
@@ -68,6 +70,7 @@ public class Laser extends JComponent implements Interactable{
 	// Make separate move methods?
 	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
 	public void move(int dirAxis, int dirAmt){
+		int[] tempArray = {0,0};
 		// Assuming the laser has not reached the border yet:
 		if(dirAxis == 0){
 			list.set(gridwidth*yposition+xposition, new Dirt());
