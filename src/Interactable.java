@@ -8,4 +8,5 @@ public interface Interactable{
 	public Icon returnIcon();
 	public JLabel returnLabel();
 	public boolean returnEnemy();
+	public boolean returnState();
 }

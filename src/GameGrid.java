@@ -14,7 +14,7 @@ public class GameGrid extends JPanel{
 	private Player userPlayer;
 	private Level lvl;
 	private Timer playertimer;
-	private ActionListener taskPerformer;
+	private ActionListener taskPerformer, taskPerformerLaser;
 	private boolean runningtimer = false;
 	
 	public GameGrid() {
@@ -106,6 +106,39 @@ public class GameGrid extends JPanel{
 					};
 //					userPlayer.moveRight();
 //					System.out.println(userPlayer.returnScore());
+				}
+				if(keyCode==KeyEvent.VK_SPACE){
+					boolean gridstate;
+					int predictedposition;
+					if(userPlayer.getDirectionAxis()==0){
+						predictedposition = 5*(userPlayer.getYPosition()+userPlayer.getDirectionAmount())+userPlayer.getXPosition();
+						gridstate = grid.get(predictedposition).returnState();
+						if(gridstate==false){
+							Laser pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5);
+							grid.set(predictedposition, pewpew);
+						}
+					}
+					else{
+						predictedposition = 5*userPlayer.getYPosition()+userPlayer.getXPosition()+userPlayer.getDirectionAmount();
+						gridstate = grid.get(predictedposition).returnState();
+						if(gridstate==false){
+							Laser pewpew = new Laser(userPlayer.getXPosition()+userPlayer.getDirectionAmount(), userPlayer.getYPosition(), 5, 5);
+							grid.set(predictedposition, pewpew);
+						}
+					}
+					taskPerformerLaser = new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+							pewpew.move();
+							removeAll();
+							setLayout(new GridLayout(5, 5, 1, 1));
+							for (int i = 0; i < grid.size(); i++) {
+								JLabel currLabel = (grid.get(i).returnLabel());
+								add(currLabel);
+							}
+							repaint();
+							validate();
+						}
+					};
 				}
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){

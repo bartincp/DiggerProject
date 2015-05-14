@@ -18,7 +18,7 @@ public class Laser extends JComponent implements Interactable{
 	private ArrayList<Interactable> list;
 	private int score;
 	private JLabel label;
-	private boolean enemy;
+	private boolean enemy, state;
 	
 	public Laser(){
 		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/laser.png");
@@ -30,6 +30,7 @@ public class Laser extends JComponent implements Interactable{
 		label = new JLabel();
 		label.setIcon(lasericon);
 		this.enemy = true;
+		state = true;
 	}
 	
 	public Laser(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
@@ -42,6 +43,7 @@ public class Laser extends JComponent implements Interactable{
 		label = new JLabel();
 		label.setIcon(lasericon);
 		this.enemy = true;
+		state = true;
 	}
 
 	public int[] transform() {
@@ -51,8 +53,13 @@ public class Laser extends JComponent implements Interactable{
 		xposition = -1;
 		yposition = -1;
 		label = null;
+<<<<<<< HEAD
 		int[] tempArray = {0,0};
 		return tempArray;
+=======
+		state = false;
+		return 0;
+>>>>>>> origin/master
 	}
 
 	public Icon returnIcon() {
@@ -100,4 +107,12 @@ public class Laser extends JComponent implements Interactable{
 		return enemy;
 	}
 	//movement method?
+	
+	public boolean returnState(){
+		return state;
+	}
+	
+	public void linkGrid(ArrayList<Interactable> inputlist){
+		list = inputlist;
+	}
 }

@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 public class Emerald extends JComponent implements Interactable{
 	
 	private Icon emeraldicon, airicon;
-//	private boolean emeraldstate;
+	private boolean emeraldstate;
 //	private int xposition, yposition;
 	private static final int points = 10;
 	private JLabel label;
@@ -20,7 +20,7 @@ public class Emerald extends JComponent implements Interactable{
 	public Emerald(){
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpeg");
 		this.emeraldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Emerald.png");
-//		this.emeraldstate = true;
+		this.emeraldstate = true;
 //		this.xposition = 0;
 //		this.yposition = 0;
 		label = new JLabel();
@@ -31,7 +31,7 @@ public class Emerald extends JComponent implements Interactable{
 	public Emerald(int xaxis, int yaxis){
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 		this.emeraldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Emerald.png");
-//		this.emeraldstate = true;
+		this.emeraldstate = true;
 //		this.xposition = xaxis;
 //		this.yposition = yaxis;
 		label = new JLabel();
@@ -39,8 +39,13 @@ public class Emerald extends JComponent implements Interactable{
 		enemy = false;
 	}
 
+<<<<<<< HEAD
 	public int[] transform(){
 //		emeraldstate = false;
+=======
+	public int transform(){
+		emeraldstate = false;
+>>>>>>> origin/master
 		emeraldicon = null;
 //		xposition = -1;
 //		yposition = -1;
@@ -60,5 +65,9 @@ public class Emerald extends JComponent implements Interactable{
 	
 	public JLabel returnLabel(){
 		return label;
+	}
+	
+	public boolean returnState(){
+		return emeraldstate;
 	}
 }
