@@ -14,6 +14,7 @@ public class Emerald extends JComponent implements Interactable{
 	private static final int points = 10;
 	private JLabel label;
 	private boolean enemy;
+	private static final int emeraldChange = -1;
 	
 	// Added zero-parameter block since Level had trouble constructing Emerald without it (JDC)
 	public Emerald(){
@@ -38,14 +39,15 @@ public class Emerald extends JComponent implements Interactable{
 		enemy = false;
 	}
 
-	public int transform(){
+	public int[] transform(){
 //		emeraldstate = false;
 		emeraldicon = null;
 //		xposition = -1;
 //		yposition = -1;
 //		label.setIcon(airicon);
 		label.setIcon(null);
-		return points;
+		int[] tempArray = {points, emeraldChange};
+		return tempArray;
 	}
 
 	public boolean returnEnemy(){

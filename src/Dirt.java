@@ -22,6 +22,7 @@ public class Dirt extends JComponent implements Interactable{
 	private static final int points = 0;
 	private JLabel label;
 	private boolean enemy;
+	private static final int emeraldChange = -1;
 	
 	public Dirt(){
 //		this.position = new int[][] {{0},{0}};
@@ -61,7 +62,7 @@ public class Dirt extends JComponent implements Interactable{
 		enemy = false;
 	}
 	
-	public int transform(){
+	public int[] transform(){
 		label.setIcon(null);
 //		this.state=!this.state;
 //		if (this.state){
@@ -72,7 +73,8 @@ public class Dirt extends JComponent implements Interactable{
 //			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 ////			this.iconFile = new File("dirtSpriteOff.gif");
 //		}
-		return points;
+		int[] tempArray = {points, emeraldChange};
+		return tempArray;
 	}
 
 	public boolean returnEnemy(){

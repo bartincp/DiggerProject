@@ -43,8 +43,9 @@ public class Nobbin extends JComponent implements Interactable {
 	}
 	
 	@Override
-	public int transform() {
-		return 0;
+	public int[] transform() {
+		int[] tempArray = {0,0};
+		return tempArray;
 	}
 
 	@Override

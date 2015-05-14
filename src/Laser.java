@@ -44,14 +44,15 @@ public class Laser extends JComponent implements Interactable{
 		this.enemy = true;
 	}
 
-	public int transform() {
+	public int[] transform() {
 		// Another suitable method name would be die();
 		laserstate = false;
 		lasericon = null;
 		xposition = -1;
 		yposition = -1;
 		label = null;
-		return 0;
+		int[] tempArray = {0,0};
+		return tempArray;
 	}
 
 	public Icon returnIcon() {
@@ -65,6 +66,7 @@ public class Laser extends JComponent implements Interactable{
 	// Make separate move methods?
 	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
 	public void move(int dirAxis, int dirAmt){
+		int[] tempArray = {0,0};
 		// Assuming the laser has not reached the border yet:
 		if (yposition-1>=0 && yposition+1<gridheight && xposition-1>=0 && xposition+1<gridwidth){
 			list.set(gridwidth*yposition+xposition, new Dirt());
@@ -77,11 +79,11 @@ public class Laser extends JComponent implements Interactable{
 			}
 			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
-				this.transform();
+				tempArray = this.transform();
 				return;
 			}
 			// This kills the enemy??
-			score += temp.transform();
+			tempArray = temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 		}
@@ -89,7 +91,7 @@ public class Laser extends JComponent implements Interactable{
 		else {
 			Interactable temp = list.get(gridwidth*yposition+xposition);
 			this.transform();
-			score += temp.transform();
+			tempArray = temp.transform();
 			return;
 		}
 	}
