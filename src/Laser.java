@@ -18,23 +18,24 @@ public class Laser extends JComponent implements Interactable{
 	private ArrayList<Interactable> list;
 	private int score;
 	private JLabel label;
-	private boolean enemy, state;
+	private boolean enemy;
+	private Player user;
 	
 	public Laser(){
-		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/laser.png");
-		this.laserstate = true;
-		gridwidth = 700;
-		gridheight = 700;
+		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Laser.gif");
+		this.laserstate = false;
+		gridwidth = 5;
+		gridheight = 5;
 		this.xposition = 0;
 		this.yposition = 0;
 		label = new JLabel();
 		label.setIcon(lasericon);
 		this.enemy = true;
-		state = true;
+		user = null;
 	}
 	
-	public Laser(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
-		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/laser.png");
+	public Laser(int xaxis, int yaxis, int widthofgrid, int heightofgrid, Player player){
+		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Laser.gif");
 		this.laserstate = true;
 		this.gridwidth = widthofgrid;
 		this.gridheight = heightofgrid;
@@ -43,7 +44,7 @@ public class Laser extends JComponent implements Interactable{
 		label = new JLabel();
 		label.setIcon(lasericon);
 		this.enemy = true;
-		state = true;
+		user = player;
 	}
 
 	public int transform() {
@@ -52,9 +53,8 @@ public class Laser extends JComponent implements Interactable{
 		lasericon = null;
 		xposition = -1;
 		yposition = -1;
-		label = null;
-		state = false;
-		return 0;
+		label.setIcon(null);
+		return score;
 	}
 
 	public Icon returnIcon() {
@@ -69,32 +69,81 @@ public class Laser extends JComponent implements Interactable{
 	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
 	public void move(int dirAxis, int dirAmt){
 		// Assuming the laser has not reached the border yet:
-		if (yposition-1>=0 && yposition+1<gridheight && xposition-1>=0 && xposition+1<gridwidth){
+		if(dirAxis == 0){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
-			if (dirAxis == 0) {
-				yposition=+dirAmt;
+			if(yposition-1>=0&&yposition+1<gridheight){
+				yposition+=dirAmt;
 			}
-			if (dirAxis == 1) {
-				xposition=+dirAmt;
-			}
-			Interactable temp = list.get(gridwidth*yposition+xposition);
-			if(temp.returnEnemy()){
+			else{
+				list.set(gridwidth*yposition+xposition, new Dirt());
+				list.get(gridwidth*yposition+xposition).transform();
 				this.transform();
 				return;
 			}
-			// This kills the enemy??
-			score += temp.transform();
-//			Interactable icon = list.get(gridwidth*yposition+xposition);
-			list.set(gridwidth*yposition+xposition, this);
+			if(list.get(gridwidth*yposition+xposition).returnEnemy()==false){
+				if(list.get(gridwidth*yposition+xposition).returnState()==false){
+					list.set(gridwidth*yposition+xposition, this);
+				}
+				else{
+					this.transform();
+				}
+			}
 		}
-		// Once laser reaches border, it disappears.
-		else {
-			Interactable temp = list.get(gridwidth*yposition+xposition);
-			this.transform();
-			score += temp.transform();
-			return;
+		if(dirAxis == 1){
+			list.set(gridwidth*yposition+xposition, new Dirt());
+			list.get(gridwidth*yposition+xposition).transform();
+			if(xposition-1>=0&&xposition+1<gridwidth){
+				xposition+=dirAmt;
+			}
+			else{
+				list.set(gridwidth*yposition+xposition, new Dirt());
+				list.get(gridwidth*yposition+xposition).transform();
+				this.transform();
+				return;
+			}
+			if(list.get(gridwidth*yposition+xposition).returnEnemy()==false){
+				if(list.get(gridwidth*yposition+xposition).returnState()==false){
+					list.set(gridwidth*yposition+xposition, this);
+				}
+				else{
+					this.transform();
+				}
+			}
 		}
+		
+//		if ((yposition-1>=0 && yposition+1<gridheight) || (xposition-1>=0 && xposition+1<gridwidth)){
+//			list.set(gridwidth*yposition+xposition, new Dirt());
+//			list.get(gridwidth*yposition+xposition).transform();
+//			if (dirAxis == 0) {
+//				yposition+=dirAmt;
+//			}
+//			if (dirAxis == 1) {
+//				xposition+=dirAmt;
+//			}
+//			System.out.println(yposition+1);
+//			System.out.println(gridheight);
+//			System.out.println(gridwidth*yposition+xposition);
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			if(temp.returnEnemy()){
+//				this.transform();
+//				return;
+//			}
+//			// This kills the enemy??
+//			score += temp.transform();
+////			Interactable icon = list.get(gridwidth*yposition+xposition);
+//			list.set(gridwidth*yposition+xposition, this);
+//		}
+//		// Once laser reaches border, it disappears.
+//		else {
+////			Interactable temp = list.get(gridwidth*yposition+xposition);
+////			score += this.transform();
+////			score += temp.transform();
+//			list.set(gridwidth*yposition+xposition, new Dirt());
+//			list.get(gridwidth*yposition+xposition).transform();
+//			this.transform();
+//			return;
+//		}
 	}
 	
 	public boolean returnEnemy(){
@@ -103,7 +152,7 @@ public class Laser extends JComponent implements Interactable{
 	//movement method?
 	
 	public boolean returnState(){
-		return state;
+		return laserstate;
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){

@@ -10,9 +10,10 @@ public class GameGrid extends JPanel{
 	private int playerposition;
 	private Player userPlayer;
 	private Level lvl;
-	private Timer playertimer;
+	private Timer playertimer, lasertimer;
 	private ActionListener taskPerformer, taskPerformerLaser;
 	private boolean runningtimer = false;
+	private Laser pewpew;
 	
 	public GameGrid() {
 		setFocusable(true);
@@ -33,6 +34,7 @@ public class GameGrid extends JPanel{
 		
 		playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 		userPlayer = (Player) grid.get(playerposition);
+		pewpew = new Laser();
 		addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent event){
 				int keyCode = event.getKeyCode();
@@ -106,36 +108,52 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode==KeyEvent.VK_SPACE){
 					boolean gridstate;
+					if(lasertimer!=null&&lasertimer.isRunning()==true)
+						lasertimer.stop();
 					int predictedposition;
 					if(userPlayer.getDirectionAxis()==0){
 						predictedposition = 5*(userPlayer.getYPosition()+userPlayer.getDirectionAmount())+userPlayer.getXPosition();
-						gridstate = grid.get(predictedposition).returnState();
-						if(gridstate==false){
-							Laser pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5);
-							grid.set(predictedposition, pewpew);
+						if(predictedposition >= 0 && predictedposition < grid.size()){
+							gridstate = grid.get(predictedposition).returnState();
+							if(gridstate==false){
+								if(pewpew.returnState()==false){
+									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
+									grid.set(predictedposition, pewpew);
+								}
+							}
 						}
 					}
 					else{
 						predictedposition = 5*userPlayer.getYPosition()+userPlayer.getXPosition()+userPlayer.getDirectionAmount();
-						gridstate = grid.get(predictedposition).returnState();
-						if(gridstate==false){
-							Laser pewpew = new Laser(userPlayer.getXPosition()+userPlayer.getDirectionAmount(), userPlayer.getYPosition(), 5, 5);
-							grid.set(predictedposition, pewpew);
+						if(predictedposition >= 0 && predictedposition < grid.size()){
+							gridstate = grid.get(predictedposition).returnState();
+							if(gridstate==false){
+								if(pewpew.returnState()==false){
+									pewpew = new Laser(userPlayer.getXPosition()+userPlayer.getDirectionAmount(), userPlayer.getYPosition(), 5, 5, userPlayer);
+									grid.set(predictedposition, pewpew);
+								}
+							}
 						}
 					}
+					pewpew.linkGrid(grid);
 					taskPerformerLaser = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
-							pewpew.move();
-							removeAll();
-							setLayout(new GridLayout(5, 5, 1, 1));
-							for (int i = 0; i < grid.size(); i++) {
-								JLabel currLabel = (grid.get(i).returnLabel());
-								add(currLabel);
+							if(pewpew.returnState()==true){
+								pewpew.move(userPlayer.getDirectionAxis(), userPlayer.getDirectionAmount());
+								removeAll();
+								setLayout(new GridLayout(5, 5, 1, 1));
+								for (int i = 0; i < grid.size(); i++) {
+									JLabel currLabel = (grid.get(i).returnLabel());
+									add(currLabel);
+								}
+								repaint();
+								validate();
 							}
-							repaint();
-							validate();
 						}
 					};
+					lasertimer = new Timer(400,taskPerformerLaser);
+					lasertimer.setInitialDelay(0);
+					lasertimer.start();
 				}
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){
@@ -153,7 +171,7 @@ public class GameGrid extends JPanel{
 						userPlayer = (Player) grid.get(playerposition);
 					}
 				}
-				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U){
+				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE){
 					if(runningtimer == false){
 						playertimer = new Timer(600,taskPerformer);
 						playertimer.setInitialDelay(0);
@@ -173,7 +191,7 @@ public class GameGrid extends JPanel{
 
 			public void keyReleased(KeyEvent event){
 				int keyCode = event.getKeyCode();
-				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U){
+				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE){
 				playertimer.stop();
 				runningtimer = false;
 				}

@@ -221,4 +221,8 @@ public class Player extends JComponent implements Interactable{
 	public boolean returnState(){
 		return playerstate;
 	}
+	
+	public void addScore(int n){
+		score += n;
+	}
 }
