@@ -18,7 +18,7 @@ public class Dirt extends JComponent implements Interactable{
 //	private int[][] position;
 	private Icon dirticon, airicon;
 //	private File iconFile;
-//	private boolean state;
+	private boolean state;
 	private static final int points = 0;
 	private JLabel label;
 	private boolean enemy;
@@ -28,7 +28,7 @@ public class Dirt extends JComponent implements Interactable{
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
-//		this.state = true;
+		this.state = true;
 		label = new JLabel();
 		label.setIcon(dirticon);
 		enemy = false;
@@ -39,7 +39,7 @@ public class Dirt extends JComponent implements Interactable{
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
 //		this.airicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Air.jpg");
 //		this.iconFile = new File("dirtSpriteOn.gif");
-//		this.state = true;
+		this.state = true;
 		label = new JLabel();
 		label.setIcon(dirticon);
 		enemy = false;
@@ -63,6 +63,7 @@ public class Dirt extends JComponent implements Interactable{
 	
 	public int transform(){
 		label.setIcon(null);
+		state = false;
 //		this.state=!this.state;
 //		if (this.state){
 //			this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.jpg");
@@ -85,5 +86,9 @@ public class Dirt extends JComponent implements Interactable{
 	
 	public JLabel returnLabel(){
 		return label;
+	}
+	
+	public boolean returnState(){
+		return state;
 	}
 }

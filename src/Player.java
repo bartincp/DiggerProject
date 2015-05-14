@@ -18,7 +18,7 @@ import javax.swing.KeyStroke;
 public class Player extends JComponent implements Interactable{
 	
 	private Icon playericon;
-//	private boolean playerstate;
+	private boolean playerstate;
 	private int xposition, yposition;
 	private int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;
@@ -32,7 +32,7 @@ public class Player extends JComponent implements Interactable{
 		yrespawn = yaxis;
 		gridwidth = widthofgrid;
 		gridheight = heightofgrid;
-//		playerstate = true;
+		playerstate = true;
 		playericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Digdug.png");
 		xposition = xaxis;
 		yposition = yaxis;
@@ -40,7 +40,7 @@ public class Player extends JComponent implements Interactable{
 		label.setIcon(playericon);
 		enemy = false;
 		northsouth = 0;
-		eastwest = 0;
+		eastwest = 1;
 	}
 	
 	public Icon getIcon(){
@@ -192,11 +192,33 @@ public class Player extends JComponent implements Interactable{
 		return enemy;
 	}
 	
-	public int returnNorthSouth(){
-		return northsouth;
+//	public int returnNorthSouth(){
+//		return northsouth;
+//	}
+//	
+//	public int returnEastWest(){
+//		return eastwest;
+//	}
+	
+	public int getDirectionAxis(){
+		int directionaxis = -1;
+		if(northsouth==0)
+			directionaxis = 1;
+		if(eastwest==0)
+			directionaxis = 0;
+		return directionaxis;
 	}
 	
-	public int returnEastWest(){
-		return eastwest;
+	public int getDirectionAmount(){
+		int directionamount = 0;
+		if(northsouth==0)
+			directionamount = eastwest;
+		if(eastwest==0)
+			directionamount = northsouth;
+		return directionamount;
+	}
+	
+	public boolean returnState(){
+		return playerstate;
 	}
 }
