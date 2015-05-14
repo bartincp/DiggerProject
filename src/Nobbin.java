@@ -6,11 +6,11 @@ import javax.swing.JLabel;
 
 public class Nobbin extends JComponent implements Interactable {
 
-	private Icon icon;
+	protected Icon icon;
 	private boolean alive;
 	private int xPos, yPos;
 	private int xRespawn, yRespawn;
-	private JLabel label;
+	protected JLabel label;
 	private boolean enemy;
 	
 	public Nobbin(int xPos, int yPos){
@@ -24,11 +24,11 @@ public class Nobbin extends JComponent implements Interactable {
 		this.enemy = true;
 	}
 	
-	private void moveMe(int playerX, int playerY) {
+	protected void moveMe(int playerX, int playerY) {
 		//
 	}
 	
-	private int[] getOptimalMove(int playerX, int playerY) {
+	protected int[] getOptimalMove(int playerX, int playerY) {
 		int dx = playerX - xPos;
 		int dy = playerY - yPos;
 		int[] move = new int[2];
