@@ -61,4 +61,8 @@ public class Nobbin extends JComponent implements Interactable {
 	public boolean returnEnemy(){
 		return enemy;
 	}
+	
+	public boolean returnState(){
+		return true;
+	}
 }

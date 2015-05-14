@@ -18,13 +18,9 @@ import javax.swing.KeyStroke;
 public class Player extends JComponent implements Interactable{
 	
 	private Icon playericon;
-<<<<<<< HEAD
-//	private boolean playerstate;
 	private int lives;
 	private int emeraldChange;
-=======
 	private boolean playerstate;
->>>>>>> origin/master
 	private int xposition, yposition;
 	private int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;

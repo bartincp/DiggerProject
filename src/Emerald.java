@@ -39,13 +39,8 @@ public class Emerald extends JComponent implements Interactable{
 		enemy = false;
 	}
 
-<<<<<<< HEAD
 	public int[] transform(){
-//		emeraldstate = false;
-=======
-	public int transform(){
 		emeraldstate = false;
->>>>>>> origin/master
 		emeraldicon = null;
 //		xposition = -1;
 //		yposition = -1;

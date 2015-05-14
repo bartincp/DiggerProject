@@ -53,13 +53,9 @@ public class Laser extends JComponent implements Interactable{
 		xposition = -1;
 		yposition = -1;
 		label = null;
-<<<<<<< HEAD
 		int[] tempArray = {0,0};
-		return tempArray;
-=======
 		state = false;
-		return 0;
->>>>>>> origin/master
+		return tempArray;
 	}
 
 	public Icon returnIcon() {
