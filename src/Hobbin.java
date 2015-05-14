@@ -24,6 +24,7 @@ public class Hobbin extends Nobbin {
 	}
 	
 	public void moveMe(int playerX, int playerY){
+		// May use unique behavior to account for dirt digging
 		super.moveMe(playerX, playerY);
 	}
 	
@@ -31,7 +32,7 @@ public class Hobbin extends Nobbin {
 		return super.getOptimalMove(playerX, playerY);
 	}
 	
-	public int transform() {
+	public int[] transform() {
 		return super.transform();
 	}
 	
