@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class Dirt extends JComponent implements Interactable{
 	// Maybe use xpos and ypos instead for consistency?
 //	private int[][] position;
-	private Icon dirticon, airicon;
+	private Icon dirticon;
 //	private File iconFile;
 	private boolean state;
 	private static final int points = 0;
