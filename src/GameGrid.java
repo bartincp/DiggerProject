@@ -17,6 +17,7 @@ public class GameGrid extends JPanel{
 	private ActionListener taskPerformer, taskPerformerLaser, taskPerformerEnemies;
 	private boolean runningtimer = false;
 	private Laser pewpew;
+	private ArrayList<Timer> goldtimers;
 	private int[] statArray;
 	
 	public GameGrid() {
