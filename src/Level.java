@@ -41,6 +41,7 @@ public class Level {
 	}
 	
 	public void readFile(){
+		enemycounter = 0;
 		// Clears current level
 		this.objectList.clear();
 		// Reads text file with level information
