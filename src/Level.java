@@ -100,6 +100,13 @@ public class Level {
 			enemyypositions[enemycounter] = yIndex;
 			enemycounter++;
 		}
+		if (symbol == 'h'){
+			System.out.println("Hobbin created at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new Hobbin(xIndex, yIndex, 5, 5));
+			enemyxpositions[enemycounter] = xIndex;
+			enemyypositions[enemycounter] = yIndex;
+			enemycounter++;
+		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
 
