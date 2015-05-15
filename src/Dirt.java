@@ -22,7 +22,7 @@ public class Dirt extends JComponent implements Interactable{
 	private static final int points = 0;
 	private JLabel label;
 	private boolean enemy;
-	private static final int emeraldChange = -1;
+	private static final int emeraldChange = 0;
 	
 	public Dirt(){
 //		this.position = new int[][] {{0},{0}};

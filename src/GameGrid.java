@@ -44,7 +44,10 @@ public class GameGrid extends JPanel{
 				if(keyCode==KeyEvent.VK_UP){
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
-							userPlayer.moveUp();
+							int[] tempArray = userPlayer.moveUp();
+							int points = tempArray[0];
+							int emeraldChange = tempArray[1];
+							// Need a way to send points and emerald change to base method
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
 							for (int i = 0; i < grid.size(); i++) {
