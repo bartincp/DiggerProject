@@ -13,8 +13,8 @@ public class GameGrid extends JPanel{
 	private int playerposition;
 	private Player userPlayer;
 	private Level lvl;
-	private Timer playertimer, lasertimer;
-	private ActionListener taskPerformer, taskPerformerLaser;
+	private Timer playertimer, lasertimer, enemytimer;
+	private ActionListener taskPerformer, taskPerformerLaser, taskPerformerEnemies;
 	private boolean runningtimer = false;
 	private Laser pewpew;
 	private int[] statArray;
@@ -36,6 +36,30 @@ public class GameGrid extends JPanel{
 			add(currLabel);
 		}
 		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
+		taskPerformerEnemies = new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				for(int n = 0; n < lvl.getEnemyNumber(); n++){
+					int xposition = lvl.getEnemyXPositions()[n];
+					int yposition = lvl.getEnemyYPositions()[n];
+					Nobbin tempnobbin = (Nobbin)grid.get(5*yposition+xposition);
+					tempnobbin.linkGrid(grid);
+					tempnobbin.moveRandom();
+					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
+					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
+				}
+				removeAll();
+				setLayout(new GridLayout(5, 5, 1, 1));
+				for (int i = 0; i < grid.size(); i++) {
+					JLabel currLabel = (grid.get(i).returnLabel());
+					add(currLabel);
+				}
+				repaint();
+				validate();
+			}
+		};
+		enemytimer = new Timer(500, taskPerformerEnemies);
+		enemytimer.setInitialDelay(0);
+		enemytimer.start();
 		
 		playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 		userPlayer = (Player) grid.get(playerposition);
@@ -153,10 +177,12 @@ public class GameGrid extends JPanel{
 						}
 					}
 					pewpew.linkGrid(grid);
+					int tempdirectionaxis = userPlayer.getDirectionAxis();
+					int tempdirectionamount = userPlayer.getDirectionAmount();
 					taskPerformerLaser = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							if(pewpew.returnState()==true){
-								pewpew.move(userPlayer.getDirectionAxis(), userPlayer.getDirectionAmount());
+								pewpew.move(tempdirectionaxis, tempdirectionamount);
 								removeAll();
 								setLayout(new GridLayout(5, 5, 1, 1));
 								for (int i = 0; i < grid.size(); i++) {

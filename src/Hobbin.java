@@ -23,13 +23,36 @@ public class Hobbin extends Nobbin {
 		this.label.setIcon(this.icon);
 	}
 	
-	public void moveRandom(){
-		// May use unique behavior to account for dirt digging
-		super.moveRandom();
-	}
-	
-	protected int[] getOptimalMove(int playerX, int playerY){
-		return super.getOptimalMove(playerX, playerY);
+	@Override
+	public void moveRandom() {
+		int dir = getRandomGenerator().nextInt(4);
+		boolean notyetmoved = true;
+		int newXPos, newYPos;
+		if (notyetmoved) {
+			if (dir == 0){
+				newYPos = getYPosition() - 1;
+				newXPos = getXPosition();
+			} else if (dir == 1){
+				newYPos = getYPosition() + 1;
+				newXPos = getXPosition();
+			} else if (dir == 2){
+				newYPos = getYPosition();
+				newXPos = getXPosition() - 1;
+			} else {
+				newYPos = getYPosition();
+				newXPos = getXPosition() + 1;
+			}
+			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
+				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
+					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
+					getGridList().get(5*getYPosition()+getXPosition()).transform();
+					setXPos(newXPos);
+					setYPos(newYPos);
+					getGridList().set(5*getYPosition()+getXPosition(),this);
+					notyetmoved = false;
+			}
+		}
+		
 	}
 	
 	public int[] transform() {

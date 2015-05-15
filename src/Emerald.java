@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class Emerald extends JComponent implements Interactable{
 	
-	private Icon emeraldicon, airicon;
+	private Icon emeraldicon;
 	private boolean emeraldstate;
 //	private int xposition, yposition;
 	private static final int points = 10;

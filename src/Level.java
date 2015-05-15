@@ -25,6 +25,8 @@ public class Level {
 	private int playerxposition, playeryposition;
 	private int xMax, yMax;
 	private int emeraldCount;
+	private int[] enemyxpositions, enemyypositions;
+	private int enemycounter;
 	
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
@@ -33,9 +35,13 @@ public class Level {
 		this.objectList= new ArrayList<Interactable>();
 //		this.positionList = new int[1][1];
 //		this.spawnList = new int[1][1];
+		enemyxpositions = new int[25];
+		enemyypositions = new int[25];
+		enemycounter = 0;
 	}
 	
 	public void readFile(){
+		enemycounter = 0;
 		// Clears current level
 		this.objectList.clear();
 		this.emeraldCount=0;
@@ -90,6 +96,9 @@ public class Level {
 		if (symbol == 'n'){
 			System.out.println("Nobbin created at row " + yIndex + ", column " + xIndex + ".");
 			this.objectList.add(new Nobbin(xIndex, yIndex, 5, 5));
+			enemyxpositions[enemycounter] = xIndex;
+			enemyypositions[enemycounter] = yIndex;
+			enemycounter++;
 		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
@@ -134,5 +143,25 @@ public class Level {
 	
 	public int getEmeraldCount(){
 		return emeraldCount;
+	}
+	
+	public int[] getEnemyXPositions(){
+		return enemyxpositions;
+	}
+	
+	public int[] getEnemyYPositions(){
+		return enemyypositions;
+	}
+	
+	public int getEnemyNumber(){
+		return enemycounter;
+	}
+
+	public void setEnemyXPositions(int n, int xPosition) {
+		enemyxpositions[n] = xPosition;
+	}
+
+	public void setEnemyYPositions(int n, int yPosition) {
+		enemyypositions[n] = yPosition;
 	}
 }

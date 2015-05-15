@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ public class Nobbin extends JComponent implements Interactable {
 	private int gridwidth;
 	private int gridheight;
 	private ArrayList<Interactable> list;
+	private Random randomgenerator;
 	
 	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid){
 		this.xRespawn = xPos;
@@ -29,36 +31,87 @@ public class Nobbin extends JComponent implements Interactable {
 		this.label = new JLabel();
 		this.label.setIcon(this.icon);
 		this.enemy = true;
+		this.randomgenerator = new Random();
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
-		list = inputlist;
+		this.list = inputlist;
 	}
 	
-	protected void moveRandom() {
-		int dir = (int)(Math.random() * 4);
+	/*
+	 *  GETTERS & SETTERS
+	 */
+	
+	public int getXPosition(){
+		return this.xPos;
+	}
+	
+	public boolean setXPos(int newXPos){
+		if (newXPos >= 0 && newXPos < getGridwidth()){
+			this.xPos = newXPos;
+			return true;
+		}
+		return false;
+	}
+	
+	public int getYPosition(){
+		return this.yPos;
+	}
+	
+	public boolean setYPos(int newYPos){
+		if (newYPos >= 0 && newYPos < getGridheight()){
+			this.yPos = newYPos;
+			return true;
+		}
+		return false;
+	}
+	
+	public int getGridwidth(){
+		return this.gridwidth;
+	}
+	
+	public int getGridheight(){
+		return this.gridheight;
+	}
+	
+	public Random getRandomGenerator(){
+		return this.randomgenerator;
+	}
+	
+	public ArrayList<Interactable> getGridList() {
+		return this.list;
+	}
+	
+	/*
+	 * END GETTERS & SETTERS
+	 */
+	
+	public void moveRandom() {
+		int dir = getRandomGenerator().nextInt(4);
 		boolean notyetmoved = true;
 		int newXPos, newYPos;
-		while (notyetmoved) {
+		if (notyetmoved) {
 			if (dir == 0){
-				newYPos = yPos - 1;
-				newXPos = xPos;
+				newYPos = getYPosition() - 1;
+				newXPos = getXPosition();
 			} else if (dir == 1){
-				newYPos = yPos + 1;
-				newXPos = xPos;
+				newYPos = getYPosition() + 1;
+				newXPos = getXPosition();
 			} else if (dir == 2){
-				newYPos = yPos;
-				newXPos = xPos - 1;
+				newYPos = getYPosition();
+				newXPos = getXPosition() - 1;
 			} else {
-				newYPos = yPos;
-				newXPos = xPos + 1;
+				newYPos = getYPosition();
+				newXPos = getXPosition() + 1;
 			}
-			if (newXPos >= 0 && newXPos < gridheight && newYPos >= 0 && newYPos < gridheight) {
-				Interactable temp = list.get(gridwidth*newYPos+newXPos);
+			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
+				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
 				if (temp.getClass() == Dirt.class && !temp.returnState()){
-					xPos = newXPos;
-					yPos = newYPos;
-					list.set(gridwidth*yPos+xPos,this);
+					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
+					getGridList().get(5*getYPosition()+getXPosition()).transform();
+					setXPos(newXPos);
+					setYPos(newYPos);
+					getGridList().set(5*getYPosition()+getXPosition(),this);
 					notyetmoved = false;
 				}
 			}
@@ -66,19 +119,19 @@ public class Nobbin extends JComponent implements Interactable {
 		
 	}
 	
-	protected int[] getOptimalMove(int playerX, int playerY) {
-		int dx = playerX - xPos;
-		int dy = playerY - yPos;
-		int[] move = new int[2];
-		if (Math.abs(dx) <= Math.abs(dy)) {
-			move[0] = Math.abs(dx)/dx;
-		} else if (Math.abs(dx) > Math.abs(dy)) {
-			move[1] = Math.abs(dy)/dy;
-		}
-		return move;
-		
-		//implement breadth-first or iterative depth-first search
-	}
+//	protected int[] getOptimalMove(int playerX, int playerY) {
+//		int dx = playerX - xPos;
+//		int dy = playerY - yPos;
+//		int[] move = new int[2];
+//		if (Math.abs(dx) <= Math.abs(dy)) {
+//			move[0] = Math.abs(dx)/dx;
+//		} else if (Math.abs(dx) > Math.abs(dy)) {
+//			move[1] = Math.abs(dy)/dy;
+//		}
+//		return move;
+//		
+//		//implement breadth-first or iterative depth-first search
+//	}
 	
 	@Override
 	public int[] transform() {
