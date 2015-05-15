@@ -17,10 +17,12 @@ public class GameGrid extends JPanel{
 	private ActionListener taskPerformer, taskPerformerLaser;
 	private boolean runningtimer = false;
 	private Laser pewpew;
+	private int[] statArray;
 	
 	public GameGrid() {
 		setFocusable(true);
 		setBackground(Color.gray);
+		// Creates two levels from constructor and advance method
 		lvl = new Level();
 		lvl.advance();
 		grid = lvl.getList();
@@ -38,15 +40,21 @@ public class GameGrid extends JPanel{
 		playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 		userPlayer = (Player) grid.get(playerposition);
 		pewpew = new Laser();
+		points=0;
+		emeraldCount = lvl.getEmeraldCount();
+		System.out.println(emeraldCount);
+		statArray = userPlayer.returnStats();
+		
 		addKeyListener(new KeyListener(){
+
 			public void keyPressed(KeyEvent event){
 				int keyCode = event.getKeyCode();
 				if(keyCode==KeyEvent.VK_UP){
 					taskPerformer = new ActionListener(){
+
 						public void actionPerformed(ActionEvent event){
-							int[] tempArray = userPlayer.moveUp();
-							int points = tempArray[0];
-							int emeraldChange = tempArray[1];
+							userPlayer.moveUp();
+							emeraldCheck();
 							// Need a way to send points and emerald change to base method
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
@@ -65,6 +73,7 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveDown();
+							emeraldCheck();
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
 							for (int i = 0; i < grid.size(); i++) {
@@ -82,6 +91,7 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveLeft();
+							emeraldCheck();
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
 							for (int i = 0; i < grid.size(); i++) {
@@ -99,6 +109,7 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveRight();
+							emeraldCheck();
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
 							for (int i = 0; i < grid.size(); i++) {
@@ -206,5 +217,26 @@ public class GameGrid extends JPanel{
 			public void keyTyped(KeyEvent event){
 			}
 		});
+		System.out.println("Hello");
+	}
+	
+	protected void emeraldCheck(){
+		statArray = userPlayer.returnStats();
+		points  += statArray[0];
+		emeraldCount  += statArray[1];
+		System.out.println(emeraldCount);
+		if (emeraldCount == 0){
+			lvl.advance();
+			grid = lvl.getList();
+			setLayout(new GridLayout(5, 5, 1, 1));
+			for (int i = 0; i < grid.size(); i++) {
+				JLabel currLabel = (grid.get(i).returnLabel());
+				add(currLabel);
+			}
+			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+			userPlayer = (Player) grid.get(playerposition);
+			emeraldCount = lvl.getEmeraldCount();
+			System.out.println(emeraldCount);
+		}
 	}
 }
