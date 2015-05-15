@@ -4,6 +4,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import java.util.Random;
 
 
 public class Nobbin extends JComponent implements Interactable {
@@ -17,6 +18,7 @@ public class Nobbin extends JComponent implements Interactable {
 	private int gridwidth;
 	private int gridheight;
 	private ArrayList<Interactable> list;
+	private Random randomgenerator;
 	
 	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid){
 		this.xRespawn = xPos;
@@ -29,17 +31,18 @@ public class Nobbin extends JComponent implements Interactable {
 		this.label = new JLabel();
 		this.label.setIcon(this.icon);
 		this.enemy = true;
+		this.randomgenerator = new Random();
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		list = inputlist;
 	}
 	
-	private void moveRandom() {
-		int dir = (int)(Math.random() * 4);
+	public void moveRandom() {
+		int dir = randomgenerator.nextInt(4);
 		boolean notyetmoved = true;
 		int newXPos, newYPos;
-		while (notyetmoved) {
+		if (notyetmoved) {
 			if (dir == 0){
 				newYPos = yPos - 1;
 				newXPos = xPos;
@@ -53,9 +56,11 @@ public class Nobbin extends JComponent implements Interactable {
 				newYPos = yPos;
 				newXPos = xPos + 1;
 			}
-			if (newXPos >= 0 && newXPos < gridheight && newYPos >= 0 && newYPos < gridheight) {
+			if (newXPos >= 0 && newXPos < gridwidth && newYPos >= 0 && newYPos < gridheight) {
 				Interactable temp = list.get(gridwidth*newYPos+newXPos);
 				if (temp.getClass() == Dirt.class && !temp.returnState()){
+					list.set(5*yPos+xPos,new Dirt());
+					list.get(5*yPos+xPos).transform();
 					xPos = newXPos;
 					yPos = newYPos;
 					list.set(gridwidth*yPos+xPos,this);
@@ -102,5 +107,13 @@ public class Nobbin extends JComponent implements Interactable {
 	
 	public boolean returnState(){
 		return true;
+	}
+	
+	public int getXPosition(){
+		return xPos;
+	}
+	
+	public int getYPosition(){
+		return yPos;
 	}
 }
