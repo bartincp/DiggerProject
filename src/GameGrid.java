@@ -45,6 +45,14 @@ public class GameGrid extends JPanel{
 					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
 					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
 				}
+				removeAll();
+				setLayout(new GridLayout(5, 5, 1, 1));
+				for (int i = 0; i < grid.size(); i++) {
+					JLabel currLabel = (grid.get(i).returnLabel());
+					add(currLabel);
+				}
+				repaint();
+				validate();
 			}
 		};
 		enemytimer = new Timer(500, taskPerformerEnemies);
