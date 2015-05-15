@@ -1,0 +1,19 @@
+Hobbin/Nobbin creation
+Est. time: 1 hour
+Actual time: 1 hour
+Comment: It was fairly simple to create constructors for both enemy classes, and to assign icons and properties to said enemies. Hobbins simply became extended classes of Nobbins
+
+Nobbin movement, transformation, and Hobbin movement
+Est. time: 2.5 hours
+Actual time: 3+ hours
+Comment: Developing the movement and transformation "AI" behavior was significantly more challenging than creating classes for the enemies. The challenge was made harder by the behavior requested for the Hobbins.
+
+Laser generation on space key and laser travel/killing
+Est. time: 1 hour
+Actual time: 2 hours
+Comment: Making a traveling entity that killed enemy entities was a bit harder than expected, but some functionality was reached and it does indeed travel across the map. The ability to kill has yet to be verified.
+
+Ability for player to die and respawn
+Est. time: 1 hour
+Actual time: 1 hour
+Comment: It was fairly straightforward to add functionality to the player so that, after colliding with the enemy, he respawns and has one less life remaining.

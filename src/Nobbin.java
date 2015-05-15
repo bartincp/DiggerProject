@@ -9,11 +9,11 @@ import java.util.Random;
 
 public class Nobbin extends JComponent implements Interactable {
 
-	private Icon icon;
+	protected Icon icon;
 	private boolean alive;
 	private int xPos, yPos;
 	private int xRespawn, yRespawn;
-	private JLabel label;
+	protected JLabel label;
 	private boolean enemy;
 	private int gridwidth;
 	private int gridheight;
@@ -71,7 +71,7 @@ public class Nobbin extends JComponent implements Interactable {
 		
 	}
 	
-	private int[] getOptimalMove(int playerX, int playerY) {
+	protected int[] getOptimalMove(int playerX, int playerY) {
 		int dx = playerX - xPos;
 		int dy = playerY - yPos;
 		int[] move = new int[2];
