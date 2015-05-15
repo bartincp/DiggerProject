@@ -1,0 +1,8 @@
+The user will see, in addtion to dirt, enemies, and emeralds, bags of gold scattered across the map upon map generation.
+Any entity will not be able to push the bag of money into dirt in order to dig it.
+However, the user and the hobbins will be able to move the bags of money into empty space.
+If vertical space(s) exist below the empty space that the bag is pushed into, it will proceed to fall.
+Any living entity that collides with the falling bag of money will die.
+After falling at least three spaces, the bag of money will explode, transforming into a pile of money.
+The user or Hobbins can pick up these piles of money for an increase in points.
+Additionally, Hobbins and Nobbins will be able to respawn a few seconds after dying.
