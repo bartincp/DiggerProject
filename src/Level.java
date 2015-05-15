@@ -44,6 +44,7 @@ public class Level {
 		enemycounter = 0;
 		// Clears current level
 		this.objectList.clear();
+		this.emeraldCount=0;
 		// Reads text file with level information
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level" + this.lvlNum + ".txt");
 		try {
@@ -95,6 +96,13 @@ public class Level {
 		if (symbol == 'n'){
 			System.out.println("Nobbin created at row " + yIndex + ", column " + xIndex + ".");
 			this.objectList.add(new Nobbin(xIndex, yIndex, 5, 5));
+			enemyxpositions[enemycounter] = xIndex;
+			enemyypositions[enemycounter] = yIndex;
+			enemycounter++;
+		}
+		if (symbol == 'h'){
+			System.out.println("Hobbin created at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new Hobbin(xIndex, yIndex, 5, 5));
 			enemyxpositions[enemycounter] = xIndex;
 			enemyypositions[enemycounter] = yIndex;
 			enemycounter++;

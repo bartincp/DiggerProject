@@ -28,6 +28,7 @@ public class Player extends JComponent implements Interactable{
 	private JLabel label;
 	private boolean enemy;
 	private int northsouth, eastwest;
+	private int[] statArray;
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		lives = 3;
@@ -42,6 +43,7 @@ public class Player extends JComponent implements Interactable{
 		label = new JLabel();
 		label.setIcon(playericon);
 		enemy = false;
+		statArray=new int[2]; statArray[0]=0; statArray[1]=0;
 		northsouth = 0;
 		eastwest = 1;
 	}
@@ -95,8 +97,7 @@ public class Player extends JComponent implements Interactable{
 //		}
 //	}
 	
-	public int[] moveUp(){
-		int[] tempArray = {0,0};
+	public void moveUp(){
 		if(yposition-1>=0 && yposition-1<gridheight){
 			// Turns current player location into air
 			list.set(gridwidth*yposition+xposition, new Dirt());
@@ -113,18 +114,17 @@ public class Player extends JComponent implements Interactable{
 			}
 			// Change type to int[], return score, emeraldCount
 			// score += temp.transform;
-			tempArray = temp.transform();
+			statArray = temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			eastwest = 0;
 			northsouth = -1;
 
 		}
-		return tempArray;
+		return;
 	}
 	
 	public void moveDown(){
-		int[] tempArray = {0,0};
 		if(yposition+1>=0 && yposition+1<gridheight){
 //			System.out.println(gridwidth);
 //			System.out.println(yposition);
@@ -140,7 +140,7 @@ public class Player extends JComponent implements Interactable{
 				return;
 			}
 //			score += temp.transform();
-			tempArray = temp.transform();
+			statArray = temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			eastwest = 0;
@@ -150,7 +150,6 @@ public class Player extends JComponent implements Interactable{
 	}
 	
 	public void moveLeft(){
-		int[] tempArray = {0,0};
 		if(xposition-1>=0 && xposition-1<gridwidth){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -162,7 +161,7 @@ public class Player extends JComponent implements Interactable{
 				return;
 			}
 //			score += temp.transform();
-			tempArray = temp.transform();
+			statArray = temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			northsouth = 0;
@@ -172,7 +171,6 @@ public class Player extends JComponent implements Interactable{
 	}
 	
 	public void moveRight(){
-		int[] tempArray = {0,0};
 		if(xposition+1>=0 && xposition+1<gridwidth){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -184,7 +182,7 @@ public class Player extends JComponent implements Interactable{
 				return;
 			}
 //			score += temp.transform();
-			tempArray = temp.transform();
+			statArray = temp.transform();
 //			Interactable icon = list.get(gridwidth*yposition+xposition);
 			list.set(gridwidth*yposition+xposition, this);
 			northsouth = 0;
@@ -244,6 +242,10 @@ public class Player extends JComponent implements Interactable{
 		return playerstate;
 	}
 	
+	public int[] returnStats(){
+		return statArray;
+	}
+			
 	public void addScore(int n){
 		score += n;
 	}
