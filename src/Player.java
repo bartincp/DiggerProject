@@ -261,7 +261,11 @@ public class Player extends JComponent implements Interactable{
 	}
 	
 	public int[] returnStats(){
-		return statArray;
+		int[] moreStatArray = new int[3];
+		moreStatArray[0]=statArray[0]; // Points
+		moreStatArray[1]=statArray[1]; // Emerald change
+		moreStatArray[2]=lives; // Lives
+		return moreStatArray;
 	}
 			
 	public void addScore(int n){

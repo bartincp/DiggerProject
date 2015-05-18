@@ -270,6 +270,7 @@ public class GameGrid extends JPanel{
 		statArray = userPlayer.returnStats();
 		points  += statArray[0];
 		emeraldCount  += statArray[1];
+		lives = statArray[2];
 //		System.out.println(emeraldCount);
 		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
 			lvl.advance();
@@ -350,5 +351,11 @@ public class GameGrid extends JPanel{
 		enemytimer = new Timer(500, taskPerformerEnemies);
 		enemytimer.setInitialDelay(0);
 		enemytimer.start();
+	}
+	
+	private int[] getStats(){
+		int[] currStats = new int[3];
+		currStats[0]=points; currStats[1]=emeraldCount; currStats[2]=lives;
+		return currStats;
 	}
 }
