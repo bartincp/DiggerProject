@@ -37,30 +37,32 @@ public class GameGrid extends JPanel{
 			add(currLabel);
 		}
 		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
-		taskPerformerEnemies = new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				for(int n = 0; n < lvl.getEnemyNumber(); n++){
-					int enemyxposition = lvl.getEnemyXPositions()[n];
-					int enemyyposition = lvl.getEnemyYPositions()[n];
-					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
-					tempnobbin.linkGrid(grid);
-					tempnobbin.moveRandom();
-					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
-					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
-				}
-				removeAll();
-				setLayout(new GridLayout(5, 5, 1, 1));
-				for (int i = 0; i < grid.size(); i++) {
-					JLabel currLabel = (grid.get(i).returnLabel());
-					add(currLabel);
-				}
-				repaint();
-				validate();
-			}
-		};
-		enemytimer = new Timer(500, taskPerformerEnemies);
-		enemytimer.setInitialDelay(0);
-		enemytimer.start();
+//		taskPerformerEnemies = new ActionListener(){
+//			public void actionPerformed(ActionEvent event){
+//				for(int n = 0; n < lvl.getEnemyNumber(); n++){
+//					int enemyxposition = lvl.getEnemyXPositions()[n];
+//					int enemyyposition = lvl.getEnemyYPositions()[n];
+//					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
+//					tempnobbin.linkGrid(grid);
+//					tempnobbin.moveRandom();
+//					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
+//					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
+//				}
+//				removeAll();
+//				setLayout(new GridLayout(5, 5, 1, 1));
+//				for (int i = 0; i < grid.size(); i++) {
+//					JLabel currLabel = (grid.get(i).returnLabel());
+//					add(currLabel);
+//				}
+//				repaint();
+//				validate();
+//			}
+//		};
+//		enemytimer = new Timer(500, taskPerformerEnemies);
+//		enemytimer.setInitialDelay(0);
+//		enemytimer.start();
+		
+		createAndStartEnemies();
 		
 		createGoldTimers();
 		
@@ -228,6 +230,8 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D){
 					createGoldTimers();
+					enemytimer.stop();
+					createAndStartEnemies();
 					emeraldCount = lvl.getEmeraldCount();
 				}
 				removeAll();
@@ -278,8 +282,10 @@ public class GameGrid extends JPanel{
 			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 			userPlayer = (Player) grid.get(playerposition);
 			emeraldCount = lvl.getEmeraldCount();
-			System.out.println(emeraldCount);
+//			System.out.println(emeraldCount);
 			createGoldTimers();
+			enemytimer.stop();
+			createAndStartEnemies();
 		}
 	}
 	
@@ -317,5 +323,32 @@ public class GameGrid extends JPanel{
 		for(int n = 0; n < lvl.getGoldNumber(); n++){
 			goldtimers[n].stop();
 		}
+	}
+	
+	private void createAndStartEnemies(){
+		taskPerformerEnemies = new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				for(int n = 0; n < lvl.getEnemyNumber(); n++){
+					int enemyxposition = lvl.getEnemyXPositions()[n];
+					int enemyyposition = lvl.getEnemyYPositions()[n];
+					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
+					tempnobbin.linkGrid(grid);
+					tempnobbin.moveRandom();
+					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
+					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
+				}
+				removeAll();
+				setLayout(new GridLayout(5, 5, 1, 1));
+				for (int i = 0; i < grid.size(); i++) {
+					JLabel currLabel = (grid.get(i).returnLabel());
+					add(currLabel);
+				}
+				repaint();
+				validate();
+			}
+		};
+		enemytimer = new Timer(500, taskPerformerEnemies);
+		enemytimer.setInitialDelay(0);
+		enemytimer.start();
 	}
 }
