@@ -26,7 +26,8 @@ public class Level {
 	private int xMax, yMax;
 	private int emeraldCount;
 	private int[] enemyxpositions, enemyypositions;
-	private int enemycounter;
+	private int enemycounter, goldcounter;
+	private int[] goldxpositions, goldypositions;
 	
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
@@ -37,7 +38,10 @@ public class Level {
 //		this.spawnList = new int[1][1];
 		enemyxpositions = new int[25];
 		enemyypositions = new int[25];
+		goldxpositions = new int[25];
+		goldypositions = new int[25];
 		enemycounter = 0;
+		goldcounter = 0;
 	}
 	
 	public void readFile(){
@@ -107,6 +111,13 @@ public class Level {
 			enemyypositions[enemycounter] = yIndex;
 			enemycounter++;
 		}
+		if (symbol == 'g'){
+			System.out.println("Gold created at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new Gold(xIndex, yIndex, 5, 5, goldcounter));
+			goldxpositions[goldcounter] = xIndex;
+			goldypositions[goldcounter] = yIndex;
+			goldcounter++;
+		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
 
@@ -170,5 +181,25 @@ public class Level {
 
 	public void setEnemyYPositions(int n, int yPosition) {
 		enemyypositions[n] = yPosition;
+	}
+	
+	public int[] getGoldXPositions(){
+		return goldxpositions;
+	}
+	
+	public int[] getGoldYPositions(){
+		return goldypositions;
+	}
+	
+	public int getGoldNumber(){
+		return goldcounter;
+	}
+	
+	public void setGoldXPositions(int n, int xPosition){
+		goldxpositions[n] = xPosition;
+	}
+	
+	public void setGoldYPositions(int n, int yPosition){
+		goldypositions[n] = yPosition;
 	}
 }
