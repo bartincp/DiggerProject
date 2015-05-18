@@ -78,7 +78,6 @@ public class GameGrid extends JPanel{
 				int keyCode = event.getKeyCode();
 				if(keyCode==KeyEvent.VK_UP){
 					taskPerformer = new ActionListener(){
-
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveUp();
 							emeraldCheck();
@@ -203,6 +202,7 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){
+						stopAllGoldTimers();
 						lvl = lvl.advance();
 						grid = lvl.getList();
 						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
@@ -211,6 +211,7 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode==KeyEvent.VK_D){
 					if(lvl.getLevelNumber()>1){
+						stopAllGoldTimers();
 						lvl = lvl.retreat();
 						grid = lvl.getList();
 						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
@@ -227,6 +228,7 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D){
 					createGoldTimers();
+					emeraldCount = lvl.getEmeraldCount();
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
@@ -236,11 +238,11 @@ public class GameGrid extends JPanel{
 				}
 				repaint();
 				validate();
-				System.out.println(userPlayer.goldcheck());
 				if(userPlayer.goldcheck()==true){
 					int tempnumber = userPlayer.goldabovenumber();
 					goldtimers[tempnumber].start();
 				}
+				System.out.println(userPlayer.returnScore());
 			}
 
 			public void keyReleased(KeyEvent event){
@@ -265,7 +267,7 @@ public class GameGrid extends JPanel{
 		points  += statArray[0];
 		emeraldCount  += statArray[1];
 //		System.out.println(emeraldCount);
-		if (emeraldCount == 0){
+		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
 			lvl.advance();
 			grid = lvl.getList();
 			setLayout(new GridLayout(5, 5, 1, 1));
@@ -284,12 +286,13 @@ public class GameGrid extends JPanel{
 	private void createGoldTimers(){
 		goldtimers = new Timer[25];
 		for(int n = 0; n < lvl.getGoldNumber(); n++){
-			System.out.println(n);
 			int num = n;
 			goldtimers[n] = new Timer(600, new ActionListener(){
 				public void actionPerformed(ActionEvent event){
 					int goldxposition = lvl.getGoldXPositions()[num];
 					int goldyposition = lvl.getGoldYPositions()[num];
+					Interactable temp = grid.get(5*goldyposition+goldxposition);
+					if(temp.getClass()==Gold.class){
 					Gold tempgold = (Gold)grid.get(5*goldyposition+goldxposition);
 					tempgold.linkGrid(grid);
 					tempgold.move();
@@ -303,9 +306,16 @@ public class GameGrid extends JPanel{
 					}
 					repaint();
 					validate();
+					}
 				}
 			});
 			goldtimers[n].setInitialDelay(1200);
+		}
+	}
+	
+	private void stopAllGoldTimers(){
+		for(int n = 0; n < lvl.getGoldNumber(); n++){
+			goldtimers[n].stop();
 		}
 	}
 }

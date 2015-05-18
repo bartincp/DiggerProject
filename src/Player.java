@@ -67,6 +67,7 @@ public class Player extends JComponent implements Interactable{
 	public void respawn(){
 		xposition = xrespawn;
 		yposition = yrespawn;
+		list.set(gridwidth*yposition+xposition, this);
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
@@ -99,13 +100,17 @@ public class Player extends JComponent implements Interactable{
 	
 	public void moveUp(){
 		if(yposition-1>=0 && yposition-1<gridheight){
+			Interactable temp = list.get(gridwidth*(yposition-1)+xposition);
+			if(temp.getClass()==Gold.class&&temp.returnState()==true){
+				return;
+			}
 			// Turns current player location into air
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			// Shifts position
 			yposition--;
 			// Reads contents of new space
-			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				// return lives
 				this.respawn();
@@ -126,6 +131,10 @@ public class Player extends JComponent implements Interactable{
 	
 	public void moveDown(){
 		if(yposition+1>=0 && yposition+1<gridheight){
+			Interactable temp = list.get(gridwidth*(yposition+1)+xposition);
+			if(temp.getClass()==Gold.class&&temp.returnState()==true){
+				return;
+			}
 //			System.out.println(gridwidth);
 //			System.out.println(yposition);
 //			System.out.println(xposition);
@@ -133,7 +142,7 @@ public class Player extends JComponent implements Interactable{
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			yposition++;
-			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
 				list.set(gridwidth*yposition+xposition,this);
@@ -151,10 +160,14 @@ public class Player extends JComponent implements Interactable{
 	
 	public void moveLeft(){
 		if(xposition-1>=0 && xposition-1<gridwidth){
+			Interactable temp = list.get(gridwidth*yposition+(xposition-1));
+			if(temp.getClass()==Gold.class&&temp.returnState()==true){
+				return;
+			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
-			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
 				list.set(gridwidth*yposition+xposition,this);
@@ -172,10 +185,14 @@ public class Player extends JComponent implements Interactable{
 	
 	public void moveRight(){
 		if(xposition+1>=0 && xposition+1<gridwidth){
+			Interactable temp = list.get(gridwidth*yposition+(xposition+1));
+			if(temp.getClass()==Gold.class&&temp.returnState()==true){
+				return;
+			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
-			Interactable temp = list.get(gridwidth*yposition+xposition);
+//			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
 				list.set(gridwidth*yposition+xposition,this);

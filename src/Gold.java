@@ -44,6 +44,7 @@ public class Gold implements Interactable{
 		if(spacesdropped>2){
 			goldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/BrokenGold.png");
 			label.setIcon(goldicon);
+			state = false;
 		}
 		spacesdropped = 0;
 	}
@@ -57,6 +58,8 @@ public class Gold implements Interactable{
 		if(predictedtileindex<list.size()&&predictedtileindex>=0){
 			Interactable temp = list.get(predictedtileindex);
 			if((temp.getClass()==Dirt.class&&temp.returnState()==false)||temp.getClass()!=Dirt.class){
+				if(temp.getClass()==Nobbin.class||temp.getClass()==Hobbin.class||temp.getClass()==Player.class)
+					list.get(predictedtileindex).transform();
 				canmove = true;
 				list.set(gridwidth*ypos+xpos,new Dirt());
 				list.get(gridwidth*ypos+xpos).transform();
