@@ -14,10 +14,10 @@ public class GameGrid extends JPanel{
 	private Player userPlayer;
 	private Level lvl;
 	private Timer playertimer, lasertimer, enemytimer;
-	private ActionListener taskPerformer, taskPerformerLaser, taskPerformerEnemies;
+	private ActionListener taskPerformer, taskPerformerLaser, taskPerformerEnemies, taskPerformerGold;
 	private boolean runningtimer = false;
 	private Laser pewpew;
-	private ArrayList<Timer> goldtimers;
+	private Timer[] goldtimers;
 	private int[] statArray;
 	
 	public GameGrid() {
@@ -40,9 +40,9 @@ public class GameGrid extends JPanel{
 		taskPerformerEnemies = new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				for(int n = 0; n < lvl.getEnemyNumber(); n++){
-					int xposition = lvl.getEnemyXPositions()[n];
-					int yposition = lvl.getEnemyYPositions()[n];
-					Nobbin tempnobbin = (Nobbin)grid.get(5*yposition+xposition);
+					int enemyxposition = lvl.getEnemyXPositions()[n];
+					int enemyyposition = lvl.getEnemyYPositions()[n];
+					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
 					tempnobbin.linkGrid(grid);
 					tempnobbin.moveRandom();
 					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
@@ -61,6 +61,8 @@ public class GameGrid extends JPanel{
 		enemytimer = new Timer(500, taskPerformerEnemies);
 		enemytimer.setInitialDelay(0);
 		enemytimer.start();
+		
+		createGoldTimers();
 		
 		playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 		userPlayer = (Player) grid.get(playerposition);
@@ -223,6 +225,9 @@ public class GameGrid extends JPanel{
 						runningtimer = true;
 					}
 				}
+				if(keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D){
+					createGoldTimers();
+				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
 				for (int i = 0; i < grid.size(); i++) {
@@ -231,6 +236,11 @@ public class GameGrid extends JPanel{
 				}
 				repaint();
 				validate();
+				System.out.println(userPlayer.goldcheck());
+				if(userPlayer.goldcheck()==true){
+					int tempnumber = userPlayer.goldabovenumber();
+					goldtimers[tempnumber].start();
+				}
 			}
 
 			public void keyReleased(KeyEvent event){
@@ -238,20 +248,23 @@ public class GameGrid extends JPanel{
 				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE){
 				playertimer.stop();
 				runningtimer = false;
+					if(userPlayer.goldcheck()==true){
+						int tempnumber = userPlayer.goldabovenumber();
+						goldtimers[tempnumber].start();
+					}
 				}
 			}
 
 			public void keyTyped(KeyEvent event){
 			}
 		});
-		System.out.println("Hello");
 	}
 	
 	protected void emeraldCheck(){
 		statArray = userPlayer.returnStats();
 		points  += statArray[0];
 		emeraldCount  += statArray[1];
-		System.out.println(emeraldCount);
+//		System.out.println(emeraldCount);
 		if (emeraldCount == 0){
 			lvl.advance();
 			grid = lvl.getList();
@@ -264,6 +277,35 @@ public class GameGrid extends JPanel{
 			userPlayer = (Player) grid.get(playerposition);
 			emeraldCount = lvl.getEmeraldCount();
 			System.out.println(emeraldCount);
+			createGoldTimers();
+		}
+	}
+	
+	private void createGoldTimers(){
+		goldtimers = new Timer[25];
+		for(int n = 0; n < lvl.getGoldNumber(); n++){
+			System.out.println(n);
+			int num = n;
+			goldtimers[n] = new Timer(600, new ActionListener(){
+				public void actionPerformed(ActionEvent event){
+					int goldxposition = lvl.getGoldXPositions()[num];
+					int goldyposition = lvl.getGoldYPositions()[num];
+					Gold tempgold = (Gold)grid.get(5*goldyposition+goldxposition);
+					tempgold.linkGrid(grid);
+					tempgold.move();
+					lvl.setGoldXPositions(num, tempgold.getXPosition());
+					lvl.setGoldYPositions(num, tempgold.getYPosition());
+					removeAll();
+					setLayout(new GridLayout(5, 5, 1, 1));
+					for (int i = 0; i < grid.size(); i++) {
+						JLabel currLabel = (grid.get(i).returnLabel());
+						add(currLabel);
+					}
+					repaint();
+					validate();
+				}
+			});
+			goldtimers[n].setInitialDelay(1200);
 		}
 	}
 }

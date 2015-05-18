@@ -192,6 +192,7 @@ public class Player extends JComponent implements Interactable{
 	}
 
 	public int[] transform() {
+		respawn();
 		int[] tempArray = {0,0};
 		return tempArray;
 	}
@@ -248,5 +249,18 @@ public class Player extends JComponent implements Interactable{
 			
 	public void addScore(int n){
 		score += n;
+	}
+	
+	public boolean goldcheck(){
+		if(yposition-1>=0 && yposition-1<gridheight){
+			if(list.get(gridwidth*(yposition-1)+xposition).getClass()==Gold.class){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int goldabovenumber(){
+		return ((Gold)list.get(gridwidth*(yposition-1)+xposition)).getGoldNumber();
 	}
 }

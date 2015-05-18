@@ -17,8 +17,9 @@ public class Gold implements Interactable{
 	private int spacesdropped;
 	private int xpos, ypos;
 	private int gridwidth, gridheight;
+	private int number;
 	
-	public Gold(int xposition, int yposition, int width, int height){
+	public Gold(int xposition, int yposition, int width, int height, int goldnumber){
 		goldicon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Gold.png");
 		label = new JLabel();
 		label.setIcon(goldicon);
@@ -29,7 +30,7 @@ public class Gold implements Interactable{
 		ypos = yposition;
 		gridwidth = width;
 		gridheight = height;
-		
+		number = goldnumber;
 	}
 	
 	public int[] transform() {
@@ -62,6 +63,7 @@ public class Gold implements Interactable{
 				list.set(predictedtileindex, this);
 				ypos++;
 				predictedtileindex = gridwidth*(ypos+1)+xpos;
+				spacesdropped++;
 			}
 		}
 		if(canmove==false)
@@ -84,5 +86,40 @@ public class Gold implements Interactable{
 	public boolean returnState() {
 		return state;
 	}
-
+	
+	public int getXPosition(){
+		return this.xpos;
+	}
+	
+	public boolean setXPos(int newXPos){
+		if (newXPos >= 0 && newXPos < getGridwidth()){
+			this.xpos = newXPos;
+			return true;
+		}
+		return false;
+	}
+	
+	public int getYPosition(){
+		return this.ypos;
+	}
+	
+	public boolean setYPos(int newYPos){
+		if (newYPos >= 0 && newYPos < getGridheight()){
+			this.ypos = newYPos;
+			return true;
+		}
+		return false;
+	}
+	
+	public int getGridwidth(){
+		return this.gridwidth;
+	}
+	
+	public int getGridheight(){
+		return this.gridheight;
+	}
+	
+	public int getGoldNumber(){
+		return number;
+	}
 }
