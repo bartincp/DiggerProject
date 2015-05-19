@@ -245,7 +245,7 @@ public class GameGrid extends JPanel{
 					int tempnumber = userPlayer.goldabovenumber();
 					goldtimers[tempnumber].start();
 				}
-				System.out.println("The player's score is: " + userPlayer.returnScore());
+//				System.out.println("The player's score is: " + userPlayer.returnScore());
 			}
 
 			public void keyReleased(KeyEvent event){
@@ -268,13 +268,13 @@ public class GameGrid extends JPanel{
 	protected void emeraldCheck(){
 		statArray = userPlayer.returnStats();
 		int lvlNum = lvl.getLevelNumber();
-		System.out.println("Points gained: " + statArray[0]);
+//		System.out.println("Points gained: " + statArray[0]);
 		points  += statArray[0];
-		System.out.println("Point total: " + points);
+//		System.out.println("Point total: " + points);
 		emeraldCount  += statArray[1];
 		lives = statArray[2];
 		bPanel.updateStatDisplay(points,emeraldCount,lives,lvlNum);
-		System.out.println("The emerald count is: " + emeraldCount);
+//		System.out.println("The emerald count is: " + emeraldCount);
 //		System.out.println(emeraldCount);
 		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
 			lvl.advance();
