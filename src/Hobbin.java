@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 /**
  * TODO Put here a description of what this class does.
  *
- * @author carducjd.
+ * @author bartincp
  *         Created May 14, 2015.
  */
 public class Hobbin extends Nobbin {
@@ -44,13 +44,14 @@ public class Hobbin extends Nobbin {
 			}
 			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
 				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
-				// Prevent Hobbins from eating Nobbins??
+				if (temp.getClass() != Nobbin.class && temp.getClass() != Emerald.class) {
 					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
 					getGridList().get(5*getYPosition()+getXPosition()).transform();
 					setXPos(newXPos);
 					setYPos(newYPos);
 					getGridList().set(5*getYPosition()+getXPosition(),this);
 					notyetmoved = false;
+				}
 			}
 		}
 		
