@@ -125,4 +125,8 @@ public class Gold implements Interactable{
 	public int getGoldNumber(){
 		return number;
 	}
+	
+	public int getSpacesDropped(){
+		return spacesdropped;
+	}
 }

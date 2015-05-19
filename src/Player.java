@@ -162,11 +162,21 @@ public class Player extends JComponent implements Interactable{
 		if(xposition-1>=0 && xposition-1<gridwidth){
 			Interactable temp = list.get(gridwidth*yposition+(xposition-1));
 			if(temp.getClass()==Gold.class&&temp.returnState()==true){
-				return;
+				if(xposition-2>=0){
+					int tempnum = gridwidth*yposition+(xposition-2);
+					if(list.get(tempnum).getClass()==Dirt.class&&((Gold)temp).getSpacesDropped()==0){
+						list.set(tempnum+1,new Dirt());
+						list.get(tempnum+1).transform();
+						list.set(tempnum, temp);
+					}
+					else
+						return;
+				}
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition--;
+			temp = list.get(gridwidth*yposition+xposition);
 //			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
@@ -187,11 +197,21 @@ public class Player extends JComponent implements Interactable{
 		if(xposition+1>=0 && xposition+1<gridwidth){
 			Interactable temp = list.get(gridwidth*yposition+(xposition+1));
 			if(temp.getClass()==Gold.class&&temp.returnState()==true){
-				return;
+				if(xposition+2<gridwidth){
+					int tempnum = gridwidth*yposition+(xposition+2);
+					if(list.get(tempnum).getClass()==Dirt.class){
+						list.set(tempnum-1,new Dirt());
+						list.get(tempnum-1).transform();
+						list.set(tempnum, temp);
+					}
+					else
+						return;
+				}
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
 			xposition++;
+			temp = list.get(gridwidth*yposition+xposition);
 //			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
