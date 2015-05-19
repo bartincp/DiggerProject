@@ -1,0 +1,20 @@
+Money bag creation
+Est. time: 1 hour
+Actual time: 1 hour
+Comment: It was fairly simple to create a constructor for the gold bag with interactable properties and a display icon.
+
+Money bag with pushing and falling capabilities
+Est. time: 1.5 hours
+Actual time: 2+ hours
+Comment: It was fairly straightforward to program the money bag to check underneath if it could fall and to break after falling a few spaces. However, pushing and killing capabilities have yet to be implemented.
+
+Nobbin/Hobbin respawning
+Est. time: 1 hour
+Actual time: 1+ hour (in progress)
+Comment: Markers have been indicated for hobbin/nobbin spawning in the past, but respawning capabilities at these markers have yet to be implemented.
+
+Statistics display
+Est. time: 1 hour
+Actual time: 2.5 hours
+Comment: It was thought that adding indicators of points, lives, emeralds remaining, and the current level would be straightforward, but there was a lot of statistics passing between classes and a lot of method creation in order for this to happen.
+Therefore, this objective took longer than expected.

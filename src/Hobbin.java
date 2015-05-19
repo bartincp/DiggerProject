@@ -44,6 +44,7 @@ public class Hobbin extends Nobbin {
 			}
 			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
 				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
+				// Prevent Hobbins from eating Nobbins??
 					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
 					getGridList().get(5*getYPosition()+getXPosition()).transform();
 					setXPos(newXPos);

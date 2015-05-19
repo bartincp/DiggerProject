@@ -1,0 +1,6 @@
+The user will be able to see an intro screen before the first level starts.
+The intro screen will contain the title of the game, as well as labeled icons of the player and enemies.
+The intro screen will also contain labeled icons for the collectables and their associated point values.
+Finally, the intro screen will display text saying to press a particular button to start the first level.
+Pressing that button will change the playing space to the first level.
+When all lives are lost, a game over screen is shown and the playing space is brought back to the intro screen.
