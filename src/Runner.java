@@ -19,6 +19,7 @@ public class Runner extends JFrame{
 		// May have to change to gridlayout in order to stack stats on top of playing space
 		pane.setLayout(new FlowLayout());
 		bPanel.importGameGrid(aPanel);
+		aPanel.importStatDisplay(bPanel);
 		pane.add(bPanel);
 		pane.add(aPanel);
 	}

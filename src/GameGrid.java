@@ -19,6 +19,7 @@ public class GameGrid extends JPanel{
 	private Laser pewpew;
 	private Timer[] goldtimers;
 	private int[] statArray;
+	private StatDisplay bPanel;
 	
 	public GameGrid() {
 		setFocusable(true);
@@ -71,9 +72,7 @@ public class GameGrid extends JPanel{
 		pewpew = new Laser();
 		points=0;
 		emeraldCount = lvl.getEmeraldCount();
-		System.out.println(emeraldCount);
-		statArray = userPlayer.returnStats();
-		
+		statArray = userPlayer.returnStats();		
 		addKeyListener(new KeyListener(){
 
 			public void keyPressed(KeyEvent event){
@@ -246,7 +245,7 @@ public class GameGrid extends JPanel{
 					int tempnumber = userPlayer.goldabovenumber();
 					goldtimers[tempnumber].start();
 				}
-				System.out.println(userPlayer.returnScore());
+				System.out.println("The player's score is: " + userPlayer.returnScore());
 			}
 
 			public void keyReleased(KeyEvent event){
@@ -268,9 +267,14 @@ public class GameGrid extends JPanel{
 	
 	protected void emeraldCheck(){
 		statArray = userPlayer.returnStats();
+		int lvlNum = lvl.getLevelNumber();
+		System.out.println("Points gained: " + statArray[0]);
 		points  += statArray[0];
+		System.out.println("Point total: " + points);
 		emeraldCount  += statArray[1];
 		lives = statArray[2];
+		bPanel.updateStatDisplay(points,emeraldCount,lives,lvlNum);
+		System.out.println("The emerald count is: " + emeraldCount);
 //		System.out.println(emeraldCount);
 		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
 			lvl.advance();
@@ -353,9 +357,13 @@ public class GameGrid extends JPanel{
 		enemytimer.start();
 	}
 	
-	private int[] getStats(){
+	public int[] getStats(){
 		int[] currStats = new int[3];
 		currStats[0]=points; currStats[1]=emeraldCount; currStats[2]=lives;
 		return currStats;
+	}
+	
+	public void importStatDisplay(StatDisplay statPanel){
+		bPanel=statPanel;
 	}
 }

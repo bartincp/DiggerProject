@@ -17,6 +17,10 @@ public class StatDisplay extends JPanel{
 	private int emeraldCount;
 	private int currLevel;
 	private GameGrid aPanel;
+	private JLabel pointLabel;
+	private JLabel livesLabel;
+	private JLabel emeraldLabel;
+	private JLabel levelLabel;
 	
 	public StatDisplay() { 
 //		setFocusable(true);
@@ -24,14 +28,22 @@ public class StatDisplay extends JPanel{
 		points=0; lives=0; emeraldCount=0; currLevel=0;
 		setBackground(Color.gray);
 		setLayout(new FlowLayout());
-		JLabel pointLabel = new JLabel("Points:" + points);
-		JLabel livesLabel = new JLabel("Lives:" + lives);
-		JLabel emeraldLabel = new JLabel("Emeralds:" + emeraldCount);
-		JLabel levelLabel = new JLabel("Level:" + currLevel);
+		pointLabel = new JLabel("Points:" + points);
+		livesLabel = new JLabel("Lives:" + lives);
+		emeraldLabel = new JLabel("Emeralds:" + emeraldCount);
+		levelLabel = new JLabel("Level:" + currLevel);
 		add(pointLabel); add(livesLabel); add(emeraldLabel); add(levelLabel);
 	}
 	
 	public void importGameGrid(GameGrid gamePanel){
 		aPanel=gamePanel;
+	}
+	
+	public void updateStatDisplay(int points, int emeraldCount, int lives, int currLevel){
+		pointLabel.setText("Points:" + points);
+		livesLabel.setText("Lives:" + lives);
+		emeraldLabel.setText("Emeralds:" + emeraldCount);
+		levelLabel.setText("Level:" + currLevel);
+		updateUI();
 	}
 }
