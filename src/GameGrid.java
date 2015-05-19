@@ -26,6 +26,7 @@ public class GameGrid extends JPanel{
 		setBackground(Color.gray);
 		// Creates two levels from constructor and advance method
 		lvl = new Level();
+		// Uncomment to go straight to level 1
 		lvl.advance();
 		grid = lvl.getList();
 		
@@ -66,18 +67,19 @@ public class GameGrid extends JPanel{
 		createAndStartEnemies();
 		
 		createGoldTimers();
-		
-		playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-		userPlayer = (Player) grid.get(playerposition);
-		pewpew = new Laser();
+		if (lvl.getPlayerCreated()){
+			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+			userPlayer = (Player) grid.get(playerposition);
+			statArray = userPlayer.returnStats();
+			pewpew = new Laser();
+		}
 		points=0;
-		emeraldCount = lvl.getEmeraldCount();
-		statArray = userPlayer.returnStats();		
+		emeraldCount = lvl.getEmeraldCount();		
 		addKeyListener(new KeyListener(){
 
 			public void keyPressed(KeyEvent event){
 				int keyCode = event.getKeyCode();
-				if(keyCode==KeyEvent.VK_UP){
+				if(keyCode==KeyEvent.VK_UP && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveUp();
@@ -96,7 +98,7 @@ public class GameGrid extends JPanel{
 //					userPlayer.moveUp();
 //					System.out.println(userPlayer.returnScore());
 				}
-				if(keyCode==KeyEvent.VK_DOWN){
+				if(keyCode==KeyEvent.VK_DOWN && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveDown();
@@ -114,7 +116,7 @@ public class GameGrid extends JPanel{
 //					userPlayer.moveDown();
 //					System.out.println(userPlayer.returnScore());
 				}
-				if(keyCode==KeyEvent.VK_LEFT){
+				if(keyCode==KeyEvent.VK_LEFT && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveLeft();
@@ -132,7 +134,7 @@ public class GameGrid extends JPanel{
 //					userPlayer.moveLeft();
 //					System.out.println(userPlayer.returnScore());
 				}
-				if(keyCode==KeyEvent.VK_RIGHT){
+				if(keyCode==KeyEvent.VK_RIGHT && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveRight();
@@ -150,7 +152,7 @@ public class GameGrid extends JPanel{
 //					userPlayer.moveRight();
 //					System.out.println(userPlayer.returnScore());
 				}
-				if(keyCode==KeyEvent.VK_SPACE){
+				if(keyCode==KeyEvent.VK_SPACE && lvl.getPlayerCreated()){
 					boolean gridstate;
 					if(lasertimer!=null&&lasertimer.isRunning()==true)
 						lasertimer.stop();
@@ -206,8 +208,10 @@ public class GameGrid extends JPanel{
 						stopAllGoldTimers();
 						lvl = lvl.advance();
 						grid = lvl.getList();
-						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-						userPlayer = (Player) grid.get(playerposition);
+						if (lvl.getPlayerCreated()){
+							playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+							userPlayer = (Player) grid.get(playerposition);
+						}
 					}
 				}
 				if(keyCode==KeyEvent.VK_D){
@@ -215,11 +219,13 @@ public class GameGrid extends JPanel{
 						stopAllGoldTimers();
 						lvl = lvl.retreat();
 						grid = lvl.getList();
-						playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-						userPlayer = (Player) grid.get(playerposition);
+						if (lvl.getPlayerCreated()){
+							playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+							userPlayer = (Player) grid.get(playerposition);
+						}
 					}
 				}
-				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE){
+				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
 					if(runningtimer == false){
 						playertimer = new Timer(600,taskPerformer);
 						playertimer.setInitialDelay(0);
@@ -227,7 +233,7 @@ public class GameGrid extends JPanel{
 						runningtimer = true;
 					}
 				}
-				if(keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D){
+				if((keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D) && lvl.getPlayerCreated()){
 					createGoldTimers();
 					enemytimer.stop();
 					createAndStartEnemies();
@@ -241,16 +247,18 @@ public class GameGrid extends JPanel{
 				}
 				repaint();
 				validate();
-				if(userPlayer.goldcheck()==true){
-					int tempnumber = userPlayer.goldabovenumber();
-					goldtimers[tempnumber].start();
+				if (lvl.getPlayerCreated()){
+					if(userPlayer.goldcheck()==true){
+						int tempnumber = userPlayer.goldabovenumber();
+						goldtimers[tempnumber].start();
+					}
+					System.out.println("The player's score is: " + userPlayer.returnScore());
 				}
-				System.out.println("The player's score is: " + userPlayer.returnScore());
 			}
 
 			public void keyReleased(KeyEvent event){
 				int keyCode = event.getKeyCode();
-				if(keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE){
+				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
 				playertimer.stop();
 				runningtimer = false;
 					if(userPlayer.goldcheck()==true){

@@ -28,10 +28,11 @@ public class Level {
 	private int[] enemyxpositions, enemyypositions;
 	private int enemycounter, goldcounter;
 	private int[] goldxpositions, goldypositions;
+	private boolean playerCreated;
 	
 	public Level(){
 		this.lvlFile = new File("C:/EclipseWorkspaces/csse220/DiggerProject/src/Level0.txt");
-		this.lvlNum = 0;
+		this.lvlNum = -1;
 		this.emeraldCount=0;
 		this.objectList= new ArrayList<Interactable>();
 //		this.positionList = new int[1][1];
@@ -42,6 +43,7 @@ public class Level {
 		goldypositions = new int[25];
 		enemycounter = 0;
 		goldcounter = 0;
+		playerCreated = false;
 	}
 	
 	public void readFile(){
@@ -61,7 +63,10 @@ public class Level {
 			exception.printStackTrace();
 		}
 		System.out.println("The raw resulting array list is " + this.objectList);
-		((Player) objectList.get(xMax*playeryposition+playerxposition)).linkGrid(objectList);
+		if (playerCreated){
+			((Player) objectList.get(xMax*playeryposition+playerxposition)).linkGrid(objectList);	
+		}
+		
 	}
 	
 	private void readFileRowIter(Scanner sc, int yIndex){
@@ -93,6 +98,7 @@ public class Level {
 		if (symbol == 'o'){
 			System.out.println("Player created at row " + yIndex + ", column " + xIndex + ".");
 			// Used xMax for grid dimensions for now, should definitely change
+			playerCreated = true;
 			this.objectList.add(new Player(xIndex,yIndex,xMax,xMax));
 			playerxposition = xIndex;
 			playeryposition = yIndex;
@@ -118,17 +124,27 @@ public class Level {
 			goldypositions[goldcounter] = yIndex;
 			goldcounter++;
 		}
+		if (symbol == 'I'){
+			System.out.println("Intro created at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new StartScreen());
+		}
+		if (symbol == 'x'){
+			System.out.println("Null space at row " + yIndex + ", column " + xIndex + ".");
+			this.objectList.add(new NullSpace());
+		}
 		readFileColIter(row, xIndex+1, yIndex);
 	}
 
 	public Level advance(){
 			this.lvlNum = this.lvlNum + 1;
+			playerCreated = false;
 			readFile();
 			return this;
 	}
 	
 	public Level retreat(){
 		this.lvlNum = this.lvlNum - 1;
+		playerCreated = false;
 		readFile();
 		return this;
 	}
@@ -173,6 +189,10 @@ public class Level {
 	
 	public int getEnemyNumber(){
 		return enemycounter;
+	}
+	
+	public boolean getPlayerCreated(){
+		return playerCreated;
 	}
 
 	public void setEnemyXPositions(int n, int xPosition) {
