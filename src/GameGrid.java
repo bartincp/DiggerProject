@@ -254,10 +254,6 @@ public class GameGrid extends JPanel{
 					}
 					System.out.println("The player's score is: " + userPlayer.returnScore());
 				}
-<<<<<<< HEAD
-=======
-//				System.out.println("The player's score is: " + userPlayer.returnScore());
->>>>>>> e2fc6ff570102a84c03387cfc61100a06e4ed6e6
 			}
 
 			public void keyReleased(KeyEvent event){
