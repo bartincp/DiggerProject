@@ -308,23 +308,24 @@ public class GameGrid extends JPanel{
 			int num = n;
 			goldtimers[n] = new Timer(600, new ActionListener(){
 				public void actionPerformed(ActionEvent event){
+					//Gold doesn't drop because getting positions from the level not the grid
 					int goldxposition = lvl.getGoldXPositions()[num];
 					int goldyposition = lvl.getGoldYPositions()[num];
 					Interactable temp = grid.get(5*goldyposition+goldxposition);
 					if(temp.getClass()==Gold.class){
-					Gold tempgold = (Gold)grid.get(5*goldyposition+goldxposition);
-					tempgold.linkGrid(grid);
-					tempgold.move();
-					lvl.setGoldXPositions(num, tempgold.getXPosition());
-					lvl.setGoldYPositions(num, tempgold.getYPosition());
-					removeAll();
-					setLayout(new GridLayout(5, 5, 1, 1));
-					for (int i = 0; i < grid.size(); i++) {
-						JLabel currLabel = (grid.get(i).returnLabel());
-						add(currLabel);
-					}
-					repaint();
-					validate();
+						Gold tempgold = (Gold)grid.get(5*goldyposition+goldxposition);
+						tempgold.linkGrid(grid);
+						tempgold.move();
+						lvl.setGoldXPositions(num, tempgold.getXPosition());
+						lvl.setGoldYPositions(num, tempgold.getYPosition());
+						removeAll();
+						setLayout(new GridLayout(5, 5, 1, 1));
+						for (int i = 0; i < grid.size(); i++) {
+							JLabel currLabel = (grid.get(i).returnLabel());
+							add(currLabel);
+						}
+						repaint();
+						validate();
 					}
 				}
 			});

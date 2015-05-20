@@ -199,7 +199,7 @@ public class Player extends JComponent implements Interactable{
 			if(temp.getClass()==Gold.class&&temp.returnState()==true){
 				if(xposition+2<gridwidth){
 					int tempnum = gridwidth*yposition+(xposition+2);
-					if(list.get(tempnum).getClass()==Dirt.class){
+					if(list.get(tempnum).getClass()==Dirt.class&&((Gold)temp).getSpacesDropped()==0){
 						list.set(tempnum-1,new Dirt());
 						list.get(tempnum-1).transform();
 						list.set(tempnum, temp);
