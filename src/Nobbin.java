@@ -106,7 +106,7 @@ public class Nobbin extends JComponent implements Interactable {
 			}
 			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
 				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
-				if ((temp.getClass() == Dirt.class && !temp.returnState()) && temp.getClass() != Emerald.class){
+				if ((temp.getClass() == Dirt.class && !temp.returnState()) || temp.getClass() == Player.class){
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),new Dirt());
 					getGridList().get(gridwidth*getYPosition()+getXPosition()).transform();
 					setXPos(newXPos);

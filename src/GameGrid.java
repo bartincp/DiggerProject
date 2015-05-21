@@ -147,11 +147,13 @@ public class GameGrid extends JPanel{
 							Interactable temporary = grid.get(predictedposition);
 							gridstate = temporary.returnState();
 							if(gridstate==false||temporary.returnEnemy()==true){
+								if(temporary.returnEnemy()){
+									
+								}
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
 								}
-								
 							}
 						}
 					}
