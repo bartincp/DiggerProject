@@ -11,7 +11,7 @@ public class Nobbin extends JComponent implements Interactable {
 
 	protected Icon icon;
 	private boolean alive;
-	private int xPos, yPos;
+	protected int xPos, yPos;
 	private int xRespawn, yRespawn;
 	protected JLabel label;
 	private boolean enemy;
@@ -109,15 +109,15 @@ public class Nobbin extends JComponent implements Interactable {
 				if ((temp.getClass() == Dirt.class && !temp.returnState()) || temp.getClass() == Player.class){
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),new Dirt());
 					getGridList().get(gridwidth*getYPosition()+getXPosition()).transform();
-					if (temp.getClass() == Player.class){
-						Player newTemp = (Player)temp;
-						newTemp.respawn();
-//						respawn();
-//						return;
-					}
 					setXPos(newXPos);
 					setYPos(newYPos);
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),this);
+					if (temp.getClass() == Player.class){
+						Player newTemp = (Player)temp;
+						if (xPos == newTemp.xrespawn && yPos == newTemp.yrespawn)
+							respawn();
+						newTemp.respawn();
+					}
 					notyetmoved = false;
 				}
 			}

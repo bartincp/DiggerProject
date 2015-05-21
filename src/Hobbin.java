@@ -52,8 +52,9 @@ public class Hobbin extends Nobbin {
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),this);
 					if (temp.getClass() == Player.class){
 						Player newTemp = (Player)temp;
+						if (xPos == newTemp.xrespawn && yPos == newTemp.yrespawn)
+							respawn();
 						newTemp.respawn();
-						respawn();
 					}
 					notyetmoved = false;
 				}
