@@ -35,8 +35,6 @@ public class GameGrid extends JPanel{
 			JLabel currLabel = (grid.get(i).returnLabel());
 			add(currLabel);
 		}
-		createAndStartEnemies();
-		createGoldTimers();
 		
 		addKeyListener(new KeyListener(){
 
@@ -141,10 +139,11 @@ public class GameGrid extends JPanel{
 						if(predictedposition >= 0 && predictedposition < grid.size()){
 							Interactable temporary = grid.get(predictedposition);
 							gridstate = temporary.returnState();
-							if(gridstate==false||temporary.returnEnemy()==true){
-								if(temporary.returnEnemy()){
-									
-								}
+							if(gridstate==false){//if(gridstate==false||temporary.returnEnemy()==true){
+//								if(temporary.returnEnemy()){
+//									temporary.transform();
+//									return;
+//								}
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
@@ -183,7 +182,7 @@ public class GameGrid extends JPanel{
 						}
 					};
 					lasertimer = new Timer(400,taskPerformerLaser);
-					lasertimer.setInitialDelay(0);
+					lasertimer.setInitialDelay(400);
 					lasertimer.start();
 				}
 				if(keyCode==KeyEvent.VK_U){
@@ -203,6 +202,8 @@ public class GameGrid extends JPanel{
 						}
 						repaint();
 						validate();
+						createAndStartEnemies();
+						createGoldTimers();
 					}
 				}
 				if(keyCode==KeyEvent.VK_D){
@@ -222,6 +223,8 @@ public class GameGrid extends JPanel{
 						}
 						repaint();
 						validate();
+						createAndStartEnemies();
+						createGoldTimers();
 					}
 				}
 				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
@@ -277,15 +280,24 @@ public class GameGrid extends JPanel{
 	protected void emeraldCheck(){
 		statArray = userPlayer.returnStats();
 		int lvlNum = lvl.getLevelNumber();
-//		System.out.println("Points gained: " + statArray[0]);
 		points  += statArray[0];
-//		System.out.println("Point total: " + points);
 		emeraldCount  += statArray[1];
 		lives = statArray[2];
 		bPanel.updateStatDisplay(points,emeraldCount,lives,lvlNum);
-//		System.out.println("The emerald count is: " + emeraldCount);
-//		System.out.println(emeraldCount);
+		// If life count is negative, user is returned to intro (or game over)
+		if (lives == -1){
+			stopAllGoldTimers();
+			lvl.ReturnToIntro();
+			bPanel.updateStatDisplay(0,0,3,0);
+			grid = lvl.getList();
+			setLayout(new GridLayout(1, 1, 1, 1));
+			for (int i = 0; i < grid.size(); i++) {
+				JLabel currLabel = (grid.get(i).returnLabel());
+				add(currLabel);
+			}
+		}
 		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
+			stopAllGoldTimers();
 			lvl.advance();
 			grid = lvl.getList();
 			setLayout(new GridLayout(5, 5, 1, 1));
@@ -298,7 +310,6 @@ public class GameGrid extends JPanel{
 			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 			userPlayer = (Player) grid.get(playerposition);
 			emeraldCount = lvl.getEmeraldCount();
-//			System.out.println(emeraldCount);
 			createGoldTimers();
 			enemytimer.stop();
 			createAndStartEnemies();
