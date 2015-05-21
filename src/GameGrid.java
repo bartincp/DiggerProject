@@ -29,17 +29,12 @@ public class GameGrid extends JPanel{
 		// Uncomment to go straight to level 1
 		lvl.advance();
 		grid = lvl.getList();
-		
-		setLayout(new GridLayout(5, 5, 1, 1));
+		// Only for intro screen
+		setLayout(new GridLayout(1, 1, 1, 1));
 		for (int i = 0; i < grid.size(); i++) {
-//			Interactable gameObject = (Interactable) grid.get(i);
-//			Icon currIcon=gameObject.returnIcon();
 			JLabel currLabel = (grid.get(i).returnLabel());
-//			add(grid.get(i));
 			add(currLabel);
 		}
-		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
-		
 		createAndStartEnemies();
 		createGoldTimers();
 		
@@ -194,23 +189,39 @@ public class GameGrid extends JPanel{
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){
 						stopAllGoldTimers();
+						removeAll();
 						lvl = lvl.advance();
+						setLayout(new GridLayout(5, 5, 1, 1));
 						grid = lvl.getList();
+						for (int i = 0; i < grid.size(); i++) {
+							JLabel currLabel = (grid.get(i).returnLabel());
+							add(currLabel);
+						}
 						if (lvl.getPlayerCreated()){
 							playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 							userPlayer = (Player) grid.get(playerposition);
 						}
+						repaint();
+						validate();
 					}
 				}
 				if(keyCode==KeyEvent.VK_D){
 					if(lvl.getLevelNumber()>1){
 						stopAllGoldTimers();
+						removeAll();
 						lvl = lvl.retreat();
+						setLayout(new GridLayout(5, 5, 1, 1));
 						grid = lvl.getList();
+						for (int i = 0; i < grid.size(); i++) {
+							JLabel currLabel = (grid.get(i).returnLabel());
+							add(currLabel);
+						}
 						if (lvl.getPlayerCreated()){
 							playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 							userPlayer = (Player) grid.get(playerposition);
 						}
+						repaint();
+						validate();
 					}
 				}
 				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
@@ -282,6 +293,8 @@ public class GameGrid extends JPanel{
 				JLabel currLabel = (grid.get(i).returnLabel());
 				add(currLabel);
 			}
+			repaint();
+			validate();
 			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 			userPlayer = (Player) grid.get(playerposition);
 			emeraldCount = lvl.getEmeraldCount();
