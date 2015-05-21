@@ -86,8 +86,13 @@ public class GameGrid extends JPanel{
 								int x = lvl.getGoldXPositions()[goldpushcheck];
 								int y = lvl.getGoldYPositions()[goldpushcheck];
 								((Gold)grid.get(5*y+x)).linkGrid(grid);
-								if(((Gold)grid.get(5*y+x)).airBelow()==true)
+								if(((Gold)grid.get(5*y+x)).airBelow()==true){
 									goldtimers[goldpushcheck].start();
+									if(grid.get(5*(y-1)+x).getClass()==Gold.class){
+										Interactable anothertempgold = grid.get(5*(y-1)+x);
+										goldtimers[((Gold)anothertempgold).getGoldNumber()].start();
+									}
+								}
 							}
 							emeraldCheck();
 							removeAll();
@@ -112,8 +117,13 @@ public class GameGrid extends JPanel{
 								int x = lvl.getGoldXPositions()[goldpushcheck];
 								int y = lvl.getGoldYPositions()[goldpushcheck];
 								((Gold)grid.get(5*y+x)).linkGrid(grid);
-								if(((Gold)grid.get(5*y+x)).airBelow()==true)
+								if(((Gold)grid.get(5*y+x)).airBelow()==true){
 									goldtimers[goldpushcheck].start();
+									if(grid.get(5*(y-1)+x).getClass()==Gold.class){
+										Interactable anothertempgold = grid.get(5*(y-1)+x);
+										goldtimers[((Gold)anothertempgold).getGoldNumber()].start();
+									}
+								}
 							}
 							emeraldCheck();
 							removeAll();
@@ -268,6 +278,12 @@ public class GameGrid extends JPanel{
 					if(userPlayer.goldcheck()==true){
 						int tempnumber = userPlayer.goldabovenumber();
 						goldtimers[tempnumber].start();
+						int doubleabove = (5*(userPlayer.getYPosition()-2)+userPlayer.getXPosition());
+						if(doubleabove>=0){
+							if(grid.get(doubleabove).getClass()==Gold.class){
+								goldtimers[((Gold)grid.get(doubleabove)).getGoldNumber()].start();
+							}
+						}
 					}
 //					System.out.println("The player's score is: " + userPlayer.returnScore());
 				}
