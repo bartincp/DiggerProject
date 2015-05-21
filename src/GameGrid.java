@@ -139,27 +139,34 @@ public class GameGrid extends JPanel{
 						if(predictedposition >= 0 && predictedposition < grid.size()){
 							Interactable temporary = grid.get(predictedposition);
 							gridstate = temporary.returnState();
-							if(gridstate==false){//if(gridstate==false||temporary.returnEnemy()==true){
-//								if(temporary.returnEnemy()){
-//									temporary.transform();
-//									return;
-//								}
+							if(gridstate==false){
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
 								}
+							}
+							if(temporary.returnEnemy()==true){
+								grid.set(predictedposition, new Dirt());
+								grid.get(predictedposition).transform();
+								((Nobbin)temporary).respawn();
 							}
 						}
 					}
 					else{
 						predictedposition = 5*userPlayer.getYPosition()+userPlayer.getXPosition()+userPlayer.getDirectionAmount();
 						if(predictedposition >= 0 && predictedposition < grid.size()){
+							Interactable temporary = grid.get(predictedposition);
 							gridstate = grid.get(predictedposition).returnState();
 							if(gridstate==false){
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition()+userPlayer.getDirectionAmount(), userPlayer.getYPosition(), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
 								}
+							}
+							if(temporary.returnEnemy()==true){
+								grid.set(predictedposition, new Dirt());
+								grid.get(predictedposition).transform();
+								((Nobbin)temporary).respawn();
 							}
 						}
 					}
