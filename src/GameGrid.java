@@ -181,8 +181,8 @@ public class GameGrid extends JPanel{
 							}
 						}
 					};
-					lasertimer = new Timer(400,taskPerformerLaser);
-					lasertimer.setInitialDelay(400);
+					lasertimer = new Timer(200,taskPerformerLaser);
+					lasertimer.setInitialDelay(200);
 					lasertimer.start();
 				}
 				if(keyCode==KeyEvent.VK_U){

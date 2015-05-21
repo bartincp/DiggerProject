@@ -93,6 +93,10 @@ public class Laser extends JComponent implements Interactable{
 					this.transform();
 				}
 			}
+//			else{
+//				((Nobbin)list.get(gridwidth*yposition+xposition)).respawn();
+////				this.transform();
+//			}
 		}
 		if(dirAxis == 1){
 			list.set(gridwidth*yposition+xposition, new Dirt());
