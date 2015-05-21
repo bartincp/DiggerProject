@@ -371,6 +371,7 @@ public class GameGrid extends JPanel{
 					int enemyyposition = lvl.getEnemyYPositions()[n];
 					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
 					tempnobbin.linkGrid(grid);
+					tempnobbin.linkLvl(lvl);
 					tempnobbin.moveRandom();
 					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
 					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());

@@ -19,8 +19,10 @@ public class Nobbin extends JComponent implements Interactable {
 	protected int gridheight;
 	private ArrayList<Interactable> list;
 	private Random randomgenerator;
+	private Level level;
+	private int number;
 	
-	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid){
+	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid, int num){
 		this.xRespawn = xPos;
 		this.yRespawn = yPos;
 		this.xPos = xPos;
@@ -32,10 +34,15 @@ public class Nobbin extends JComponent implements Interactable {
 		this.label.setIcon(this.icon);
 		this.enemy = true;
 		this.randomgenerator = new Random();
+		this.number = num;
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		this.list = inputlist;
+	}
+	
+	public void linkLvl(Level lvl){
+		level=lvl;
 	}
 	
 	/*
@@ -126,10 +133,11 @@ public class Nobbin extends JComponent implements Interactable {
 	}
 	
 	public void respawn(){
-		
 		xPos = xRespawn;
 		yPos = yRespawn;
 		list.set(gridwidth*yPos+xPos, this);
+		level.setEnemyXPositions(number, xPos);
+		level.setEnemyYPositions(number, yPos);
 		repaint();
 		validate();
 	}
@@ -150,8 +158,7 @@ public class Nobbin extends JComponent implements Interactable {
 	
 	@Override
 	public int[] transform() {
-		xPos = xRespawn;
-		yPos = yRespawn;
+		respawn();
 		int[] tempArray = {0,0};
 		return tempArray;
 	}

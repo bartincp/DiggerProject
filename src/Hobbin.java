@@ -17,8 +17,8 @@ public class Hobbin extends Nobbin {
 	 * @param xPos
 	 * @param yPos
 	 */
-	public Hobbin(int xPos, int yPos, int widthofgrid, int heightofgrid) {
-		super (xPos, yPos,widthofgrid,heightofgrid);
+	public Hobbin(int xPos, int yPos, int widthofgrid, int heightofgrid, int num) {
+		super (xPos, yPos,widthofgrid,heightofgrid,num);
 		this.icon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/hobbin.png");
 		this.label.setIcon(this.icon);
 	}

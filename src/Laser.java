@@ -80,8 +80,8 @@ public class Laser extends JComponent implements Interactable{
 				yposition+=dirAmt;
 			}
 			else{
-				list.set(gridwidth*yposition+xposition, new Dirt());
-				list.get(gridwidth*yposition+xposition).transform();
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
 				this.transform();
 				return;
 			}
@@ -93,10 +93,16 @@ public class Laser extends JComponent implements Interactable{
 					this.transform();
 				}
 			}
-//			else{
-//				((Nobbin)list.get(gridwidth*yposition+xposition)).respawn();
-////				this.transform();
-//			}
+			else{
+//				list.get(gridwidth*yposition+xposition).transform();
+				System.out.println(yposition);
+				System.out.println(xposition);
+				Interactable temp = list.get(gridwidth*yposition+xposition);
+				list.set(gridwidth*yposition+xposition, new Dirt());
+				list.get(gridwidth*yposition+xposition).transform();
+				((Nobbin)temp).respawn();
+				this.transform();
+			}
 		}
 		if(dirAxis == 1){
 			list.set(gridwidth*yposition+xposition, new Dirt());
@@ -105,8 +111,8 @@ public class Laser extends JComponent implements Interactable{
 				xposition+=dirAmt;
 			}
 			else{
-				list.set(gridwidth*yposition+xposition, new Dirt());
-				list.get(gridwidth*yposition+xposition).transform();
+//				list.set(gridwidth*yposition+xposition, new Dirt());
+//				list.get(gridwidth*yposition+xposition).transform();
 				this.transform();
 				return;
 			}
@@ -117,6 +123,16 @@ public class Laser extends JComponent implements Interactable{
 				else{
 					this.transform();
 				}
+			}
+			else{
+//				list.get(gridwidth*yposition+xposition).transform();
+				System.out.println(yposition);
+				System.out.println(xposition);
+				Interactable temp = list.get(gridwidth*yposition+xposition);
+				list.set(gridwidth*yposition+xposition, new Dirt());
+				list.get(gridwidth*yposition+xposition).transform();
+				((Nobbin)temp).respawn();
+				this.transform();
 			}
 		}
 		
