@@ -97,6 +97,14 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveLeft();
+							int goldpushcheck = userPlayer.goldPushCheck();
+							if(goldpushcheck!=-1){
+								int x = lvl.getGoldXPositions()[goldpushcheck];
+								int y = lvl.getGoldYPositions()[goldpushcheck];
+								((Gold)grid.get(5*y+x)).linkGrid(grid);
+								if(((Gold)grid.get(5*y+x)).airBelow()==true)
+									goldtimers[goldpushcheck].start();
+							}
 							emeraldCheck();
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));
@@ -115,6 +123,14 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveRight();
+							int goldpushcheck = userPlayer.goldPushCheck();
+							if(goldpushcheck!=-1){
+								int x = lvl.getGoldXPositions()[goldpushcheck];
+								int y = lvl.getGoldYPositions()[goldpushcheck];
+								((Gold)grid.get(5*y+x)).linkGrid(grid);
+								if(((Gold)grid.get(5*y+x)).airBelow()==true)
+									goldtimers[goldpushcheck].start();
+							}
 							emeraldCheck();
 							removeAll();
 							setLayout(new GridLayout(5, 5, 1, 1));

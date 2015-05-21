@@ -52,6 +52,7 @@ public class Gold implements Interactable{
 	public void linkGrid(ArrayList<Interactable> grid){
 		list = grid;
 	}
+	
 	public void move(){
 		boolean canmove = false;
 		int predictedtileindex = gridwidth*(ypos+1)+xpos;
@@ -128,5 +129,16 @@ public class Gold implements Interactable{
 	
 	public int getSpacesDropped(){
 		return spacesdropped;
+	}
+	
+	public boolean airBelow(){
+		if(ypos+1<gridheight){
+			//list is null
+			Interactable tempspacebelow = list.get(gridwidth*(ypos+1)+xpos);
+			if(tempspacebelow.getClass()==Dirt.class&&tempspacebelow.returnState()==false){
+				return true;
+			}
+		}
+		return false;
 	}
 }

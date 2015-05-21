@@ -30,6 +30,8 @@ public class Player extends JComponent implements Interactable{
 	private boolean enemy;
 	private int northsouth, eastwest;
 	private int[] statArray;
+	private boolean goldpushed;
+	private int goldpushednumber;
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		lives = 3;
@@ -47,6 +49,8 @@ public class Player extends JComponent implements Interactable{
 		statArray=new int[2]; statArray[0]=0; statArray[1]=0;
 		northsouth = 0;
 		eastwest = 1;
+		goldpushed = false;
+		goldpushednumber = -1;
 	}
 	
 	public Icon getIcon(){
@@ -173,16 +177,20 @@ public class Player extends JComponent implements Interactable{
 						list.set(tempnum+1,new Dirt());
 						list.get(tempnum+1).transform();
 						list.set(tempnum, temp);
-						level.setGoldXPositions(((Gold)temp).getGoldNumber(),xposition-2);
-						level.setGoldYPositions(((Gold)temp).getGoldNumber(), yposition);
+						goldpushednumber = ((Gold)temp).getGoldNumber();
+						level.setGoldXPositions(goldpushednumber,xposition-2);
+						level.setGoldYPositions(goldpushednumber, yposition);
 						((Gold)temp).setXPos(xposition-2);
 						((Gold)temp).setYPos(yposition);
+						goldpushed=true;
 					}
 					else
 						return;
 				}
-				if(temp.returnState())
-					return;
+				else{
+					if(temp.returnState())
+						return;
+				}
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -214,16 +222,20 @@ public class Player extends JComponent implements Interactable{
 						list.set(tempnum-1,new Dirt());
 						list.get(tempnum-1).transform();
 						list.set(tempnum, temp);
-						level.setGoldXPositions(((Gold)temp).getGoldNumber(),xposition+2);
-						level.setGoldYPositions(((Gold)temp).getGoldNumber(), yposition);
+						goldpushednumber = ((Gold)temp).getGoldNumber();
+						level.setGoldXPositions(goldpushednumber,xposition+2);
+						level.setGoldYPositions(goldpushednumber, yposition);
 						((Gold)temp).setXPos(xposition+2);
 						((Gold)temp).setYPos(yposition);
+						goldpushed=true;
 					}
 					else
 						return;
 				}
-				if(temp.returnState())
-					return;
+				else{
+					if(temp.returnState())
+						return;
+				}
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -320,5 +332,15 @@ public class Player extends JComponent implements Interactable{
 	
 	public int goldabovenumber(){
 		return ((Gold)list.get(gridwidth*(yposition-1)+xposition)).getGoldNumber();
+	}
+	
+	public int goldPushCheck(){
+		if(goldpushed==true){
+			goldpushed=false;
+			int tempnumber=goldpushednumber;
+			goldpushednumber=-1;
+			return tempnumber;
+		}
+		return goldpushednumber;
 	}
 }
