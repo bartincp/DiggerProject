@@ -90,6 +90,12 @@ public class Level {
 			System.out.println("Dirt created at row " + yIndex + ", column " + xIndex + ".");
 			this.objectList.add(new Dirt(xIndex,yIndex,true));
 		}
+		if(symbol == '-'){
+			System.out.println("Air created at row " + yIndex + ", column " + xIndex + ".");
+			Interactable temp = new Dirt(xIndex,yIndex,true);
+			temp.transform();
+			this.objectList.add(temp);
+		}
 		if (symbol == 'v'){
 			System.out.println("Emerald created at row " + yIndex + ", column " + xIndex + ".");
 			this.objectList.add(new Emerald(xIndex, yIndex));

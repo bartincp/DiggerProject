@@ -73,6 +73,7 @@ public class Player extends JComponent implements Interactable{
 		xposition = xrespawn;
 		yposition = yrespawn;
 		list.set(gridwidth*yposition+xposition, this);
+		lives--;
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
@@ -123,8 +124,8 @@ public class Player extends JComponent implements Interactable{
 			if(temp.returnEnemy()){
 				// return lives
 				this.respawn();
-				lives--;
 //				list.set(gridwidth*yposition+xposition,this);
+				return;
 			}
 			// Change type to int[], return score, emeraldCount
 			// score += temp.transform;
@@ -153,7 +154,7 @@ public class Player extends JComponent implements Interactable{
 //			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
-				list.set(gridwidth*yposition+xposition,this);
+//				list.set(gridwidth*yposition+xposition,this);
 				return;
 			}
 //			score += temp.transform();
@@ -197,7 +198,7 @@ public class Player extends JComponent implements Interactable{
 //			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
-				list.set(gridwidth*yposition+xposition,this);
+//				list.set(gridwidth*yposition+xposition,this);
 				return;
 			}
 //			score += temp.transform();
@@ -241,7 +242,7 @@ public class Player extends JComponent implements Interactable{
 //			Interactable temp = list.get(gridwidth*yposition+xposition);
 			if(temp.returnEnemy()){
 				this.respawn();
-				list.set(gridwidth*yposition+xposition,this);
+//				list.set(gridwidth*yposition+xposition,this);
 				return;
 			}
 //			score += temp.transform();

@@ -41,17 +41,8 @@ public class GameGrid extends JPanel{
 		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
 		
 		createAndStartEnemies();
-		
 		createGoldTimers();
-		if (lvl.getPlayerCreated()){
-			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
-			userPlayer = (Player) grid.get(playerposition);
-			userPlayer.linkLvl(lvl);
-			statArray = userPlayer.returnStats();
-			pewpew = new Laser();
-		}
-		points=0;
-		emeraldCount = lvl.getEmeraldCount();		
+		
 		addKeyListener(new KeyListener(){
 
 			public void keyPressed(KeyEvent event){
@@ -153,12 +144,14 @@ public class GameGrid extends JPanel{
 					if(userPlayer.getDirectionAxis()==0){
 						predictedposition = 5*(userPlayer.getYPosition()+userPlayer.getDirectionAmount())+userPlayer.getXPosition();
 						if(predictedposition >= 0 && predictedposition < grid.size()){
-							gridstate = grid.get(predictedposition).returnState();
-							if(gridstate==false){
+							Interactable temporary = grid.get(predictedposition);
+							gridstate = temporary.returnState();
+							if(gridstate==false||temporary.returnEnemy()==true){
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
 								}
+								
 							}
 						}
 					}
@@ -232,6 +225,7 @@ public class GameGrid extends JPanel{
 					createAndStartEnemies();
 					emeraldCount = lvl.getEmeraldCount();
 					userPlayer.linkLvl(lvl);
+					createInitialConditions();
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
@@ -368,5 +362,18 @@ public class GameGrid extends JPanel{
 	
 	public void importStatDisplay(StatDisplay statPanel){
 		bPanel=statPanel;
+	}
+	
+	private void createInitialConditions(){
+		if (lvl.getPlayerCreated()){
+			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
+			userPlayer = (Player) grid.get(playerposition);
+			userPlayer.linkLvl(lvl);
+			statArray = userPlayer.returnStats();
+			pewpew = new Laser();
+			System.out.println("player created!");
+		}
+		points=0;
+		emeraldCount = lvl.getEmeraldCount();
 	}
 }
