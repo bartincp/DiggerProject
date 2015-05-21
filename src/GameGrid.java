@@ -141,10 +141,11 @@ public class GameGrid extends JPanel{
 						if(predictedposition >= 0 && predictedposition < grid.size()){
 							Interactable temporary = grid.get(predictedposition);
 							gridstate = temporary.returnState();
-							if(gridstate==false||temporary.returnEnemy()==true){
-								if(temporary.returnEnemy()){
-									
-								}
+							if(gridstate==false){//if(gridstate==false||temporary.returnEnemy()==true){
+//								if(temporary.returnEnemy()){
+//									temporary.transform();
+//									return;
+//								}
 								if(pewpew.returnState()==false){
 									pewpew = new Laser(userPlayer.getXPosition(), (userPlayer.getYPosition()+userPlayer.getDirectionAmount()), 5, 5, userPlayer);
 									grid.set(predictedposition, pewpew);
@@ -183,7 +184,7 @@ public class GameGrid extends JPanel{
 						}
 					};
 					lasertimer = new Timer(400,taskPerformerLaser);
-					lasertimer.setInitialDelay(0);
+					lasertimer.setInitialDelay(400);
 					lasertimer.start();
 				}
 				if(keyCode==KeyEvent.VK_U){
