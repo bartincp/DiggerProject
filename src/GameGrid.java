@@ -187,7 +187,11 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){
-						stopAllGoldTimers();
+						// No gold timers in Level 0
+						if (lvl.getLevelNumber() > 0){
+							enemytimer.stop();
+							stopAllGoldTimers();
+						}
 						removeAll();
 						lvl = lvl.advance();
 						setLayout(new GridLayout(5, 5, 1, 1));
@@ -200,10 +204,11 @@ public class GameGrid extends JPanel{
 							playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 							userPlayer = (Player) grid.get(playerposition);
 						}
+						updateUI();
 						repaint();
 						validate();
+						createGoldTimers();						
 						createAndStartEnemies();
-						createGoldTimers();
 					}
 				}
 				if(keyCode==KeyEvent.VK_D){
@@ -223,8 +228,9 @@ public class GameGrid extends JPanel{
 						}
 						repaint();
 						validate();
-						createAndStartEnemies();
 						createGoldTimers();
+						enemytimer.stop();
+						createAndStartEnemies();
 					}
 				}
 				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
@@ -286,8 +292,10 @@ public class GameGrid extends JPanel{
 		bPanel.updateStatDisplay(points,emeraldCount,lives,lvlNum);
 		// If life count is negative, user is returned to intro (or game over)
 		if (lives == -1){
+			enemytimer.stop();
 			stopAllGoldTimers();
 			lvl.ReturnToIntro();
+			removeAll();
 			bPanel.updateStatDisplay(0,0,3,0);
 			grid = lvl.getList();
 			setLayout(new GridLayout(1, 1, 1, 1));
@@ -295,6 +303,8 @@ public class GameGrid extends JPanel{
 				JLabel currLabel = (grid.get(i).returnLabel());
 				add(currLabel);
 			}
+			repaint();
+			validate();
 		}
 		if (emeraldCount == 0 && lvl.getLevelNumber()<3){
 			stopAllGoldTimers();
