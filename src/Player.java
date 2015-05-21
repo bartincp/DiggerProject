@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 public class Player extends JComponent implements Interactable{
 	
 	private Icon playericon;
-	private int lives;
+	private static int lives = 3;
 	private int emeraldChange;
 	private boolean playerstate;
 	private int xposition, yposition;
@@ -25,7 +25,6 @@ public class Player extends JComponent implements Interactable{
 	private int goldpushednumber;
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
-		lives = 3;
 		xrespawn = xaxis;
 		yrespawn = yaxis;
 		gridwidth = widthofgrid;
