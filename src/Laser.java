@@ -32,7 +32,6 @@ public class Laser extends JComponent implements Interactable{
 		label.setIcon(lasericon);
 		this.enemy = true;
 		user = null;
-		System.out.println("laser created!");
 	}
 	
 	public Laser(int xaxis, int yaxis, int widthofgrid, int heightofgrid, Player player){

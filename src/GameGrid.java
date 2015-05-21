@@ -56,8 +56,6 @@ public class GameGrid extends JPanel{
 							validate();
 						}
 					};
-//					userPlayer.moveUp();
-//					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_DOWN && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
@@ -74,8 +72,6 @@ public class GameGrid extends JPanel{
 							validate();
 						}
 					};
-//					userPlayer.moveDown();
-//					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_LEFT && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
@@ -105,8 +101,6 @@ public class GameGrid extends JPanel{
 							validate();
 						}
 					};
-//					userPlayer.moveLeft();
-//					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_RIGHT && lvl.getPlayerCreated()){
 					taskPerformer = new ActionListener(){
@@ -136,8 +130,6 @@ public class GameGrid extends JPanel{
 							validate();
 						}
 					};
-//					userPlayer.moveRight();
-//					System.out.println(userPlayer.returnScore());
 				}
 				if(keyCode==KeyEvent.VK_SPACE && lvl.getPlayerCreated()){
 					boolean gridstate;
@@ -285,7 +277,6 @@ public class GameGrid extends JPanel{
 							}
 						}
 					}
-//					System.out.println("The player's score is: " + userPlayer.returnScore());
 				}
 			}
 
@@ -431,7 +422,6 @@ public class GameGrid extends JPanel{
 			userPlayer.linkLvl(lvl);
 			statArray = userPlayer.returnStats();
 			pewpew = new Laser();
-			System.out.println("player created!");
 		}
 		points=0;
 		emeraldCount = lvl.getEmeraldCount();
