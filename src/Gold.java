@@ -58,7 +58,7 @@ public class Gold implements Interactable{
 		int predictedtileindex = gridwidth*(ypos+1)+xpos;
 		if(predictedtileindex<list.size()&&predictedtileindex>=0){
 			Interactable temp = list.get(predictedtileindex);
-			if((temp.getClass()==Dirt.class&&temp.returnState()==false)||temp.getClass()!=Dirt.class){
+			if((temp.getClass()==Dirt.class&&temp.returnState()==false)||(temp.getClass()!=Dirt.class&&temp.getClass()!=Emerald.class)){
 				if(temp.getClass()==Nobbin.class||temp.getClass()==Hobbin.class||temp.getClass()==Player.class)
 					list.get(predictedtileindex).transform();
 				canmove = true;

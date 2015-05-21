@@ -293,6 +293,7 @@ public class GameGrid extends JPanel{
 			createGoldTimers();
 			enemytimer.stop();
 			createAndStartEnemies();
+			userPlayer.linkLvl(lvl);
 		}
 	}
 	

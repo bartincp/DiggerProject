@@ -135,7 +135,6 @@ public class Player extends JComponent implements Interactable{
 			northsouth = -1;
 
 		}
-		return;
 	}
 	
 	public void moveDown(){
@@ -164,7 +163,6 @@ public class Player extends JComponent implements Interactable{
 			eastwest = 0;
 			northsouth = 1;
 		}
-		return;
 	}
 	
 	public void moveLeft(){
@@ -209,7 +207,6 @@ public class Player extends JComponent implements Interactable{
 			northsouth = 0;
 			eastwest = -1;
 		}
-		return;
 	}
 	
 	public void moveRight(){
@@ -254,7 +251,6 @@ public class Player extends JComponent implements Interactable{
 			northsouth = 0;
 			eastwest = 1;
 		}
-		return;
 	}
 
 	public int[] transform() {
@@ -314,6 +310,8 @@ public class Player extends JComponent implements Interactable{
 		moreStatArray[0]=statArray[0]; // Points
 		moreStatArray[1]=statArray[1]; // Emerald change
 		moreStatArray[2]=lives; // Lives
+		statArray[0] = 0;
+		statArray[1] = 0;
 		return moreStatArray;
 	}
 			
