@@ -1,18 +1,9 @@
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Timer;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.KeyStroke;
 
 
 public class Player extends JComponent implements Interactable{
@@ -22,7 +13,7 @@ public class Player extends JComponent implements Interactable{
 	private int emeraldChange;
 	private boolean playerstate;
 	private int xposition, yposition;
-	private int xrespawn, yrespawn, gridwidth, gridheight;
+	int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;
 	private Level level;
 	private int score = 0;
@@ -74,6 +65,8 @@ public class Player extends JComponent implements Interactable{
 		yposition = yrespawn;
 		list.set(gridwidth*yposition+xposition, this);
 		lives--;
+		repaint();
+		validate();
 	}
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
