@@ -155,6 +155,13 @@ public class Level {
 		return this;
 	}
 	
+	public Level ReturnToIntro(){
+		this.lvlNum = 0;
+		playerCreated = false;
+		readFile();
+		return this;
+	}
+	
 //	public void actionPerformed(KeyEvent event) {
 //		int keyCode = event.getKeyCode();
 //		if(keyCode==KeyEvent.VK_U){
