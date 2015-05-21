@@ -45,11 +45,15 @@ public class Hobbin extends Nobbin {
 			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
 				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
 				if (temp.getClass() != Nobbin.class && temp.getClass() != Emerald.class) {
-					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
-					getGridList().get(5*getYPosition()+getXPosition()).transform();
+					getGridList().set(gridwidth*getYPosition()+getXPosition(),new Dirt());
+					getGridList().get(gridwidth*getYPosition()+getXPosition()).transform();
 					setXPos(newXPos);
 					setYPos(newYPos);
-					getGridList().set(5*getYPosition()+getXPosition(),this);
+					getGridList().set(gridwidth*getYPosition()+getXPosition(),this);
+					if (temp.getClass() == Player.class){
+						Player newTemp = (Player)temp;
+						newTemp.respawn();
+					}
 					notyetmoved = false;
 				}
 			}

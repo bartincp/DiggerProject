@@ -15,8 +15,8 @@ public class Nobbin extends JComponent implements Interactable {
 	private int xRespawn, yRespawn;
 	protected JLabel label;
 	private boolean enemy;
-	private int gridwidth;
-	private int gridheight;
+	protected int gridwidth;
+	protected int gridheight;
 	private ArrayList<Interactable> list;
 	private Random randomgenerator;
 	
@@ -107,11 +107,11 @@ public class Nobbin extends JComponent implements Interactable {
 			if (newXPos >= 0 && newXPos < getGridwidth() && newYPos >= 0 && newYPos < getGridheight()) {
 				Interactable temp = getGridList().get(getGridwidth()*newYPos+newXPos);
 				if ((temp.getClass() == Dirt.class && !temp.returnState()) && temp.getClass() != Emerald.class){
-					getGridList().set(5*getYPosition()+getXPosition(),new Dirt());
-					getGridList().get(5*getYPosition()+getXPosition()).transform();
+					getGridList().set(gridwidth*getYPosition()+getXPosition(),new Dirt());
+					getGridList().get(gridwidth*getYPosition()+getXPosition()).transform();
 					setXPos(newXPos);
 					setYPos(newYPos);
-					getGridList().set(5*getYPosition()+getXPosition(),this);
+					getGridList().set(gridwidth*getYPosition()+getXPosition(),this);
 					notyetmoved = false;
 				}
 			}
