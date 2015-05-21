@@ -39,30 +39,6 @@ public class GameGrid extends JPanel{
 			add(currLabel);
 		}
 		// Solution to missing imageicons: Use jlabels!!! Find a way to grab imageicons
-//		taskPerformerEnemies = new ActionListener(){
-//			public void actionPerformed(ActionEvent event){
-//				for(int n = 0; n < lvl.getEnemyNumber(); n++){
-//					int enemyxposition = lvl.getEnemyXPositions()[n];
-//					int enemyyposition = lvl.getEnemyYPositions()[n];
-//					Nobbin tempnobbin = (Nobbin)grid.get(5*enemyyposition+enemyxposition);
-//					tempnobbin.linkGrid(grid);
-//					tempnobbin.moveRandom();
-//					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
-//					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
-//				}
-//				removeAll();
-//				setLayout(new GridLayout(5, 5, 1, 1));
-//				for (int i = 0; i < grid.size(); i++) {
-//					JLabel currLabel = (grid.get(i).returnLabel());
-//					add(currLabel);
-//				}
-//				repaint();
-//				validate();
-//			}
-//		};
-//		enemytimer = new Timer(500, taskPerformerEnemies);
-//		enemytimer.setInitialDelay(0);
-//		enemytimer.start();
 		
 		createAndStartEnemies();
 		
@@ -70,6 +46,7 @@ public class GameGrid extends JPanel{
 		if (lvl.getPlayerCreated()){
 			playerposition = 5*lvl.getPlayerYPosition()+lvl.getPlayerXPosition();
 			userPlayer = (Player) grid.get(playerposition);
+			userPlayer.linkLvl(lvl);
 			statArray = userPlayer.returnStats();
 			pewpew = new Laser();
 		}
@@ -238,6 +215,7 @@ public class GameGrid extends JPanel{
 					enemytimer.stop();
 					createAndStartEnemies();
 					emeraldCount = lvl.getEmeraldCount();
+					userPlayer.linkLvl(lvl);
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));
@@ -252,7 +230,7 @@ public class GameGrid extends JPanel{
 						int tempnumber = userPlayer.goldabovenumber();
 						goldtimers[tempnumber].start();
 					}
-					System.out.println("The player's score is: " + userPlayer.returnScore());
+//					System.out.println("The player's score is: " + userPlayer.returnScore());
 				}
 			}
 
@@ -308,7 +286,6 @@ public class GameGrid extends JPanel{
 			int num = n;
 			goldtimers[n] = new Timer(600, new ActionListener(){
 				public void actionPerformed(ActionEvent event){
-					//Gold doesn't drop because getting positions from the level not the grid
 					int goldxposition = lvl.getGoldXPositions()[num];
 					int goldyposition = lvl.getGoldYPositions()[num];
 					Interactable temp = grid.get(5*goldyposition+goldxposition);

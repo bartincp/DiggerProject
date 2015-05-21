@@ -24,6 +24,7 @@ public class Player extends JComponent implements Interactable{
 	private int xposition, yposition;
 	private int xrespawn, yrespawn, gridwidth, gridheight;
 	private ArrayList<Interactable> list;
+	private Level level;
 	private int score = 0;
 	private JLabel label;
 	private boolean enemy;
@@ -72,6 +73,10 @@ public class Player extends JComponent implements Interactable{
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		list = inputlist;
+	}
+	
+	public void linkLvl(Level lvl){
+		level = lvl;
 	}
 	
 	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
@@ -168,10 +173,16 @@ public class Player extends JComponent implements Interactable{
 						list.set(tempnum+1,new Dirt());
 						list.get(tempnum+1).transform();
 						list.set(tempnum, temp);
+						level.setGoldXPositions(((Gold)temp).getGoldNumber(),xposition-2);
+						level.setGoldYPositions(((Gold)temp).getGoldNumber(), yposition);
+						((Gold)temp).setXPos(xposition-2);
+						((Gold)temp).setYPos(yposition);
 					}
 					else
 						return;
 				}
+				if(temp.returnState())
+					return;
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -203,10 +214,16 @@ public class Player extends JComponent implements Interactable{
 						list.set(tempnum-1,new Dirt());
 						list.get(tempnum-1).transform();
 						list.set(tempnum, temp);
+						level.setGoldXPositions(((Gold)temp).getGoldNumber(),xposition+2);
+						level.setGoldYPositions(((Gold)temp).getGoldNumber(), yposition);
+						((Gold)temp).setXPos(xposition+2);
+						((Gold)temp).setYPos(yposition);
 					}
 					else
 						return;
 				}
+				if(temp.returnState())
+					return;
 			}
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
