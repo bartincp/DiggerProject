@@ -109,6 +109,12 @@ public class Nobbin extends JComponent implements Interactable {
 				if ((temp.getClass() == Dirt.class && !temp.returnState()) || temp.getClass() == Player.class){
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),new Dirt());
 					getGridList().get(gridwidth*getYPosition()+getXPosition()).transform();
+					if (temp.getClass() == Player.class){
+						Player newTemp = (Player)temp;
+						newTemp.respawn();
+//						respawn();
+//						return;
+					}
 					setXPos(newXPos);
 					setYPos(newYPos);
 					getGridList().set(gridwidth*getYPosition()+getXPosition(),this);
@@ -117,6 +123,15 @@ public class Nobbin extends JComponent implements Interactable {
 			}
 		}
 		
+	}
+	
+	public void respawn(){
+		
+		xPos = xRespawn;
+		yPos = yRespawn;
+		list.set(gridwidth*yPos+xPos, this);
+		repaint();
+		validate();
 	}
 	
 //	protected int[] getOptimalMove(int playerX, int playerY) {

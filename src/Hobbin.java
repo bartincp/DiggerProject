@@ -53,6 +53,7 @@ public class Hobbin extends Nobbin {
 					if (temp.getClass() == Player.class){
 						Player newTemp = (Player)temp;
 						newTemp.respawn();
+						respawn();
 					}
 					notyetmoved = false;
 				}
