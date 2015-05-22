@@ -25,7 +25,7 @@ public class StartScreen extends JComponent implements Interactable{
 	
 	public StartScreen(){
 		this.startstate=true;
-		this.starticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/SmallIntro.png");
+		this.starticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/IntroFinal.png");
 		label = new JLabel();
 		label.setIcon(starticon);
 	}
