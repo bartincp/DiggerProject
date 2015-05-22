@@ -4,16 +4,17 @@ import javax.swing.JLabel;
 
 
 /**
- * TODO Put here a description of what this class does.
+ * 
+ * TODO This class governs the creation and procedures of the hobbin, a stronger enemy class in the game.
  *
- * @author bartincp
- *         Created May 14, 2015.
+ * @author Jake Carducci, Taylor Jenkins, Carl Bartine
+ *         Modified May 21, 2015.
  */
 public class Hobbin extends Nobbin {
 
 	
 	/**
-	 * TODO Put here a description of what this constructor does.
+	 * TODO The constructor generates the laser sprites with associated icon, position, and state data.
 	 *
 	 * @param xPos
 	 * @param yPos
@@ -25,6 +26,12 @@ public class Hobbin extends Nobbin {
 		this.goldpushednumber = -1;
 		this.goldpushed = false;
 	}
+	
+	/**
+	 * 
+	 * TODO This method is invoked whenever the hobbin needs to move. The movement behavior is selected at random, but is designed to avoid edges and corners, to push bags, to eat dirt, and kill the player; it respawns if needed.
+	 *
+	 */
 	
 	@Override
 	public void moveRandom() {
@@ -89,17 +96,45 @@ public class Hobbin extends Nobbin {
 		
 	}
 	
+	/**
+	 * 
+	 * TODO This method inherits the transform method from the Nobbin class
+	 *
+	 * @return The point and emerald count changes in an array
+	 */
+	
 	public int[] transform() {
 		return super.transform();
 	}
+	
+	/**
+	 * 
+	 * TODO The returnIcon method returns the icon of the hobbin sprite
+	 *
+	 * @return The icon of the sprite
+	 */	 
 	
 	public Icon returnIcon(){
 		return super.returnIcon();
 	}
 	
+	/**
+	 * 
+	 * TODO The returnLabel method returns the JLabel of the hobbin sprite
+	 *
+	 * @return The JLabel of the sprite
+	 */
+	
 	public JLabel returnLabel() {
 		return super.returnLabel();
 	}
+	
+	/**
+	 * 
+	 * TODO This method returns the status of the sprite as an enemy, which should be true
+	 *
+	 * @return True if an enemy, false if not
+	 */
 	
 	public boolean returnEnemy(){
 		return super.returnEnemy();
