@@ -173,7 +173,7 @@ public class GameGrid extends JPanel{
 									grid.set(predictedposition, pewpew);
 								}
 							}
-							if(temporary.returnEnemy()==true){
+							if(temporary.returnEnemy()==true&&temporary.getClass()!=Laser.class){
 								grid.set(predictedposition, new Dirt());
 								grid.get(predictedposition).transform();
 								((Nobbin)temporary).respawn();
