@@ -85,6 +85,7 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveLeft();
+							//Checks if the player moved a bag of gold over a gap and initiates the gold timer if true
 							int goldpushcheck = userPlayer.goldPushCheck();
 							if(goldpushcheck!=-1){
 								int x = lvl.getGoldXPositions()[goldpushcheck];
@@ -92,6 +93,7 @@ public class GameGrid extends JPanel{
 								((Gold)grid.get(5*y+x)).linkGrid(grid);
 								if(((Gold)grid.get(5*y+x)).airBelow()==true){
 									goldtimers[goldpushcheck].start();
+									//Checks if the gold that will begin to fall has another gold above and starts that timer accordingly
 									if(grid.get(5*(y-1)+x).getClass()==Gold.class){
 										Interactable anothertempgold = grid.get(5*(y-1)+x);
 										goldtimers[((Gold)anothertempgold).getGoldNumber()].start();
@@ -114,6 +116,7 @@ public class GameGrid extends JPanel{
 					taskPerformer = new ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							userPlayer.moveRight();
+							//Checks if player moved a bag of gold over a gap and initiates the timer if true
 							int goldpushcheck = userPlayer.goldPushCheck();
 							if(goldpushcheck!=-1){
 								int x = lvl.getGoldXPositions()[goldpushcheck];
@@ -121,6 +124,7 @@ public class GameGrid extends JPanel{
 								((Gold)grid.get(5*y+x)).linkGrid(grid);
 								if(((Gold)grid.get(5*y+x)).airBelow()==true){
 									goldtimers[goldpushcheck].start();
+									//Checks if the falling bag of gold had a gold above it and initiates that timer if true
 									if(grid.get(5*(y-1)+x).getClass()==Gold.class){
 										Interactable anothertempgold = grid.get(5*(y-1)+x);
 										goldtimers[((Gold)anothertempgold).getGoldNumber()].start();
@@ -141,9 +145,13 @@ public class GameGrid extends JPanel{
 				}
 				if(keyCode==KeyEvent.VK_SPACE && lvl.getPlayerCreated()){
 					boolean gridstate;
+					//Checks to see if the laser timer was created yet and stops the timer each time the spacebar is pressed
+					//Ensures that the timer doesn't keep adding to itself if the spacebar is hit multiple times
 					if(lasertimer!=null&&lasertimer.isRunning()==true)
 						lasertimer.stop();
 					int predictedposition;
+					//Creates laser if the direction the player moved last and one in front of the player is in the grid and if the grid is open
+					//Handles if the player shoots up or down
 					if(userPlayer.getDirectionAxis()==0){
 						predictedposition = 5*(userPlayer.getYPosition()+userPlayer.getDirectionAmount())+userPlayer.getXPosition();
 						if(predictedposition >= 0 && predictedposition < grid.size()){
@@ -155,6 +163,7 @@ public class GameGrid extends JPanel{
 									grid.set(predictedposition, pewpew);
 								}
 							}
+							//If the predicted space to be created in is occupied by an enemy the laser kills the enemy and respawns the enemy
 							if(temporary.returnEnemy()==true){
 								grid.set(predictedposition, new Dirt());
 								grid.get(predictedposition).transform();
@@ -162,6 +171,7 @@ public class GameGrid extends JPanel{
 							}
 						}
 					}
+					//Creates the laser as above except if the player last moved left or right
 					else{
 						predictedposition = 5*userPlayer.getYPosition()+userPlayer.getXPosition()+userPlayer.getDirectionAmount();
 						if(predictedposition >= 0 && predictedposition < grid.size()){
@@ -180,6 +190,7 @@ public class GameGrid extends JPanel{
 							}
 						}
 					}
+					//Makes sure the laser doesn't respond to the player moving after it is created
 					pewpew.linkGrid(grid);
 					int tempdirectionaxis = userPlayer.getDirectionAxis();
 					int tempdirectionamount = userPlayer.getDirectionAmount();
@@ -202,6 +213,7 @@ public class GameGrid extends JPanel{
 					lasertimer.setInitialDelay(200);
 					lasertimer.start();
 				}
+				//Advances level manually
 				if(keyCode==KeyEvent.VK_U){
 					if(lvl.getLevelNumber()<3){
 						// No gold timers in Level 0
@@ -228,6 +240,7 @@ public class GameGrid extends JPanel{
 						createAndStartEnemies();
 					}
 				}
+				//Moves backwards for the level manually
 				if(keyCode==KeyEvent.VK_D){
 					if(lvl.getLevelNumber()>1){
 						stopAllGoldTimers();
@@ -250,6 +263,7 @@ public class GameGrid extends JPanel{
 						createAndStartEnemies();
 					}
 				}
+				//If the user holds down an arrow key then the timer will only engage if not running already to stop multiple instances and limit speed
 				if((keyCode != KeyEvent.VK_D && keyCode != KeyEvent.VK_U && keyCode != KeyEvent.VK_SPACE) && lvl.getPlayerCreated()){
 					if(runningtimer == false){
 						playertimer = new Timer(600,taskPerformer);
@@ -258,6 +272,7 @@ public class GameGrid extends JPanel{
 						runningtimer = true;
 					}
 				}
+				//Creates all the necessary timers when switching between levels manually
 				if((keyCode == KeyEvent.VK_U || keyCode == KeyEvent.VK_D) && lvl.getPlayerCreated()){
 					createGoldTimers();
 					enemytimer.stop();
@@ -274,6 +289,8 @@ public class GameGrid extends JPanel{
 				}
 				repaint();
 				validate();
+				//Checks whenever the player moves if the player is below a bag of gold and starts the timer if true
+				//Also checks if theres another bag of gold above that gold bag so both fall accordingly
 				if (lvl.getPlayerCreated()){
 					if(userPlayer.goldcheck()==true){
 						int tempnumber = userPlayer.goldabovenumber();
