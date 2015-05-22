@@ -4,10 +4,11 @@ import javax.swing.*;
 
 
 /**
- * TODO Put here a description of what this class does.
+ * 
+ * TODO This class governs the creation and procedures of the lasers created by the player.
  *
- * @author carducjd.
- *         Created May 8, 2015.
+ * @author Jake Carducci, Taylor Jenkins, Carl Bartine
+ *         Modified May 21, 2015.
  */
 public class Laser extends JComponent implements Interactable{
 	
@@ -20,6 +21,12 @@ public class Laser extends JComponent implements Interactable{
 	private JLabel label;
 	private boolean enemy;
 	private Player user;
+	
+	/**
+	 * 
+	 * TODO The constructor generates the laser sprites with associated icon, position, and state data.
+	 *
+	 */
 	
 	public Laser(){
 		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Laser.gif");
@@ -34,6 +41,12 @@ public class Laser extends JComponent implements Interactable{
 		user = null;
 	}
 	
+	/**
+	 * 
+	 * TODO The constructor generates the laser sprites with the option to specify position and origin information.
+	 *
+	 */
+	
 	public Laser(int xaxis, int yaxis, int widthofgrid, int heightofgrid, Player player){
 		this.lasericon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Laser.gif");
 		this.laserstate = true;
@@ -46,7 +59,14 @@ public class Laser extends JComponent implements Interactable{
 		this.enemy = true;
 		user = player;
 	}
-
+	
+	/**
+	 * 
+	 * TODO This method is invoked whenever the beam strikes the panel edge, a block, or an enemy
+	 *
+	 * @return The point and emerald count changes in an array
+	 */
+	
 	public int[] transform() {
 		// Another suitable method name would be die();
 		laserstate = false;
@@ -59,16 +79,36 @@ public class Laser extends JComponent implements Interactable{
 		return tempArray;
 	}
 
+	/**
+	 * 
+	 * TODO The returnIcon method returns the icon of the laser sprite
+	 *
+	 * @return The icon of the sprite
+	 */
+	
 	public Icon returnIcon() {
 		return lasericon;
 	}
 
+	/**
+	 * 
+	 * TODO The returnLabel method returns the JLabel of the laser sprite
+	 *
+	 * @return The JLabel of the sprite
+	 */
+	
 	public JLabel returnLabel() {
 		return label;
 	}
 	
-	// Make separate move methods?
-	// dirAxis (0 is N/S, 1 is E/W) dirAmt (-1 is N, W; 1 is S, E)
+	/**
+	 * 
+	 * TODO This method helps the laser move from one space to another upon the player firing it
+	 * 
+	 * @param dirAxis 0 is N/S, 1 is E/W
+	 * @param dirAmt -1 is N, W; 1 is S, E
+	 */
+
 	public void move(int dirAxis, int dirAmt){
 		int[] tempArray = {0,0};
 		// Assuming the laser has not reached the border yet:
@@ -169,14 +209,35 @@ public class Laser extends JComponent implements Interactable{
 //		}
 	}
 	
+	/**
+	 * 
+	 * TODO This method returns the status of the sprite as an enemy, which should be false
+	 *
+	 * @return True if an enemy, false if not
+	 */
+	
 	public boolean returnEnemy(){
 		return enemy;
 	}
 	//movement method?
 	
+	/**
+	 * 
+	 * TODO The returnState method returns the existence of the laser sprite
+	 *
+	 * @return True if the laser exists, false if it does not
+	 */
+	
 	public boolean returnState(){
 		return laserstate;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows for the import and method use of the grid object array in this class.
+	 *
+	 * @param inputlist The object list of the grid being linked
+	 */
 	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		list = inputlist;

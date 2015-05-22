@@ -46,7 +46,7 @@ public class StartScreen extends JComponent implements Interactable{
 		// TODO Auto-generated method stub.
 		return false;
 	}
-
+	
 	@Override
 	public boolean returnState() {
 		// TODO Auto-generated method stub.
