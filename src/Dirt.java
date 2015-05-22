@@ -24,6 +24,12 @@ public class Dirt extends JComponent implements Interactable{
 	private boolean enemy;
 	private static final int emeraldChange = 0;
 	
+	/**
+	 * 
+	 * TODO The constructor generates the dirt sprite with associated icon, position, and state data.
+	 *
+	 */
+	
 	public Dirt(){
 //		this.position = new int[][] {{0},{0}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
@@ -35,6 +41,12 @@ public class Dirt extends JComponent implements Interactable{
 		enemy = false;
 	}
 	
+	 /**
+	 * 
+	 * TODO The constructor generates the dirt sprite with the option to specify position and state information.
+	 *
+	 */
+	
 	public Dirt(int xPos, int yPos, boolean state){
 //		this.position = new int[][] {{xPos},{yPos}};
 		this.dirticon = new ImageIcon("C:/EclipseWorkspaces/csse220/DiggerProject/Dirt.png");
@@ -45,6 +57,12 @@ public class Dirt extends JComponent implements Interactable{
 		label.setIcon(dirticon);
 		enemy = false;
 	}
+	
+	 /**
+	 * 
+	 * TODO The constructor generates the dirt sprite with the option to specify position and state information.
+	 *
+	 */
 	
 	public Dirt(int[][] position, boolean state){
 //		this.position = position;
@@ -62,6 +80,13 @@ public class Dirt extends JComponent implements Interactable{
 		enemy = false;
 	}
 	
+	/**
+	 * 
+	 * TODO This method is invoked whenever the dirt is dug by a player or hobbin
+	 *
+	 * @return The point and emerald count changes in an array
+	 */
+	
 	public int[] transform(){
 		label.setIcon(null);
 		state = false;
@@ -78,17 +103,45 @@ public class Dirt extends JComponent implements Interactable{
 		return tempArray;
 	}
 
+	/**
+	 * 
+	 * TODO This method returns the status of the sprite as an enemy, which should be false
+	 *
+	 * @return True if an enemy, false if not
+	 */
+	
 	public boolean returnEnemy(){
 		return enemy;
 	}
+	
+	/**
+	 * 
+	 * TODO The returnIcon method returns the icon of the dirt sprite
+	 *
+	 * @return The icon of the sprite
+	 */	 
 	
 	public Icon returnIcon() {
 		return dirticon;
 	}
 	
+	/**
+	 * 
+	 * TODO The returnLabel method returns the JLabel of the dirt sprite
+	 *
+	 * @return The JLabel of the sprite
+	 */
+	
 	public JLabel returnLabel(){
 		return label;
 	}
+	
+	/**
+	 * 
+	 * TODO The returnState method returns the existence of the dirt sprite
+	 *
+	 * @return True if the dirt exists, false if it does not
+	 */
 	
 	public boolean returnState(){
 		return state;
