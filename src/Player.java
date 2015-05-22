@@ -5,6 +5,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * TODO Put here a description of what this class does.
+ *
+ * @author carducjd.
+ *         Created May 21, 2015.
+ */
 
 public class Player extends JComponent implements Interactable{
 	

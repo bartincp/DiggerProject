@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/**
+ * 
+ * TODO This class governs the creation and procedures of the playing space/panel in the Digger game.
+ *
+ * @author Jake Carducci, Taylor Jenkins, Carl Bartine
+ *         Modified May 21, 2015.
+ */
 
 public class GameGrid extends JPanel{
 	private int lives;
@@ -21,6 +28,10 @@ public class GameGrid extends JPanel{
 	private int[] statArray;
 	private StatDisplay bPanel;
 	
+	/**
+	 * TODO The GameGrid constructor creates a playing space where the player, collectables, and monsters will spawn, along with associated timers and action listeners.
+	 *
+	 */
 	public GameGrid() {
 		setFocusable(true);
 		setBackground(Color.gray);
@@ -34,9 +45,7 @@ public class GameGrid extends JPanel{
 			JLabel currLabel = (grid.get(i).returnLabel());
 			add(currLabel);
 		}
-		
 		addKeyListener(new KeyListener(){
-
 			public void keyPressed(KeyEvent event){
 				int keyCode = event.getKeyCode();
 				if(keyCode==KeyEvent.VK_UP && lvl.getPlayerCreated()){
@@ -296,6 +305,12 @@ public class GameGrid extends JPanel{
 		});
 	}
 	
+	/**
+	 * 
+	 * TODO The emeraldCheck method is run everytime an input is accepted from the user. It checks all stat changes and sees if all emeralds are collected or all lives are lost. If so, the level is changed accordingly.
+	 *
+	 */
+	
 	protected void emeraldCheck(){
 		statArray = userPlayer.returnStats();
 		int lvlNum = lvl.getLevelNumber();
@@ -344,6 +359,12 @@ public class GameGrid extends JPanel{
 		}
 	}
 	
+	/**
+	 * 
+	 * TODO The createGoldTimers method adds a timer for and marks positions of existing gold bags, which will help the automatic falling of gold bags through vertical channels.
+	 *
+	 */
+	
 	private void createGoldTimers(){
 		goldtimers = new Timer[25];
 		for(int n = 0; n < lvl.getGoldNumber(); n++){
@@ -374,11 +395,23 @@ public class GameGrid extends JPanel{
 		}
 	}
 	
+	/**
+	 * 
+	 * TODO The stopAllGoldTimers method disables any existing gold timers, which proves very useful in level changes to prevent conflicts
+	 *
+	 */
+	
 	private void stopAllGoldTimers(){
 		for(int n = 0; n < lvl.getGoldNumber(); n++){
 			goldtimers[n].stop();
 		}
 	}
+	
+	/**
+	 * 
+	 * TODO The createAndStartEnemies method adds timers for and marks positions of created enemies, which will help the creatures automatically move and perform actions over time.
+	 *
+	 */
 	
 	private void createAndStartEnemies(){
 		taskPerformerEnemies = new ActionListener(){
@@ -408,15 +441,35 @@ public class GameGrid extends JPanel{
 		enemytimer.start();
 	}
 	
+	/**
+	 * 
+	 * TODO The getStats method returns an integer array containing the current life, point, and remaining emerald count.
+	 *
+	 * @return Returns the aformentioned integer array
+	 */
+	
 	public int[] getStats(){
 		int[] currStats = new int[3];
 		currStats[0]=points; currStats[1]=emeraldCount; currStats[2]=lives;
 		return currStats;
 	}
 	
+	/**
+	 * 
+	 * TODO The importStatDisplay method allows the GameGrid object to import and perform methods from a given StatDisplay object
+	 *
+	 * @param statPanel The StatDisplay object
+	 */
+	
 	public void importStatDisplay(StatDisplay statPanel){
 		bPanel=statPanel;
 	}
+	
+	/**
+	 * 
+	 * TODO The createInitialConditions method sets the initial stats of the game and initializes the player
+	 *
+	 */
 	
 	private void createInitialConditions(){
 		if (lvl.getPlayerCreated()){
