@@ -112,18 +112,20 @@ public class Laser extends JComponent implements Interactable{
 	public void move(int dirAxis, int dirAmt){
 		int[] tempArray = {0,0};
 		// Assuming the laser has not reached the border yet:
+		//Handles moving up and down
 		if(dirAxis == 0){
+			//Changes current space to air
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
+			//Checks if the laser can move in the correct direction and if not deletes it
 			if(yposition-1>=0&&yposition+1<gridheight){
 				yposition+=dirAmt;
 			}
 			else{
-//				list.set(gridwidth*yposition+xposition, new Dirt());
-//				list.get(gridwidth*yposition+xposition).transform();
 				this.transform();
 				return;
 			}
+			//Checks if the next space the laser can move into is and enemy and handles situation accordingly
 			if(list.get(gridwidth*yposition+xposition).returnEnemy()==false){
 				if(list.get(gridwidth*yposition+xposition).returnState()==false){
 					list.set(gridwidth*yposition+xposition, this);
@@ -133,9 +135,6 @@ public class Laser extends JComponent implements Interactable{
 				}
 			}
 			else{
-//				list.get(gridwidth*yposition+xposition).transform();
-				System.out.println(yposition);
-				System.out.println(xposition);
 				Interactable temp = list.get(gridwidth*yposition+xposition);
 				list.set(gridwidth*yposition+xposition, new Dirt());
 				list.get(gridwidth*yposition+xposition).transform();
@@ -143,6 +142,7 @@ public class Laser extends JComponent implements Interactable{
 				this.transform();
 			}
 		}
+		//Handles moving left and right
 		if(dirAxis == 1){
 			list.set(gridwidth*yposition+xposition, new Dirt());
 			list.get(gridwidth*yposition+xposition).transform();
@@ -150,8 +150,6 @@ public class Laser extends JComponent implements Interactable{
 				xposition+=dirAmt;
 			}
 			else{
-//				list.set(gridwidth*yposition+xposition, new Dirt());
-//				list.get(gridwidth*yposition+xposition).transform();
 				this.transform();
 				return;
 			}
@@ -164,7 +162,6 @@ public class Laser extends JComponent implements Interactable{
 				}
 			}
 			else{
-//				list.get(gridwidth*yposition+xposition).transform();
 				System.out.println(yposition);
 				System.out.println(xposition);
 				Interactable temp = list.get(gridwidth*yposition+xposition);
@@ -174,39 +171,6 @@ public class Laser extends JComponent implements Interactable{
 				this.transform();
 			}
 		}
-		
-//		if ((yposition-1>=0 && yposition+1<gridheight) || (xposition-1>=0 && xposition+1<gridwidth)){
-//			list.set(gridwidth*yposition+xposition, new Dirt());
-//			list.get(gridwidth*yposition+xposition).transform();
-//			if (dirAxis == 0) {
-//				yposition+=dirAmt;
-//			}
-//			if (dirAxis == 1) {
-//				xposition+=dirAmt;
-//			}
-//			System.out.println(yposition+1);
-//			System.out.println(gridheight);
-//			System.out.println(gridwidth*yposition+xposition);
-//			Interactable temp = list.get(gridwidth*yposition+xposition);
-//			if(temp.returnEnemy()){
-//				this.transform();
-//				return;
-//			}
-//			// This kills the enemy??
-//			score += temp.transform();
-////			Interactable icon = list.get(gridwidth*yposition+xposition);
-//			list.set(gridwidth*yposition+xposition, this);
-//		}
-//		// Once laser reaches border, it disappears.
-//		else {
-////			Interactable temp = list.get(gridwidth*yposition+xposition);
-////			score += this.transform();
-////			score += temp.transform();
-//			list.set(gridwidth*yposition+xposition, new Dirt());
-//			list.get(gridwidth*yposition+xposition).transform();
-//			this.transform();
-//			return;
-//		}
 	}
 	
 	/**
@@ -219,7 +183,6 @@ public class Laser extends JComponent implements Interactable{
 	public boolean returnEnemy(){
 		return enemy;
 	}
-	//movement method?
 	
 	/**
 	 * 
