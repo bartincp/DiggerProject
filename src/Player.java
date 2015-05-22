@@ -325,6 +325,10 @@ public class Player extends JComponent implements Interactable{
 		return ((Gold)list.get(gridwidth*(yposition-1)+xposition)).getGoldNumber();
 	}
 	
+	public void setLives(int lives){
+		this.lives=lives;
+	}
+	
 	public int goldPushCheck(){
 		if(goldpushed==true){
 			goldpushed=false;

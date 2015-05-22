@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.Timer;
+
 import javax.swing.*;
 
 
@@ -26,7 +26,6 @@ public class GameGrid extends JPanel{
 		setBackground(Color.gray);
 		// Creates two levels from constructor and advance method
 		lvl = new Level();
-		// Uncomment to go straight to level 1
 		lvl.advance();
 		grid = lvl.getList();
 		// Only for intro screen
@@ -304,13 +303,17 @@ public class GameGrid extends JPanel{
 		emeraldCount  += statArray[1];
 		lives = statArray[2];
 		bPanel.updateStatDisplay(points,emeraldCount,lives,lvlNum);
+		System.out.println("Lives: "+lives);
+		System.out.println("Level: "+lvlNum);
+		System.out.println("Emeralds left: "+emeraldCount);
 		// If life count is negative, user is returned to intro (or game over)
-		if (lives == -1){
+		if (lives < 0){
 			enemytimer.stop();
 			stopAllGoldTimers();
 			lvl.ReturnToIntro();
 			removeAll();
-			bPanel.updateStatDisplay(0,0,3,0);
+			userPlayer.setLives(3);
+			lives = 3;
 			grid = lvl.getList();
 			setLayout(new GridLayout(1, 1, 1, 1));
 			for (int i = 0; i < grid.size(); i++) {
