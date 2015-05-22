@@ -25,6 +25,16 @@ public class Nobbin extends JComponent implements Interactable {
 	boolean goldpushed;
 	Level lvl;
 	
+	/**
+	 * TODO The constructor generates the nobbin sprites with associated icon, position, and state data.
+	 *
+	 * @param xPos Horizontal respawn position
+	 * @param yPos Vertical respawn position
+	 * @param widthofgrid Total horizontal spaces
+	 * @param heightofgrid Total vertical spaces
+	 * @param num Unique identifier
+	 */
+	
 	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid, int num){
 		this.xRespawn = xPos;
 		this.yRespawn = yPos;
@@ -40,9 +50,23 @@ public class Nobbin extends JComponent implements Interactable {
 		this.number = num;
 	}
 	
+	/**
+	 * 
+	 * TODO The linkGrid method allows this class to import and use methods of the grid array containing game objects.
+	 *
+	 * @param inputlist The object list of the grid array.
+	 */
+	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		this.list = inputlist;
 	}
+	
+	/**
+	 * 
+	 * TODO The linkGrid method allows this class to import and use methods of the current level object.
+	 *
+	 * @param lvl The level object being imported.
+	 */
 	
 	public void linkLvl(Level lvl){
 		level=lvl;
@@ -52,9 +76,24 @@ public class Nobbin extends JComponent implements Interactable {
 	 *  GETTERS & SETTERS
 	 */
 	
+	/**
+	 * 
+	 * TODO This method returns the current horizontal position of the nobbin
+	 *
+	 * @return Nobbin horizontal position
+	 */
+	
 	public int getXPosition(){
 		return this.xPos;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows for the horizontal position of the nobbin to be manually set.
+	 *
+	 * @param newXPos Horizontal position being set
+	 * @return True if position is set and valid, false if otherwise
+	 */
 	
 	public boolean setXPos(int newXPos){
 		if (newXPos >= 0 && newXPos < getGridwidth()){
@@ -64,9 +103,24 @@ public class Nobbin extends JComponent implements Interactable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * TODO This method returns the current vertical position of the nobbin
+	 *
+	 * @return Nobbin vertical position
+	 */
+	
 	public int getYPosition(){
 		return this.yPos;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows for the vertical position of the nobbin to be manually set.
+	 *
+	 * @param newXPos Vertical position being set
+	 * @return True if position is set and valid, false if otherwise
+	 */
 	
 	public boolean setYPos(int newYPos){
 		if (newYPos >= 0 && newYPos < getGridheight()){
@@ -76,17 +130,45 @@ public class Nobbin extends JComponent implements Interactable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * TODO This method allows class to export grid width
+	 *
+	 * @return Number of horizontal spaces in grid
+	 */
+	
 	public int getGridwidth(){
 		return this.gridwidth;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows class to export grid height
+	 *
+	 * @return Number of vertical spaces in grid
+	 */
 	
 	public int getGridheight(){
 		return this.gridheight;
 	}
 	
+	/**
+	 * 
+	 * TODO This method creates and returns a random number generator
+	 *
+	 * @return Random generator
+	 */
+	
 	public Random getRandomGenerator(){
 		return this.randomgenerator;
 	}
+	
+	/**
+	 * 
+	 * TODO This method returns the grid object array being used.
+	 *
+	 * @return Grid object array
+	 */
 	
 	public ArrayList<Interactable> getGridList() {
 		return this.list;
@@ -94,6 +176,12 @@ public class Nobbin extends JComponent implements Interactable {
 	
 	/*
 	 * END GETTERS & SETTERS
+	 */
+	
+	/**
+	 * 
+	 * TODO This method is invoked whenever the nobbin needs to move. The movement behavior is selected at random, but is designed to avoid edges, corners, dirt, and other collidable object, as well as to kill the player; it respawns if needed.
+	 *
 	 */
 	
 	public void moveRandom() {
@@ -135,6 +223,12 @@ public class Nobbin extends JComponent implements Interactable {
 		
 	}
 	
+	/**
+	 * 
+	 * TODO This method is invoked when the enemy is destroyed by gold or laser.
+	 *
+	 */
+	
 	public void respawn(){
 		xPos = xRespawn;
 		yPos = yRespawn;
@@ -159,6 +253,13 @@ public class Nobbin extends JComponent implements Interactable {
 //		//implement breadth-first or iterative depth-first search
 //	}
 	
+	/**
+	 * 
+	 * TODO This method invokes respawning when it is tranformed from being killed
+	 *
+	 * @return The point and emerald count changes in an array
+	 */
+	
 	@Override
 	public int[] transform() {
 		respawn();
@@ -166,23 +267,58 @@ public class Nobbin extends JComponent implements Interactable {
 		return tempArray;
 	}
 
+	/**
+	 * 
+	 * TODO The returnIcon method returns the icon of the nobbin sprite
+	 *
+	 * @return The icon of the sprite
+	 */	 
+	
 	@Override
 	public Icon returnIcon() {
 		return this.icon;
 	}
 
+	/**
+	 * 
+	 * TODO The returnLabel method returns the JLabel of the nobbin sprite
+	 *
+	 * @return The JLabel of the sprite
+	 */
+	
 	@Override
 	public JLabel returnLabel() {
 		return this.label;
 	}
 
+	/**
+	 * 
+	 * TODO This method returns the status of the sprite as an enemy, which should be true
+	 *
+	 * @return True if an enemy, false if not
+	 */
+	
 	public boolean returnEnemy(){
 		return enemy;
 	}
 	
+	/**
+	 * 
+	 * TODO The returnState method returns the existence of the nobbin
+	 *
+	 * @return True if the nobbin exists, false if it does not
+	 */
+	
 	public boolean returnState(){
 		return true;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows for the detection of money bags within horizontal touching distance of the nobbin
+	 *
+	 * @return True if there is an adjacent money bag, false if not
+	 */
 	
 	public boolean goldcheck(){
 		if(yPos-1>=0 && yPos-1<gridheight){
@@ -193,10 +329,23 @@ public class Nobbin extends JComponent implements Interactable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * TODO This method checks the value of the goldcounter stored within any potential money bags above the enemy
+	 *
+	 * @return The gold counter value of the gold money bag above enemy (the bag indicator)
+	 */
+	
 	public int goldabovenumber(){
 		return ((Gold)list.get(gridwidth*(yPos-1)+xPos)).getGoldNumber();
 	}
 
+	/**
+	 * 
+	 * TODO This method checks to see if any gold was pushed by the nobbin
+	 * @return The number identifier for the particular bag of gold being pushed
+	 */
+	
 	public int goldPushCheck(){
 		if(goldpushed==true){
 			goldpushed=false;

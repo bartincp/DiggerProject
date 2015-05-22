@@ -14,10 +14,13 @@ public class Hobbin extends Nobbin {
 
 	
 	/**
-	 * TODO The constructor generates the laser sprites with associated icon, position, and state data.
+	 * TODO The constructor generates the hobbin sprites with associated icon, position, and state data.
 	 *
-	 * @param xPos
-	 * @param yPos
+	 * @param xPos Horizontal respawn position
+	 * @param yPos Vertical respawn position
+	 * @param widthofgrid Total horizontal spaces
+	 * @param heightofgrid Total vertical spaces
+	 * @param num Unique identifier
 	 */
 	public Hobbin(int xPos, int yPos, int widthofgrid, int heightofgrid, int num) {
 		super (xPos, yPos,widthofgrid,heightofgrid,num);
