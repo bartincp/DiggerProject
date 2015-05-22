@@ -7,11 +7,12 @@ import javax.swing.JLabel;
 
 /**
  * 
- * TODO Put here a description of what this class does.
+ * TODO This class governs the creation and procedures of the player character in the Digger game.
  *
- * @author carducjd.
- *         Created May 21, 2015.
+ * @author Jake Carducci, Taylor Jenkins, Carl Bartine
+ *         Modified May 21, 2015.
  */
+
 
 public class Player extends JComponent implements Interactable{
 	
@@ -30,6 +31,16 @@ public class Player extends JComponent implements Interactable{
 	private int[] statArray;
 	private boolean goldpushed;
 	private int goldpushednumber;
+	
+	/**
+	 * 
+	 * TODO This Player constructor generates a player sprite with associated position, icon, and stat data
+	 *
+	 * @param xaxis The horizontal position of the player.
+	 * @param yaxis The vertical postion of the player.
+	 * @param widthofgrid The total count of horizontal positions.
+	 * @param heightofgrid The total count of vertical positions.
+	 */
 	
 	public Player(int xaxis, int yaxis, int widthofgrid, int heightofgrid){
 		xrespawn = xaxis;
@@ -50,13 +61,34 @@ public class Player extends JComponent implements Interactable{
 		goldpushednumber = -1;
 	}
 	
+	/**
+	 * 
+	 * TODO The getIcon method returns the icon of the player sprite
+	 *
+	 * @return The icon of the sprite
+	 */
+	
 	public Icon getIcon(){
 		return playericon;
 	}
 	
+	/**
+	 * 
+	 * TODO The getXPosition method returns the horizontal position of the player on the playing space
+	 *
+	 * @return Player's horizontal position
+	 */
+	
 	public int getXPosition(){
 		return xposition;
 	}
+	
+	/**
+	 * 
+	 * TODO The getYPosition method returns the vertical position of the player on the playing space
+	 *
+	 * @return Player's vertical position
+	 */
 	
 	public int getYPosition(){
 		return yposition;
@@ -65,6 +97,12 @@ public class Player extends JComponent implements Interactable{
 //	public void death(){
 //		playerstate = false;
 //	}
+	
+	/**
+	 * 
+	 * TODO This method resets the player at his spawn point and decreases the life count
+	 *
+	 */
 	
 	public void respawn(){
 		xposition = xrespawn;
@@ -75,9 +113,23 @@ public class Player extends JComponent implements Interactable{
 		validate();
 	}
 	
+	/**
+	 * 
+	 * TODO The linkGrid method allows the player class to import and use methods of the grid array containing game objects.
+	 *
+	 * @param inputlist The object list of the grid array.
+	 */
+	
 	public void linkGrid(ArrayList<Interactable> inputlist){
 		list = inputlist;
 	}
+	
+	/**
+	 * 
+	 * TODO The linkGrid method allows the player class to import and use methods of the current level object.
+	 *
+	 * @param lvl The level object being imported.
+	 */
 	
 	public void linkLvl(Level lvl){
 		level = lvl;
@@ -106,6 +158,12 @@ public class Player extends JComponent implements Interactable{
 //			list.set(gridwidth*yposition+xposition, this);
 //		}
 //	}
+	
+	/**
+	 * 
+	 * TODO The moveUp method allows the player sprite to move his vertical position upwards.
+	 *
+	 */
 	
 	public void moveUp(){
 		if(yposition-1>=0 && yposition-1<gridheight){
@@ -137,6 +195,12 @@ public class Player extends JComponent implements Interactable{
 		}
 	}
 	
+	/**
+	 * 
+	 * TODO The moveDown method allows the player sprite to move his vertical position downwards.
+	 *
+	 */
+	
 	public void moveDown(){
 		if(yposition+1>=0 && yposition+1<gridheight){
 			Interactable temp = list.get(gridwidth*(yposition+1)+xposition);
@@ -164,6 +228,12 @@ public class Player extends JComponent implements Interactable{
 			northsouth = 1;
 		}
 	}
+	
+	/**
+	 * 
+	 * TODO The moveLeft method allows the player sprite to move his horizontal position left. Also does checking for gold bag pushing.
+	 *
+	 */
 	
 	public void moveLeft(){
 		if(xposition-1>=0 && xposition-1<gridwidth){
@@ -209,6 +279,12 @@ public class Player extends JComponent implements Interactable{
 		}
 	}
 	
+	/**
+	 * 
+	 * TODO The moveRight method allows the player sprite to move his horizontal position right. Also does checking for gold bag pushing.
+	 *
+	 */
+	
 	public void moveRight(){
 		if(xposition+1>=0 && xposition+1<gridwidth){
 			Interactable temp = list.get(gridwidth*yposition+(xposition+1));
@@ -252,24 +328,59 @@ public class Player extends JComponent implements Interactable{
 			eastwest = 1;
 		}
 	}
-
+	
+	/**
+	 * 
+	 * TODO The transform method is invoked upon player contact with an enemy, resulting in death and respawn.
+	 *
+	 * @return Array containing point and emerald change values
+	 */
+	
 	public int[] transform() {
 		respawn();
 		int[] tempArray = {0,0};
 		return tempArray;
 	}
-
+	
+	/**
+	 * 
+	 * TODO This method returns the icon of the player sprite
+	 *
+	 * @return Icon of the sprite
+	 */
+	
 	public Icon returnIcon() {
 		return playericon;
 	}
+	
+	/**
+	 * 
+	 * TODO This method returns the JLabel of the player sprite
+	 *
+	 * @return JLabel of the player
+	 */
 	
 	public JLabel returnLabel(){
 		return label;
 	}
 	
+	/**
+	 * 
+	 * TODO This method returns the current score of the player
+	 *
+	 * @return Score amount
+	 */
+	
 	public int returnScore(){
 		return score;
 	}
+	
+	/**
+	 * 
+	 * TODO This method returns the enemy status of the player, which should always be false
+	 *
+	 * @return Status as an enemy
+	 */
 	
 	public boolean returnEnemy(){
 		return enemy;
@@ -283,6 +394,13 @@ public class Player extends JComponent implements Interactable{
 //		return eastwest;
 //	}
 	
+	/**
+	 * 
+	 * TODO This method indicates whether the player is facing the north-south axis or the left-right axis
+	 *
+	 * @return 1 if facing northsouth, 0 if facing eastwest
+	 */
+	
 	public int getDirectionAxis(){
 		int directionaxis = -1;
 		if(northsouth==0)
@@ -291,6 +409,13 @@ public class Player extends JComponent implements Interactable{
 			directionaxis = 0;
 		return directionaxis;
 	}
+	
+	/**
+	 * 
+	 * TODO This method indicates whether the player is facing the north-south axis or the left-right axis
+	 *
+	 * @return The value stored in eastwest if facing northsouth, the value stored in northsouth if facing eastwest
+	 */
 	
 	public int getDirectionAmount(){
 		int directionamount = 0;
@@ -301,9 +426,23 @@ public class Player extends JComponent implements Interactable{
 		return directionamount;
 	}
 	
+	/**
+	 * 
+	 * TODO This method checks to see if the player still exists.
+	 *
+	 * @return True if existing, false if not existing
+	 */
+	
 	public boolean returnState(){
 		return playerstate;
 	}
+	
+	/**
+	 * 
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return moreStatArray The array containing the exported player statistics
+	 */
 	
 	public int[] returnStats(){
 		int[] moreStatArray = new int[3];
@@ -314,10 +453,24 @@ public class Player extends JComponent implements Interactable{
 		statArray[1] = 0;
 		return moreStatArray;
 	}
-			
+	
+	/**
+	 * 
+	 * TODO This method allows for the manual addition of points to the player score
+	 *
+	 * @param n Score change
+	 */
+	
 	public void addScore(int n){
 		score += n;
 	}
+	
+	/**
+	 * 
+	 * TODO This method allows for the detection of money bags within horizontal touching distance of the player
+	 *
+	 * @return True if there is an adjacent money bag, false if not
+	 */
 	
 	public boolean goldcheck(){
 		if(yposition-1>=0 && yposition-1<gridheight){
@@ -328,13 +481,33 @@ public class Player extends JComponent implements Interactable{
 		return false;
 	}
 	
+	/**
+	 * 
+	 * TODO This method checks the value of the goldcounter stored within any potential money bags above the player
+	 *
+	 * @return The gold counter value of the gold money bag above player (the bag indicator)
+	 */
+	
 	public int goldabovenumber(){
 		return ((Gold)list.get(gridwidth*(yposition-1)+xposition)).getGoldNumber();
 	}
 	
+	/**
+	 * 
+	 * TODO This method allows for manual resetting of the player life count
+	 *
+	 * @param lives The number of lives the player is being set to
+	 */
+	
 	public void setLives(int lives){
 		this.lives=lives;
 	}
+	
+	/**
+	 * 
+	 * TODO This method checks to see if any gold was pushed by the player
+	 * @return The number identifier for the particular bag of gold being pushed
+	 */
 	
 	public int goldPushCheck(){
 		if(goldpushed==true){
