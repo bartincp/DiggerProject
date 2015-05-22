@@ -173,7 +173,7 @@ public class GameGrid extends JPanel{
 									grid.set(predictedposition, pewpew);
 								}
 							}
-							if(temporary.returnEnemy()==true&&temporary.getClass()!=Laser.class){
+							if(temporary.returnEnemy()==true&&temporary.getClass()!=Laser.class&&pewpew.returnState()==false){
 								grid.set(predictedposition, new Dirt());
 								grid.get(predictedposition).transform();
 								((Nobbin)temporary).respawn();
@@ -425,6 +425,16 @@ public class GameGrid extends JPanel{
 					tempnobbin.moveRandom();
 					lvl.setEnemyXPositions(n, tempnobbin.getXPosition());
 					lvl.setEnemyYPositions(n, tempnobbin.getYPosition());
+					if(tempnobbin.goldcheck()==true){
+						int tempnumber = tempnobbin.goldabovenumber();
+						goldtimers[tempnumber].start();
+						int doubleabove = (5*(tempnobbin.getYPosition()-2)+tempnobbin.getXPosition());
+						if(doubleabove>=0){
+							if(grid.get(doubleabove).getClass()==Gold.class){
+								goldtimers[((Gold)grid.get(doubleabove)).getGoldNumber()].start();
+							}
+						}
+					}
 				}
 				removeAll();
 				setLayout(new GridLayout(5, 5, 1, 1));

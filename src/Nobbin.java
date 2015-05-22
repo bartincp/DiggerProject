@@ -180,4 +180,17 @@ public class Nobbin extends JComponent implements Interactable {
 	public boolean returnState(){
 		return true;
 	}
+	
+	public boolean goldcheck(){
+		if(yPos-1>=0 && yPos-1<gridheight){
+			if(list.get(gridwidth*(yPos-1)+xPos).getClass()==Gold.class){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int goldabovenumber(){
+		return ((Gold)list.get(gridwidth*(yPos-1)+xPos)).getGoldNumber();
+	}
 }
