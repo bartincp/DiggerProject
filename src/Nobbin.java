@@ -19,8 +19,11 @@ public class Nobbin extends JComponent implements Interactable {
 	protected int gridheight;
 	private ArrayList<Interactable> list;
 	private Random randomgenerator;
-	private Level level;
+	protected Level level;
 	private int number;
+	int goldpushednumber;
+	boolean goldpushed;
+	Level lvl;
 	
 	public Nobbin(int xPos, int yPos, int widthofgrid, int heightofgrid, int num){
 		this.xRespawn = xPos;
@@ -192,5 +195,15 @@ public class Nobbin extends JComponent implements Interactable {
 	
 	public int goldabovenumber(){
 		return ((Gold)list.get(gridwidth*(yPos-1)+xPos)).getGoldNumber();
+	}
+
+	public int goldPushCheck(){
+		if(goldpushed==true){
+			goldpushed=false;
+			int tempnumber=goldpushednumber;
+			goldpushednumber=-1;
+			return tempnumber;
+		}
+		return goldpushednumber;
 	}
 }
